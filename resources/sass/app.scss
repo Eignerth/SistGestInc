@@ -1,0 +1,26 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+//ADMIN LTE
+@import '~admin-lte/dist/css/adminlte.min.css';
+
+//fontawesome
+$fa-font-path:"~admin-lte/plugins/fontawesome-free/webfonts";
+@import '~admin-lte/plugins/fontawesome-free/css/all.css';
+
+//sweetalert
+@import '~sweetalert2/src/sweetalert2.scss';
+
+//flag-icon-css
+//@import '~admin-lte/plugins/flag-icon-css/css/flag-icon.css';
+
+//datatables
+@import '~admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css';
+@import '~admin-lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css';
+
