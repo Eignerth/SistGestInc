@@ -64,7 +64,17 @@
                 <p>
                     Administrar los productos y/o servicios que ofrece la empresa.
                 </p>
-                <a href="{{route('productos.index')}}" class="btn bg-teal">Ir a Productos y Servicios</a>
+                <a href="{{route('productos.index')}}" class="btn bg-teal">Ir a Productos y Serv.</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-outline card-warning">
+            <h4 class="card-header">Usuarios</h4>
+            <div class="card-body">
+                <p>Aquí podrá administrar usuarios y definir permisos a cada uno.
+                </p>
+                <a href="{{route('usuarios.index')}}" class="btn bg-warning">Ir a Usuarios</a>
             </div>
             </div>
         </div>

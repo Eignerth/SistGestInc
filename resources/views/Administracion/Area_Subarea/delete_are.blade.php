@@ -10,8 +10,8 @@
           <p>Este proceso no tiene reversión</p>
       </div>
       <div class="modal-footer">
-          <button type="button" wire:click.prevent="cancel()" class="btn btnarea btn-secondary" data-dismiss="modal">Cerrar</button>
-          <button type="button" wire:click.prevent="destroy()" class="btn btnarea btn-danger" data-dismiss="modal">Eliminar</button>
+          <button type="button" wire:click.prevent="cancel()" class="btn  btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" wire:click.prevent="destroy()" class="btn  btn-danger" data-dismiss="modal">Eliminar</button>
       </div>
     </div>
   </div>

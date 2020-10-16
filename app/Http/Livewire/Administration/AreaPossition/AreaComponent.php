@@ -15,10 +15,12 @@ class AreaComponent extends Component
     public $sortAsc=true;
     public $search='';
     public $codigo,$abbrev,$descrip;
+
     public function updatingSearch()
     {
         $this->resetPage();
     }
+    
     public function sortBy($field)
     {
         if ($this->sortField === $field) {

@@ -230,6 +230,12 @@
                   <p>Producto y/o Servicio</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{route('usuarios.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Usuarios</p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item has-treeview">
@@ -290,9 +296,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('canales_atencion.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Clientes</p>
+                  <p>Canales de Atención</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('clasificacion_inc.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>clasificación de INCs</p>
                 </a>
               </li>
             </ul>

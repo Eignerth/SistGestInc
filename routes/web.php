@@ -2,20 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+//login
+Route::get('login','Auth\LoginController@showLogin')->name('login');
 
-Route::get('/', function () {
-    return view('layouts.app');
-});
+Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
 
 Route::group(['prefix' => 'administracion','namespace'=>'Administration'], function () {
     Route::get('/', function () {
@@ -25,12 +15,15 @@ Route::group(['prefix' => 'administracion','namespace'=>'Administration'], funct
     Route::resource('area_cargo', 'AreaPossitionController')->only(['index']);
     Route::resource('rol_permiso', 'RolePermissionController')->only(['index']);
     Route::resource('personal', 'PersonalController')->only(['index']);
+    Route::resource('usuarios', 'UserController')->only(['index']);
     Route::resource('productos', 'ProductController')->only(['index']);
 });
 
 Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance'], function () {
     Route::get('/', function () {
         return view('Mantenimiento.index');
-    });
-    Route::resource('docidentidad', 'KindidentificationController');
+    })->name('mantenimientos');
+    Route::resource('docidentidad', 'KindidentificationController')->only(['index']);
+    Route::resource('canales_atencion', 'ChannelController')->only(['index']);
+    Route::resource('clasificacion_inc', 'ClassificationController')->only(['index']);
 });
