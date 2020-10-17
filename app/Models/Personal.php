@@ -24,10 +24,4 @@ class Personal extends Model
         'addnote'
     ];
 
-/*     public static function search($query){
-        return empty($query) ? static::query()
-            :static::where('name','like','%'.$query.'%')
-            ->orWhere('kindident','like','%'.$query.'%')
-            ->orWhere('email','like','%'.$query.'%');
-    } */
 }

@@ -62,7 +62,7 @@ class KinidentificationComponent extends Component
     {
         $docidentity = Kindidentification::findOrFail($this->codigo);        
         $docidentity->update([
-            'abbreviation'=>Str::upper($this->abbreviation),
+            'abbreviation'=>$this->abbreviation,
             'description'=>$this->description,
             'ndigits'=>$this->digits,
         ]);
@@ -80,7 +80,7 @@ class KinidentificationComponent extends Component
     public function store()
     {
         Kindidentification::create([
-            'abbreviation'=>Str::upper($this->abbreviation),
+            'abbreviation'=>$this->abbreviation,
             'description'=>$this->description,
             'ndigits'=>$this->digits,
         ]);        

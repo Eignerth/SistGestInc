@@ -73,16 +73,16 @@ class PersonalComponent extends Component
     {
         $this->validateOnly($propertyName,[
             'name' =>'required|max:200|string',
-            'idkindident'=>'required|integer',
+            'idkindident'=>'required',
             'kindident'=>'required|max:25|unique:App\Models\Personal,kindident,'.$this->codigo.',id',
             'ruc'=>'nullable|size:11|unique:App\Models\Personal,ruc,'.$this->codigo.'id',
             'telf'=>'nullable|max:15|string',
             'cel'=>'nullable|max:15|string',
             'ownemail'=>'nullable|email',
-            'email'=>'nullable|email',
+            'email'=>'required|email',
             'address'=>'nullable|max:500',
             'dateborn'=>'date|nullable',
-            'idpossitions'=>'integer|nullable',
+            'idpossitions'=>'integer',
             'addnote'=>'nullable|string',
             ]);
     }
@@ -115,7 +115,7 @@ class PersonalComponent extends Component
     }
     public function store(){
         
-        try {
+         try { 
             Personal::create([
                 'name' =>$this->name,
                 'idkindident'=>$this->idkindident,
@@ -139,7 +139,7 @@ class PersonalComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
                 ]);
-        } catch (\Throwable $th) {
+         } catch (\Throwable $th) {
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No eliminado!',
                 'text'=>'No se pudo agregar el nuevo registro',
