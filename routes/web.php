@@ -7,6 +7,13 @@ Route::get('login','Auth\LoginController@showLogin')->name('login');
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
 
+
+
+//clientes
+
+
+
+//administracion
 Route::group(['prefix' => 'administracion','namespace'=>'Administration'], function () {
     Route::get('/', function () {
         return view('Administracion.index');
@@ -19,6 +26,8 @@ Route::group(['prefix' => 'administracion','namespace'=>'Administration'], funct
     Route::resource('productos', 'ProductController')->only(['index']);
 });
 
+
+//mantenimiento de tablas
 Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance'], function () {
     Route::get('/', function () {
         return view('Mantenimiento.index');
