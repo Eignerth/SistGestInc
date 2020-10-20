@@ -9,7 +9,8 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="idkindident">Tipo de Doc. Identidad</label>
-            <select wire:model="idkindident" class="custom-select">
+            <select wire:model="idkindident" class="form-control">
+                <option value="" selected>--Escoger--</option>
                 @foreach ($idkindidents as $idkindident)
                     <option value="{{$idkindident->id}}">{{$idkindident->description}}</option>                
                 @endforeach
@@ -73,7 +74,8 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="idpossitions">Cargo</label>
-            <select wire:model="idpossitions" class="custom-select">
+            <select wire:model="idpossitions" class="form-control">
+                <option value="" selected>--Escoger--</option>
                 @foreach ($possitions as $possition)
                     <option value="{{$possition->id}}">{{$possition->description}}</option>                
                 @endforeach

@@ -5,6 +5,9 @@ namespace App\Http\Livewire\Administration;
 use App\Models\Kindidentification;
 use App\Models\Personal;
 use App\Models\Possition;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -115,8 +118,8 @@ class PersonalComponent extends Component
     }
     public function store(){
         
-         try { 
-            Personal::create([
+          try {
+            $personal = Personal::create([
                 'name' =>$this->name,
                 'idkindident'=>$this->idkindident,
                 'kindident'=>$this->kindident,
@@ -130,6 +133,13 @@ class PersonalComponent extends Component
                 'idpossitions'=>$this->idpossitions,
                 'addnote'=>$this->addnote,
             ]);
+            User::create([
+                'idpersonals'=>$personal->id,
+                'name'=>$personal->kindident,
+                'password'=>Hash::make($personal->kindident),
+                'lastactivity'=>Carbon::now(),
+                'flgstatus'=>0
+            ]);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'Agregado!',
@@ -139,7 +149,7 @@ class PersonalComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
                 ]);
-         } catch (\Throwable $th) {
+          } catch (\Throwable $th) {
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No eliminado!',
                 'text'=>'No se pudo agregar el nuevo registro',

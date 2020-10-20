@@ -41,11 +41,7 @@ class UserComponent extends Component
                 ->where('users.name','like','%'.$this->search.'%')
                 ->orWhere('personals.name','like','%'.$this->search.'%')
                 ->orderBy($this->sortField,$this->sortAsc?'asc':'desc')
-                ->paginate($this->porPagina),
-                'personals'=>Personal::join('users','personals.id','=','users.idpersonals')
-                    ->select('personals.id','personals.name')
-                    ->where('users.flgstatus','=','0')
-                    ->get(),
+                ->paginate($this->porPagina)
         ]);
     }
 

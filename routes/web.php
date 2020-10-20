@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Route;
 
 //login
 Route::get('login','Auth\LoginController@showLogin')->name('login');
+Route::post('login','Auth\LoginController@login')->name('loadloging');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
 
-Route::group(['prefix' => 'administracion','namespace'=>'Administration'], function () {
+Route::group(['prefix' => 'administracion','namespace'=>'Administration','middleware'=>'auth'], function () {
     Route::get('/', function () {
         return view('Administracion.index');
     })->name('administracion');
@@ -19,7 +22,7 @@ Route::group(['prefix' => 'administracion','namespace'=>'Administration'], funct
     Route::resource('productos', 'ProductController')->only(['index']);
 });
 
-Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance'], function () {
+Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance','middleware'=>'auth'], function () {
     Route::get('/', function () {
         return view('Mantenimiento.index');
     })->name('mantenimientos');
@@ -27,3 +30,4 @@ Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance'], function 
     Route::resource('canales_atencion', 'ChannelController')->only(['index']);
     Route::resource('clasificacion_inc', 'ClassificationController')->only(['index']);
 });
+//Route::get('areadata', 'Administration\AreaPossitionController@AreaData')->name('areadata');

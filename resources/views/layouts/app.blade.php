@@ -9,6 +9,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
+  @yield('css')
   @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini">
@@ -35,9 +36,16 @@
         </div>
       </div>
     </form>
+    <div class="ml-auto">
+      <h5 class="align-middle">
+        Bienvenid@ {{auth()->user()->personal->name}}
+        
+      </h5>
+    </div>
 
     {{-- Right navbar links --}}
     <ul class="navbar-nav ml-auto">
+
       {{-- Notifications Dropdown Menu --}}
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -272,7 +280,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal">
                   <i class="far fa-circle nav-icon text-danger"></i>
                   <p>Cerrar Sesión</p>
                 </a>
@@ -356,6 +364,31 @@
   </footer>
 </div>
 <!-- ./wrapper -->
+
+
+{{--Modal Logout--}}
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">Cerrar Sesión</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>          
+      <form action="{{route('logout')}}" method="POST">
+          @csrf
+          <div class="modal-body">
+              Se perderán todos los datos no guardados.
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-danger">Cerrar</button>
+          </div>
+      </form>
+  </div>
+  </div>
+</div>
 
   @livewireScripts
   <script type="text/javascript" src="{{asset('js/app.js')}}"></script>

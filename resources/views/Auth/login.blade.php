@@ -20,7 +20,8 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Inicia Sesión</p>
 
-      <form  method="post">
+      <form action="{{route('loadloging')}}"  method="post">
+        @csrf
         <div class="input-group mb-3">
           <input type="text" max="50" name="user" class="form-control" placeholder="Usuario">
           <div class="input-group-append">

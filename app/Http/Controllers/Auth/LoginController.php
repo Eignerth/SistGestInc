@@ -19,7 +19,7 @@ class LoginController extends Controller
 
     public function login(VerifyForm $request)
     {
-        if(Auth::attempt(['user'=>$request->user,'password'=>$request->password,'status'=>1])){
+        if(Auth::attempt(['name'=>$request->user,'password'=>$request->password,'flgstatus'=>1])){
             Auth::logoutOtherDevices($request->password);
             return redirect()->route('dashboard');
         }

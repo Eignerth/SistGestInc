@@ -9,7 +9,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" wire:click.prevent="cancel()" class="btn  btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="button" wire:click.prevent="store()" class="btn  btn-danger" data-dismiss="modal">Agregar</button>
+            <button type="button" wire:click.prevent="store()" class="btn  btn-success" data-dismiss="modal">Agregar</button>
         </div>
         </div>
     </div>

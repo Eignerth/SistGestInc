@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('tittle','| Áreas - Cargos')
+@section('styles')
+    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2-bs4.min.css')}}">
+@endsection
 @section('tittlePage')
     <h1 class="m-0 text-dark">Áreas y Cargos</h1>
 @endsection
@@ -34,16 +38,43 @@
             </div>
         </div>
         </div>          
-    </div>
-    
+    </div>    
 @endsection
 
 @section('js')
 
+<script type="text/javascript" src="{{asset('vendor/select2/js/select2.full.min.js')}}"></script>
+<script src="{{asset('vendor/select2/js/i18n/es.js')}}"></script>
 <script>
     window.addEventListener('swal',function(e){ 
         Swal.fire(e.detail);
-    });   
+    });
+     $(document).ready(function() {
+        $('#area').select2({
+            language: "es",
+            theme:'bootstrap4',
+            minimumInputLength:1,
+            placeholder:'Área',
+            allowClear: true,
+            /* ajax:{
+            url: '/areadata',
+            dataType:'json',
+            delay:200,
+            data:function(params){
+                var query={
+                    search:params.term,
+                    _type: 'query'
+                }
+                return query;
+            },
+            processResults: function(data){
+                return{
+                    results: data.results,
+                };
+            }
+        } */
+        });
+    });  
 </script>
     
 @endsection
