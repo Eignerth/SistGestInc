@@ -1,5 +1,5 @@
-<!-- Modal -->
-<div wire:ignore.self class="modal fade" id="updatearea" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="updateareatittle" aria-hidden="true">
+{{--Modal--}}
+<div wire:ignore.self class="modal fade" id="updatearea" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="updateareatittle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">

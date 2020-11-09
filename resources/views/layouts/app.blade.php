@@ -167,7 +167,7 @@
             </a>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="{{route('clientes')}}" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Clientes
@@ -176,15 +176,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('contactos.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Contactos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('soporte_de_clientes.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Clientes</p>
+                  <p>Soporte de Clientes</p>
                 </a>
               </li>
             </ul>

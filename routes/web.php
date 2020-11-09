@@ -10,7 +10,21 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
 
-Route::group(['prefix' => 'administracion','namespace'=>'Administration','middleware'=>'auth'], function () {
+
+
+//clientes
+Route::group(['prefix' => 'clientes','namespace'=>'Customer'], function () {
+    Route::get('/', function () {
+        return view('Clientes.index');
+    })->name('clientes');
+    Route::resource('soporte_de_clientes', 'CustomerController')->only(['index']);
+    Route::resource('contactos', 'ContactController')->only(['index']);
+    Route::get('soporte_de_clientes_lista','CustomerController@CustomerList')->name('sop_clientes.lista');
+});
+
+
+//administracion
+Route::group(['prefix' => 'administracion','namespace'=>'Administration'], function () {
     Route::get('/', function () {
         return view('Administracion.index');
     })->name('administracion');
@@ -22,7 +36,9 @@ Route::group(['prefix' => 'administracion','namespace'=>'Administration','middle
     Route::resource('productos', 'ProductController')->only(['index']);
 });
 
-Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance','middleware'=>'auth'], function () {
+
+//mantenimiento de tablas
+Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance'], function () {
     Route::get('/', function () {
         return view('Mantenimiento.index');
     })->name('mantenimientos');

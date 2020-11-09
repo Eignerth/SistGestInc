@@ -87,7 +87,7 @@ class AreaComponent extends Component
             'icon'=>'success',
             'toast'=>true,
             'position'=>'top-right'
-            ]);
+        ]);
     }
 
     public function delete($id){
