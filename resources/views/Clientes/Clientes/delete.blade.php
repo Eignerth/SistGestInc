@@ -1,9 +1,9 @@
 {{--Modal--}}
-<div wire:ignore.self class="modal fade" id="deleteidentidad" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="deleteidentidadtittle" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="deletecliente" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="deleteclientetittle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="deleteidentidadtittle">Eliminar Tipo de Doc. de Identifición</h5>
+          <h5 class="modal-title" id="deleteclientetittle">Eliminar Cliente</h5>
         </div>
         <div class="modal-body">
             <h3>¿Desea Eliminar este Registro?</h3>

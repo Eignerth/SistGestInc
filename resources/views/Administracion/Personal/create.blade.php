@@ -1,4 +1,4 @@
-<div wire:ignore.self class="modal fade" id="storepersonal" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="storepersonaltittle" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="storepersonal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="storepersonaltittle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <div class="modal-header">

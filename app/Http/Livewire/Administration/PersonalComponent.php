@@ -138,16 +138,16 @@ class PersonalComponent extends Component
                 'icon'=>'success',
                 'toast'=>true,
                 'position'=>'top-right'
-                ]);
+            ]);
          } catch (\Throwable $th) {
             $this->dispatchBrowserEvent('swal',[
-                'title'=>'No eliminado!',
+                'title'=>'No Agregado!',
                 'text'=>'No se pudo agregar el nuevo registro',
                 'timer'=>3000,
                 'icon'=>'error',
                 'toast'=>true,
                 'position'=>'top-right'
-                ]);
+            ]);
         }
     }
 

@@ -10,7 +10,14 @@ Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard
 
 
 //clientes
-
+Route::group(['prefix' => 'clientes','namespace'=>'Customer'], function () {
+    Route::get('/', function () {
+        return view('Clientes.index');
+    })->name('clientes');
+    Route::resource('soporte_de_clientes', 'CustomerController')->only(['index']);
+    Route::resource('contactos', 'ContactController')->only(['index']);
+    Route::get('soporte_de_clientes_lista','CustomerController@CustomerList')->name('sop_clientes.lista');
+});
 
 
 //administracion

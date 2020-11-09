@@ -85,21 +85,34 @@ class PossitionComponent extends Component
 
     public function store()
     {
-        Possition::create([
-            'idareas'=>$this->area,
-            'description'=>$this->descripcion,
-            'addnote'=>$this->notas,
-            'level'=>$this->nivel,
-        ]);        
-        $this->limpiar();
-        $this->dispatchBrowserEvent('swal',[
-            'title'=>'Agregado!',
-            'text'=>'La información se agregó correctamente!',
-            'timer'=>3000,
-            'icon'=>'success',
-            'toast'=>true,
-            'position'=>'top-right'
-        ]);
+        try {
+            Possition::create([
+                'idareas'=>$this->area,
+                'description'=>$this->descripcion,
+                'addnote'=>$this->notas,
+                'level'=>$this->nivel,
+            ]);        
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Agregado!',
+                'text'=>'La información se agregó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+       
+            
+        } catch (\Throwable $th) {
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Agregado!',
+                'text'=>'No se pudo agregar el nuevo registro',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
     }
     public function delete($id){
         $this->codigo=$id;

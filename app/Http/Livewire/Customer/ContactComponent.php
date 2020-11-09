@@ -2,19 +2,21 @@
 
 namespace App\Http\Livewire\Customer;
 
+use App\Models\Contact;
 use App\Models\Customer;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class CustomerComponent extends Component
+class ContactComponent extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $porPagina=10;
     public $sortField='id';
-    public $sortAsc=true;    
-    public $search = '';    
-    public $codigo,$descripcion,$ruc,$address,$telf,$cel,$email,$sector,$addnote;
+    public $sortAsc=true;
+    public $search='';
+    public $codigo,$customer,$name,$email,$cel,$telf,$possition,$addnote;
+
 
     public function updatingSearch()
     {
@@ -31,93 +33,90 @@ class CustomerComponent extends Component
 
         $this->sortField = $field;
     }
-
     public function render()
-    {
-        return view('livewire.customer.customer-component',[
-            'customers'=>Customer::search($this->search)
-                ->orderBy($this->sortField,$this->sortAsc ? 'asc':'desc')
+    { 
+        return view('livewire.customer.contact-component',[
+            'contacts'=>Contact::join('customers','contacts.idcustomers','=','customers.id')
+                ->select('contacts.id','customers.descripcion as customer','contacts.name','contacts.cel','contacts.email')
+                ->where('customers.descripcion','like','%'.$this->search.'%')
+                ->orWhere('contacts.name','like','%'.$this->search.'%')
+                ->orderBy($this->sortField,$this->sortAsc?'asc':'desc')
                 ->paginate($this->porPagina),
+                'customers'=>Customer::all(),
         ]);
     }
 
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName,[
-            'descripcion'=>'required|max:200|string',
-            'ruc'=>'required|min:11|string|unique:App\Models\Customer,ruc,'.$this->codigo.',id',
-            'address'=>'max:500|string',
-            'telf'=>'max:15|numeric',
-            'cel'=>'max:15|numeric',
-            'email'=>'email|max:255',
-            'sector'=>'string|max:100',
-            'addnote'=>'nullable|string',
+            'customer'=>'required',
+            'name'=>'required',
+            'email'=>'email|nullable',
+            'cel'=>'numeric|nullable',
+            'telf'=>'numeric|nullable',
+            'possition'=>'string|nullable|max:50',
+            'addnote'=>'string|nullable'
         ]);
     }
 
     public function store()
     {
         try {
-            
-            Customer::create([
-                'descripcion'=>$this->descripcion,
-                'ruc'=>$this->ruc,
-                'address'=>$this->address,
+            Contact::create([
+                'idcustomers'=>$this->customer,
+                'name'=>$this->name,
+                'email'=>$this->email,
                 'telf'=>$this->telf,
                 'cel'=>$this->cel,
-                'email'=>$this->email,
-                'sector'=>$this->sector,
+                'possition'=>$this->possition,
                 'addnote'=>$this->addnote,
-                ]);
-                $this->limpiar();
-                $this->dispatchBrowserEvent('swal',[
-                    'title'=>'Agregado!',
-                    'text'=>'La información se agregó correctamente!',
-                    'timer'=>3000,
-                    'icon'=>'success',
-                    'toast'=>true,
-                    'position'=>'top-right'
-                    ]);
-                } catch (\Throwable $th) {
-                    $this->dispatchBrowserEvent('swal',[
-                        'title'=>'No Agregado!',
-                        'text'=>'No se pudo agregar el nuevo registro',
-                        'timer'=>3000,
-                        'icon'=>'error',
-                        'toast'=>true,
-                        'position'=>'top-right'
-                    ]);
-                }
+            ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Agregado!',
+                'text'=>'La información se agregó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        } catch (\Throwable $th) {
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Agregado!',
+                'text'=>'No se pudo agregar el nuevo registro',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
     }
-                
+
     public function edit($codigo)
     {
-        $customer = Customer::findOrFail($codigo);
-        $this->codigo=$customer->id;
-        $this->descripcion=$customer->descripcion;
-        $this->ruc=$customer->ruc;
-        $this->address=$customer->address;
-        $this->telf=$customer->telf;
-        $this->cel=$customer->cel;
-        $this->email=$customer->email;
-        $this->sector=$customer->sector;
-        $this->addnote=$customer->addnote;
+        $contact = Contact::findOrFail($codigo);
+        $this->codigo=$contact->id;
+        $this->customer=$contact->idcustomers;
+        $this->name=$contact->name;
+        $this->email=$contact->email;
+        $this->telf=$contact->telf;
+        $this->cel=$contact->cel;
+        $this->possition=$contact->possition;
+        $this->addnote=$contact->addnote;
         
     }
 
     public function update()
     {
         try {
-                        
-            $customer = Customer::findOrFail($this->codigo);
-            $customer->update([
-                'descripcion'=>$this->descripcion,
-                'ruc'=>$this->ruc,
-                'address'=>$this->address,
+            $contact = Contact::findOrFail($this->codigo);
+            $contact->update([
+                'idcustomers'=>$this->customer,
+                'name'=>$this->name,
+                'email'=>$this->email,
                 'telf'=>$this->telf,
                 'cel'=>$this->cel,
-                'email'=>$this->email,
-                'sector'=>$this->sector,
+                'possition'=>$this->possition,
                 'addnote'=>$this->addnote,
             ]);
             $this->limpiar();
@@ -140,15 +139,15 @@ class CustomerComponent extends Component
             ]);
         }
     }
-    
 
     public function delete($id){
         $this->codigo=$id;
     }
+
     public function destroy(){
 
         try {
-            Customer::destroy($this->codigo);
+            Contact::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'Eliminado!',
@@ -170,20 +169,21 @@ class CustomerComponent extends Component
                 ]);
         }        
     }
-
-    public function limpiar(){
+    public function limpiar()
+    {
         $this->search='';
-        $this->descripcion='';
-        $this->ruc='';
-        $this->address='';
-        $this->telf='';
+        $this->codigo='';
+        $this->customer='';
+        $this->name='';
         $this->cel='';
-        $this->email='';
+        $this->telf='';
+        $this->possition='';
         $this->addnote='';
     }
-
-    public function cancel(){
+    public function cancel()
+    {
         $this->limpiar();
         $this->resetValidation();
     }
+
 }
