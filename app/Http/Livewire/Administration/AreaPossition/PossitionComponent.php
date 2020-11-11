@@ -101,8 +101,6 @@ class PossitionComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
-       
-            
         } catch (\Throwable $th) {
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',

@@ -38,7 +38,7 @@
     </form>
     <div class="ml-auto">
       <h5 class="align-middle">
-        Bienvenid@ {{auth()->user()->personal->name}}
+        {{-- Bienvenid@ {{auth()->user()->personal->name}} --}}
         
       </h5>
     </div>

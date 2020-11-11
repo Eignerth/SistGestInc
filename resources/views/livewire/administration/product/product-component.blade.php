@@ -51,9 +51,7 @@
                     <td>{{$product->abbreviation}}</td>
                     <td>{{$product->description}}</td>
                     <td>
-                        <div class="d-flex justify-content-center">     
-                            <button class="btn btn-primary"><i class="fas fa-info"></i></button>                           
-                            &nbsp;&nbsp;                        
+                        <div class="d-flex justify-content-center">                        
                             <button wire:click="edit({{$product->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updateproducto"><i class="fas fa-edit"></i></button>
                             &nbsp;&nbsp;                        
                             <button wire:click="delete({{$product->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deleteproducto"><i class="fas fa-trash-alt"></i></button>

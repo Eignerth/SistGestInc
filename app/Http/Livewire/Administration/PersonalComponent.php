@@ -148,13 +148,8 @@ class PersonalComponent extends Component
                 'icon'=>'success',
                 'toast'=>true,
                 'position'=>'top-right'
-<<<<<<< HEAD
-                ]);
-          } catch (\Throwable $th) {
-=======
             ]);
          } catch (\Throwable $th) {
->>>>>>> clientes
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',
                 'text'=>'No se pudo agregar el nuevo registro',
@@ -191,7 +186,7 @@ class PersonalComponent extends Component
                 'icon'=>'error',
                 'toast'=>true,
                 'position'=>'top-right'
-                ]);
+            ]);
         }        
     }
     

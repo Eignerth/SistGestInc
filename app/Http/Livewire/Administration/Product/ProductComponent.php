@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Administration;
+namespace App\Http\Livewire\Administration\Product;
 
 use App\Models\Product;
 use Livewire\Component;
@@ -14,7 +14,6 @@ class ProductComponent extends Component
     public $sortField='id';
     public $sortAsc=true;
     public $search='';
-
     public $codigo,$abbreviation,$description,$addnote;
 
     public function updatingSearch()
@@ -35,10 +34,12 @@ class ProductComponent extends Component
 
     public function render()
     {
-        return view('livewire.administration.product-component',[
+        
+        return view('livewire.administration.product.product-component',[
             'products'=>Product::search($this->search)
             ->orderBy($this->sortField,$this->sortAsc?'asc':'desc')
             ->paginate($this->porPagina),
+            'producto'=>Product::where('id','=',$this->codigo)->get(),
         ]);
     }
 
@@ -59,6 +60,8 @@ class ProductComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
+            $this->emit('product:refresh');
+
         } catch (\Throwable $th) {
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',
@@ -69,6 +72,20 @@ class ProductComponent extends Component
                 'position'=>'top-right'
             ]);
         }
+    }
+
+    public function show($codigo)
+    {
+        $this->edit($codigo);
+    }
+
+    public function edit($codigo)
+    {
+        $producto = Product::findOrFail($codigo);
+        $this->codigo = $producto->id;
+        $this->abbreviation = $producto->abbreviation;
+        $this->description = $producto->description;
+        $this->addnote = $producto->addnote;
     }
 
     public function limpiar(){
