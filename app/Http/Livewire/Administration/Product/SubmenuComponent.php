@@ -20,6 +20,7 @@ class SubmenuComponent extends Component
 
     protected $listeners = [
         'menu:refresh' => '$refresh',
+        'product:refresh' => '$refresh',
     ];
     public function updatingSearch()
     {

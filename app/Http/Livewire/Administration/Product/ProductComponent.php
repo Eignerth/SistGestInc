@@ -88,6 +88,38 @@ class ProductComponent extends Component
         $this->addnote = $producto->addnote;
     }
 
+    public function update()
+    {
+        try {
+            $product = Product::findOrFail($this->codigo);
+            $product->update([
+                'abbreviation'=>$this->abbreviation,
+                'description'=>$this->description,
+                'addnote'=>$this->addnote,
+            ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Actualizado!',
+                'text'=>'La información se actualizó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+            $this->emit('product:refresh');
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Actualizado!',
+                'text'=>'No se pudo actualizar',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
+    }
+
     public function limpiar(){
         $this->search='';
         $this->codigo='';
@@ -99,5 +131,37 @@ class ProductComponent extends Component
     public function cancel(){
         $this->limpiar();
         $this->resetValidation();
+    }
+
+    public function delete($id)
+    {
+        $this->codigo=$id;
+    }
+
+    public function destroy()
+    {
+        try {
+            Product::destroy($this->codigo);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Eliminado!',
+                'text'=>'La información se eliminó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+            $this->emit('product:refresh');
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No eliminado!',
+                'text'=>'Quizas este registro ya tiene movismientos',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
     }
 }

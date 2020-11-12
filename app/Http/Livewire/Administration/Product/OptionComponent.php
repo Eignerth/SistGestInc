@@ -21,6 +21,7 @@ class OptionComponent extends Component
     protected $listeners = [
         'submenu:refresh' => '$refresh',
         'menu:refresh' => '$refresh',
+        'product:refresh' => '$refresh',
     ];
 
     public function updatingSearch()

@@ -19,9 +19,10 @@ class SuboptionComponent extends Component
     public $codigo,$option,$description;
 
     protected $listeners = [
-        'menu:refresh' => '$refresh',
-        'submenu:refresh' => '$refresh',
         'option:refresh' => '$refresh',
+        'submenu:refresh' => '$refresh',
+        'menu:refresh' => '$refresh',
+        'product:refresh' => '$refresh',
     ];
 
     public function updatingSearch()
