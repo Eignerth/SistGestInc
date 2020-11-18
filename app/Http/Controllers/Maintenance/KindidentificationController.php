@@ -10,6 +10,7 @@ class KindidentificationController extends Controller
 
     public function index()
     {
+        $this->authorize('Ver Docs Identidad');
         return view('Mantenimiento.Tipoidentificacion.index');
     }
 }

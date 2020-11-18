@@ -10,12 +10,7 @@ class CustomerController extends Controller
 {
     public function index()
     {
+        $this->authorize('Ver Soporte de Clientes');
         return view('Clientes.Clientes.index');
-    }
-
-    public function CustomerList(Request $request)
-    {   
-        $customerslist=Customer::where('descripcion','LIKE','%'.$request->input('search','').'%')->get(['id','descripcion as text']);
-        return ['results'=>$customerslist];
     }
 }

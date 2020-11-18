@@ -18,7 +18,9 @@
                     <p>
                         En esta opción usted podrá administrar los datos de la empresa.
                     </p>
-                    <a href="{{route('empresa.index')}}" class="btn bg-navy">Ir a Empresa</a>
+                    @can('Ver Empresa')
+                        <a href="{{route('empresa.index')}}" class="btn bg-navy">Ir a Empresa</a>
+                    @endcan
                 </div>            
             </div>
 
@@ -26,12 +28,14 @@
         <div class="col-md-4">
             <div class="card card-outline card-purple">
             <h4 class="card-header">Áreas y Cargos</h4>
-            <div class="card-body">
-                <p>
-                    Podrá administrar las áreas de la empresa, así como los cargos que cada área posee
-                </p>
-                <a href="{{route('area_cargo.index')}}" class="btn bg-purple">Ir a Áreas y Cargos</a>
-            </div>            
+                <div class="card-body">
+                    <p>
+                        Podrá administrar las áreas de la empresa, así como los cargos que cada área posee
+                    </p>
+                    @can('Ver Área-Cargo')
+                        <a href="{{route('area_cargo.index')}}" class="btn bg-purple">Ir a Áreas y Cargos</a>
+                    @endcan    
+                </div>            
             </div>
         </div>
         <div class="col-md-4">
@@ -39,7 +43,9 @@
             <h4 class="card-header">Roles y Permisos</h4>
             <div class="card-body">
                 <p>En esta opción podrá administrar los permisos de cada rol, incluyendo los roles.</p>
+                @can('Ver Rol')
                 <a href="{{route('rol_permiso.index')}}" class="btn bg-olive">Ir a Roles y Permisos</a>
+                @endcan
             </div>
             </div>
         </div>
@@ -52,7 +58,9 @@
                 <p>
                     En esta opción podrá administrar el personal que usará el sistema.
                 </p>
+                @can('Ver Personal')
                 <a href="{{route('personal.index')}}" class="btn bg-lightblue">Ir a Personal</a>
+                @endcan
             </div>            
             </div>
         </div>
@@ -64,7 +72,9 @@
                 <p>
                     Administrar los productos y/o servicios que ofrece la empresa.
                 </p>
+                @can('Ver Producto')
                 <a href="{{route('productos.index')}}" class="btn bg-teal">Ir a Productos y Serv.</a>
+                @endcan
             </div>
             </div>
         </div>
@@ -74,7 +84,9 @@
             <div class="card-body">
                 <p>Aquí podrá administrar usuarios y definir permisos a cada uno.
                 </p>
+                @can('Ver Usuario')
                 <a href="{{route('usuarios.index')}}" class="btn bg-warning">Ir a Usuarios</a>
+                @endcan
             </div>
             </div>
         </div>

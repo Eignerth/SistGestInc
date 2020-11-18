@@ -1,8 +1,17 @@
 <div>
     <div>
+        @can('Agregar Producto')
         @include('Administracion.Productos.Option.create')
+        @endcan
+            
+        @can('Editar Producto')
         @include('Administracion.Productos.Option.edit')
+        @endcan
+            
+        @can('Eliminar Producto')
         @include('Administracion.Productos.Option.delete')
+        @endcan
+            
     </div>
     <div class="row mb-4">
         <div class="col form-inline">
@@ -10,9 +19,11 @@
                 <input wire:model="search" type="text" class="form-control" placeholder="Opción">
                 <button wire:click="limpiar()" class="btn bg-teal " data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i  class="fas fa-times"></i></button>
                 &nbsp;
-                <span data-toggle="modal" data-target="#storeoption">
-                    <button class="btn btn-primary" data-placement="bottom" data-toggle="tooltip" title="Agregar Opción"><i class="fas fa-plus-square"></i></button>
-                </span>
+                @can('Agregar Producto')
+                    <span data-toggle="modal" data-target="#storeoption">
+                        <button class="btn btn-primary" data-placement="bottom" data-toggle="tooltip" title="Agregar Opción"><i class="fas fa-plus-square"></i></button>
+                    </span>
+                @endcan
             </div>
         </div>
     </div>
@@ -43,9 +54,13 @@
                         <td>{{$option->description}}</td>
                         <td>
                             <div class="d-flex justify-content-center"> 
-                                <button wire:click="edit({{$option->id}})" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateoption"><i class="fas fa-edit"></i></button>
+                                @can('Editar Producto')
+                                    <button wire:click="edit({{$option->id}})" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateoption"><i class="fas fa-edit"></i></button>
+                                @endcan
                                 &nbsp;&nbsp;                        
-                                <button wire:click="delete({{$option->id}})" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteoption"><i class="fas fa-trash-alt"></i></button>
+                                @can('Eliminar Producto')
+                                    <button wire:click="delete({{$option->id}})" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteoption"><i class="fas fa-trash-alt"></i></button>
+                                @endcan
                             </div>
                         </td>
                     </tr>

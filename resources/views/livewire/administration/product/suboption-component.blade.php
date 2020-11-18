@@ -1,8 +1,17 @@
 <div>
     <div>
+        @can('Agregar Producto')
         @include('Administracion.Productos.Suboption.create')
+        @endcan
+            
+        @can('Editar Producto')
         @include('Administracion.Productos.Suboption.edit')
+        @endcan
+            
+        @can('Eliminar Producto')
         @include('Administracion.Productos.Suboption.delete')
+        @endcan
+            
     </div>
     <div class="row mb-4">
         <div class="col form-inline">
@@ -10,9 +19,11 @@
                 <input wire:model="search" type="text" class="form-control" placeholder="Sub-Opción">
                 <button wire:click="limpiar()" class="btn bg-teal " data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i  class="fas fa-times"></i></button>
                 &nbsp;
+                @can('Agregar Producto')
                 <span data-toggle="modal" data-target="#storesuboption">
                     <button class="btn btn-primary" data-placement="bottom" data-toggle="tooltip" title="Agregar Sub-Opción"><i class="fas fa-plus-square"></i></button>
                 </span>
+                @endcan
             </div>
         </div>
     </div>
@@ -43,9 +54,13 @@
                         <td>{{$suboption->description}}</td>
                         <td>
                             <div class="d-flex justify-content-center"> 
+                                @can('Editar Producto')
                                 <button wire:click="edit({{$suboption->id}})" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updatesuboption"><i class="fas fa-edit"></i></button>
+                                @endcan
                                 &nbsp;&nbsp;                        
+                                @can('Eliminar Producto')
                                 <button wire:click="delete({{$suboption->id}})" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletesuboption"><i class="fas fa-trash-alt"></i></button>
+                                @endcan
                             </div>
                         </td>
                     </tr>

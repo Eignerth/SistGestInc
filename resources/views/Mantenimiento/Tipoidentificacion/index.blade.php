@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('tittle','| Mant. - Tipos Identidad')
+@section('tittle','| Tipos Identidad')
 @section('tittlePage')
     <h1 class="m-0 text-dark">Tipos de Documentos de Identidad</h1>
 @endsection

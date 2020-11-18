@@ -13,18 +13,17 @@ Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard
 
 
 //clientes
-Route::group(['prefix' => 'clientes','namespace'=>'Customer'], function () {
+Route::group(['prefix' => 'clientes','namespace'=>'Customer','middleware'=>'auth'], function () {
     Route::get('/', function () {
         return view('Clientes.index');
     })->name('clientes');
     Route::resource('soporte_de_clientes', 'CustomerController')->only(['index']);
     Route::resource('contactos', 'ContactController')->only(['index']);
-    Route::get('soporte_de_clientes_lista','CustomerController@CustomerList')->name('sop_clientes.lista');
 });
 
 
 //administracion
-Route::group(['prefix' => 'administracion','namespace'=>'Administration'], function () {
+Route::group(['prefix' => 'administracion','namespace'=>'Administration','middleware'=>'auth'], function () {
     Route::get('/', function () {
         return view('Administracion.index');
     })->name('administracion');
@@ -38,7 +37,7 @@ Route::group(['prefix' => 'administracion','namespace'=>'Administration'], funct
 
 
 //mantenimiento de tablas
-Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance'], function () {
+Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance','middleware'=>'auth'], function () {
     Route::get('/', function () {
         return view('Mantenimiento.index');
     })->name('mantenimientos');
@@ -46,4 +45,3 @@ Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance'], function 
     Route::resource('canales_atencion', 'ChannelController')->only(['index']);
     Route::resource('clasificacion_inc', 'ClassificationController')->only(['index']);
 });
-//Route::get('areadata', 'Administration\AreaPossitionController@AreaData')->name('areadata');

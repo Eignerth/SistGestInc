@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Administration\Company;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Company;
 use Livewire\Component;
 
@@ -45,25 +46,38 @@ class CompanyComponent extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function update(){        
-        $validatedData =  $this->validate();
+    public function update(){
+        try {
+            $this->authorize('Editar Empresa');        
+            $validatedData =  $this->validate();
+            $company = Company::findOrFail(1);        
+            $company->update([
+                'address'=>$this->address,
+                'telf'=>$this->telf,
+                'web'=>$this->web,
+                'email'=>$this->email,
+            ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Actualizado!',
+                'text'=>'La información se actualizó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Actualizado!',
+                'text'=>'No se pudo actualizar',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
         
-        $company = Company::findOrFail(1);        
-        $company->update([
-            'address'=>$this->address,
-            'telf'=>$this->telf,
-            'web'=>$this->web,
-            'email'=>$this->email,
-        ]);
-        $this->limpiar();
-        $this->dispatchBrowserEvent('swal',[
-            'title'=>'Actualizado!',
-            'text'=>'La información se actualizó correctamente!',
-            'timer'=>3000,
-            'icon'=>'success',
-            'toast'=>true,
-            'position'=>'top-right'
-        ]);
         
     }
 }

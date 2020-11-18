@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Administration\Product;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -46,6 +46,7 @@ class ProductComponent extends Component
     public function store()
     {
         try {
+            $this->authorize('Agregar Producto');
             Product::create([
                 'abbreviation'=>$this->abbreviation,
                 'description'=>$this->description,
@@ -63,6 +64,7 @@ class ProductComponent extends Component
             $this->emit('product:refresh');
 
         } catch (\Throwable $th) {
+            $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',
                 'text'=>'No se pudo agregar el nuevo registro',
@@ -74,10 +76,7 @@ class ProductComponent extends Component
         }
     }
 
-    public function show($codigo)
-    {
-        $this->edit($codigo);
-    }
+
 
     public function edit($codigo)
     {
@@ -91,6 +90,7 @@ class ProductComponent extends Component
     public function update()
     {
         try {
+            $this->authorize('Editar Producto');
             $product = Product::findOrFail($this->codigo);
             $product->update([
                 'abbreviation'=>$this->abbreviation,
@@ -141,6 +141,7 @@ class ProductComponent extends Component
     public function destroy()
     {
         try {
+            $this->authorize('Eliminar Producto');
             Product::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

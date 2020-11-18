@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Customer;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Customer;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -58,7 +58,7 @@ class CustomerComponent extends Component
     public function store()
     {
         try {
-            
+            $this->authorize('Agregar Soporte de Clientes');
             Customer::create([
                 'descripcion'=>$this->descripcion,
                 'ruc'=>$this->ruc,
@@ -108,7 +108,7 @@ class CustomerComponent extends Component
     public function update()
     {
         try {
-                        
+            $this->authorize('Editar Soporte de Clientes');       
             $customer = Customer::findOrFail($this->codigo);
             $customer->update([
                 'descripcion'=>$this->descripcion,
@@ -148,6 +148,7 @@ class CustomerComponent extends Component
     public function destroy(){
 
         try {
+            $this->authorize('Eliminar Soporte de Clientes');
             Customer::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

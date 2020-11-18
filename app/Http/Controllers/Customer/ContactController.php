@@ -9,6 +9,7 @@ class ContactController extends Controller
 {
     public function index()
     {
+        $this->authorize('Ver Contactos');
         return view('Clientes.Contactos.index');
     }
 }

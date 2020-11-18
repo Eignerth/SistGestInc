@@ -1,8 +1,17 @@
 <div>
     <div>
+        @can('Agregar Contactos')
         @include('Clientes.Contactos.create')
+        @endcan
+            
+        @can('Editar Contactos')
         @include('Clientes.Contactos.edit')
+        @endcan
+            
+        @can('Eliminar Contactos')
         @include('Clientes.Contactos.delete')
+        @endcan
+            
     </div>
     <div wire:ignore class="row mb-4">
         <div class="col form-inline">
@@ -19,9 +28,11 @@
                 <input wire:model="search" class="form-control" type="text" placeholder="Buscar...">
                 <button wire:click="limpiar()" class="btn bg-purple" data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i class="fas fa-times"></i></button>
                 &nbsp;&nbsp;
-                <span data-toggle="modal" data-target="#storecontacto">
-                    <button class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Contacto"><i class="fas fa-plus-square"></i></button>
-                </span>
+                @can('Agregar Contactos')
+                    <span data-toggle="modal" data-target="#storecontacto">
+                        <button class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Contacto"><i class="fas fa-plus-square"></i></button>
+                    </span>
+                @endcan
             </div>
         </div>      
     </div>
@@ -56,10 +67,15 @@
                     <td>{{$contact->email}}</td>
                     <td>
                         <div class="d-flex justify-content-center">                                
+                            @can('Editar Contactos', Model::class)
                             <button wire:click="edit({{$contact->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updatecontacto"><i class="fas fa-edit"></i></button>
-                            &nbsp;&nbsp;                        
+                            @endcan
+                            &nbsp;&nbsp;
+                                
+                            @can('Eliminar Contactos', Model::class)
                             <button wire:click="delete({{$contact->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletecontacto"><i class="fas fa-trash-alt"></i></button>
-                        </div>
+                            @endcan                       
+                        </div>  
                     </td>
                 </tr>
                 @endforeach

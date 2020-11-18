@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Administration\Product;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Menu;
 use App\Models\SubMenu;
 use Livewire\Component;
@@ -69,6 +69,7 @@ class SubmenuComponent extends Component
     public function store()
     {
         try {
+            $this->authorize('Agregar Producto');
             SubMenu::create([
                 'idmenus'=>$this->menu,
                 'description'=>$this->description,
@@ -107,6 +108,7 @@ class SubmenuComponent extends Component
     public function update()
     {
         try {
+            $this->authorize('Editar Producto');
             $submenu = SubMenu::findOrFail($this->codigo);
             $submenu->update([
                 'description'=>$this->description,
@@ -154,6 +156,7 @@ class SubmenuComponent extends Component
     public function destroy()
     {
         try {
+            $this->authorize('Eliminar Producto');
             SubMenu::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

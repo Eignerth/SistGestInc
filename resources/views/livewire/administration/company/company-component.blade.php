@@ -1,14 +1,19 @@
 <div>
     {{--incluir modal edit--}}
-    @include('Administracion.Empresa.edit')
+    @can('Editar Empresa')
+        @include('Administracion.Empresa.edit')
+    @endcan
 
     <div class="d-flex justify-content-between">
         <div>
             <h1>{{$company->description}}</h1>        
         </div>
-        <div class="align-self-center">
-            <button data-toggle="modal" data-target="#updatecompany" wire:click="edit()" class="btn btn-warning bt-sm inline"><i class="fas fa-edit"></i>&nbsp;Editar</button>        
-        </div>      
+        @can('Editar Empresa')
+            
+            <div class="align-self-center">
+                <button data-toggle="modal" data-target="#updatecompany" wire:click="edit()" class="btn btn-warning bt-sm inline"><i class="fas fa-edit"></i>&nbsp;Editar</button>        
+            </div>      
+        @endcan
     </div>
     <table class="table table-hover">
         <tbody>

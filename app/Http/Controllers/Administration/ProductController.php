@@ -9,6 +9,7 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $this->authorize('Ver Producto');
         return view('Administracion.Productos.index');
     }
 }

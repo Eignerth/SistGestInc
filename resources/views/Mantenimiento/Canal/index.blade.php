@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('tittle','| Mant. - Canales de Atención')
+@section('tittle','| Canales de Atención')
 @section('tittlePage')
     <h1 class="m-0 text-dark">Canales de Atención</h1>
 @endsection

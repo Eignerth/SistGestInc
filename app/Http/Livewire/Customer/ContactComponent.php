@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Customer;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Contact;
 use App\Models\Customer;
 use Livewire\Component;
@@ -62,6 +62,7 @@ class ContactComponent extends Component
     public function store()
     {
         try {
+            $this->authorize('Ver Contactos');
             Contact::create([
                 'idcustomers'=>$this->customer,
                 'name'=>$this->name,
@@ -109,6 +110,7 @@ class ContactComponent extends Component
     public function update()
     {
         try {
+            $this->authorize('Editar Contactos');
             $contact = Contact::findOrFail($this->codigo);
             $contact->update([
                 'idcustomers'=>$this->customer,
@@ -147,6 +149,7 @@ class ContactComponent extends Component
     public function destroy(){
 
         try {
+            $this->authorize('Eliminar Contactos');
             Contact::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

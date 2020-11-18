@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Maintenance;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Kindidentification;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -59,45 +60,74 @@ class KinidentificationComponent extends Component
     }
 
     public function update()
-    {
-        $docidentity = Kindidentification::findOrFail($this->codigo);        
-        $docidentity->update([
-            'abbreviation'=>$this->abbreviation,
-            'description'=>$this->description,
-            'ndigits'=>$this->digits,
-        ]);
-        $this->limpiar();
-        $this->dispatchBrowserEvent('swal',[
-            'title'=>'Actualizado!',
-            'text'=>'La información se actualizó correctamente!',
-            'timer'=>3000,
-            'icon'=>'success',
-            'toast'=>true,
-            'position'=>'top-right'
-        ]);
+    {   
+        try {
+            $this->authorize('Editar Docs Identidad');
+            $docidentity = Kindidentification::findOrFail($this->codigo);        
+            $docidentity->update([
+                'abbreviation'=>$this->abbreviation,
+                'description'=>$this->description,
+                'ndigits'=>$this->digits,
+            ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Actualizado!',
+                'text'=>'La información se actualizó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Actualizado!',
+                'text'=>'No se pudo actualizar',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
+        
     }
 
     public function store()
     {
-        Kindidentification::create([
-            'abbreviation'=>$this->abbreviation,
-            'description'=>$this->description,
-            'ndigits'=>$this->digits,
-        ]);        
-        $this->limpiar();
-        $this->dispatchBrowserEvent('swal',[
-            'title'=>'Agregado!',
-            'text'=>'La información se agregó correctamente!',
-            'timer'=>3000,
-            'icon'=>'success',
-            'toast'=>true,
-            'position'=>'top-right'
-        ]);
+        try {
+            $this->authorize('Agregar Docs Identidad');
+            Kindidentification::create([
+                'abbreviation'=>$this->abbreviation,
+                'description'=>$this->description,
+                'ndigits'=>$this->digits,
+            ]);        
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Agregado!',
+                'text'=>'La información se agregó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Agregado!',
+                'text'=>'No se pudo agregar el nuevo registro',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
+        
     }
 
     public function destroy(){
 
         try {
+            $this->authorize('Eliminar Docs Identidad');
             Kindidentification::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

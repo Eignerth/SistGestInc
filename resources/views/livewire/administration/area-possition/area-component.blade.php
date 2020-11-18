@@ -1,8 +1,14 @@
 <div>
     <div>
-        @include('Administracion.Area_Subarea.edit_area')
-        @include('Administracion.Area_Subarea.create_area')
-        @include('Administracion.Area_Subarea.delete_are')
+        @can('Agregar Área')
+            @include('Administracion.Area_Subarea.edit_area')
+        @endcan
+        @can('Editar Área')
+            @include('Administracion.Area_Subarea.create_area')
+        @endcan
+        @can('Eliminar Área', Model::class)
+            @include('Administracion.Area_Subarea.delete_are')    
+        @endcan    
     </div>
 
     <div wire:ignore class="row mb-4">
@@ -21,10 +27,14 @@
                 <div class="input-group-append">
                     <button wire:click="limpiar()" class="btn bg-purple" data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i class="fas fa-times"></i></button>
                 </div>
-
             </div>
         </div>
-        <button class="btn btn-success" data-placement="bottom" data-toggle="modal" data-target="#storearea" title="Agregar Área"><i class="fas fa-plus-square"></i></button>
+        @can('Agregar Área')
+            <span data-toggle="modal" data-target="#storearea">
+                <button class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Área"><i class="fas fa-plus-square"></i></button>
+            </span>
+        @endcan
+            
     </div>
     <div class="row">
         <table class="table table-hover">
@@ -52,9 +62,13 @@
                         <td>{{$area->abbreviation}}</td>
                         <td>{{$area->description}}</td>
                         <td>
-                            <div class="d-flex justify-content-between">                                
-                                <button wire:click="edit({{$area->id}})"  data-toggle="modal" data-target="#updatearea" class="btn btn-warning" ><i class="fas fa-edit"></i></button>                           
-                                <button wire:click="delete({{$area->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletearea"><i class="fas fa-trash-alt"></i></button>
+                            <div class="d-flex justify-content-between">
+                                @can('Editar Área')
+                                    <button wire:click="edit({{$area->id}})"  data-toggle="modal" data-target="#updatearea" class="btn btn-warning" ><i class="fas fa-edit"></i></button>                           
+                                @endcan
+                                @can('Eliminar Área')
+                                    <button wire:click="delete({{$area->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletearea"><i class="fas fa-trash-alt"></i></button>
+                                @endcan
                             </div>                        
                         </td>
                     </tr>

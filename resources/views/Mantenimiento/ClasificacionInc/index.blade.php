@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('tittle','| Mant. - Clasif. de Inc.')
+@section('tittle','| Clasif. de Inc.')
 @section('tittlePage')
     <h1 class="m-0 text-dark">Clasificación de Incidencias</h1>
 @endsection

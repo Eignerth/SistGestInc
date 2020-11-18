@@ -9,6 +9,7 @@ class ChannelController extends Controller
 {    
     public function index()
     {
+        $this->authorize('Ver Canales de Atención');
         return view('Mantenimiento.Canal.index');
     }
 }

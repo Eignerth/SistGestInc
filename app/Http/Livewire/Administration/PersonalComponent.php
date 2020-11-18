@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Administration;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Kindidentification;
 use App\Models\Personal;
 use App\Models\Possition;
@@ -90,35 +90,50 @@ class PersonalComponent extends Component
             ]);
     }
 
-    public function update(){        
-        $personal = Personal::findOrFail($this->codigo);        
-        $personal->update([
-            'name' =>$this->name,
-            'idkindident'=>$this->idkindident,
-            'kindident'=>$this->kindident,
-            'ruc'=>$this->ruc,
-            'telf'=>$this->telf,
-            'cel'=>$this->cel,
-            'ownemail'=>$this->ownemail,
-            'email'=>$this->email,
-            'address'=>$this->address,
-            'dateborn'=>$this->dateborn,
-            'idpossitions'=>$this->idpossitions,
-            'addnote'=>$this->addnote,
-        ]);
-        $this->limpiar();
-        $this->dispatchBrowserEvent('swal',[
-            'title'=>'Actualizado!',
-            'text'=>'La información se actualizó correctamente!',
-            'timer'=>3000,
-            'icon'=>'success',
-            'toast'=>true,
-            'position'=>'top-right'
-        ]);
+    public function update(){
+        try {
+            $this->authorize('Editar Personal');
+            $personal = Personal::findOrFail($this->codigo);        
+            $personal->update([
+                'name' =>$this->name,
+                'idkindident'=>$this->idkindident,
+                'kindident'=>$this->kindident,
+                'ruc'=>$this->ruc,
+                'telf'=>$this->telf,
+                'cel'=>$this->cel,
+                'ownemail'=>$this->ownemail,
+                'email'=>$this->email,
+                'address'=>$this->address,
+                'dateborn'=>$this->dateborn,
+                'idpossitions'=>$this->idpossitions,
+                'addnote'=>$this->addnote,
+            ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Actualizado!',
+                'text'=>'La información se actualizó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Actualizado!',
+                'text'=>'No se pudo actualizar',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }     
+        
     }
     public function store(){
         
           try {
+            $this->authorize('Agregar Personal');
             $personal = Personal::create([
                 'name' =>$this->name,
                 'idkindident'=>$this->idkindident,
@@ -167,6 +182,7 @@ class PersonalComponent extends Component
     public function destroy(){
 
         try {
+            $this->authorize('Eliminar Personal');
             Personal::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

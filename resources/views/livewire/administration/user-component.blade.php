@@ -4,7 +4,7 @@
         @include('Administracion.Usuario.edit')
     </div>
     <div wire:ignore class="row mb-4">
-<div class="col form-inline">
+        <div class="col form-inline">
             Por Página: &nbsp;
             <select wire:model="porPagina" class="form-control">
                 <option>10</option>

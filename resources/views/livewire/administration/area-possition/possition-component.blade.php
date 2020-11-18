@@ -1,8 +1,14 @@
 <div>
     <div>
-        @include('Administracion.Area_Subarea.edit_cargo')
-        @include('Administracion.Area_Subarea.create_cargo')
-        @include('Administracion.Area_Subarea.delete_cargo')
+        @can('Agregar Cargo')
+            @include('Administracion.Area_Subarea.create_cargo')
+        @endcan
+        @can('Editar Cargo')
+            @include('Administracion.Area_Subarea.edit_cargo')
+        @endcan
+        @can('Eliminar Cargo')
+            @include('Administracion.Area_Subarea.delete_cargo')
+        @endcan
     </div>
     <div wire:ignore class="row mb-4">
         <div class="col form-inline">
@@ -22,7 +28,10 @@
                 </div>
             </div>
         </div>
-        <button class="btn btn-success" data-placement="bottom" data-toggle="modal" data-target="#storecargo" title="Agregar Cargo"><i class="fas fa-plus-square"></i></button>
+        @can('Agregar Cargo')
+            <button class="btn btn-success" data-placement="bottom" data-toggle="modal" data-target="#storecargo" title="Agregar Cargo"><i class="fas fa-plus-square"></i></button>
+        @endcan
+            
     </div>
     <div class="row">
         <table class="table table-hover">
@@ -56,8 +65,12 @@
                         <td>{{$possition->level}}</td>
                         <td>
                             <div>
-                                <button wire:click="edit({{$possition->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updatecargo"><i class="fas fa-edit"></i></button>
-                                <button wire:click="delete({{$possition->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletecargo"><i class="fas fa-trash-alt"></i></button>
+                                @can('Editar Cargo')
+                                    <button wire:click="edit({{$possition->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updatecargo"><i class="fas fa-edit"></i></button>
+                                @endcan
+                                @can('Eliminar Cargo')
+                                   <button wire:click="delete({{$possition->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletecargo"><i class="fas fa-trash-alt"></i></button>
+                                @endcan
                             </div>
                         </td>
                     </tr>

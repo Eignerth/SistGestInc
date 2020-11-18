@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Administration\Product;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Option;
 use App\Models\SubMenu;
 use Livewire\Component;
@@ -74,6 +74,7 @@ class OptionComponent extends Component
     public function store()
     {
         try {
+            $this->authorize('Agregar Producto');
             Option::create([
                 'idsubmenus'=>$this->submenu,
                 'description'=>$this->description,
@@ -112,6 +113,7 @@ class OptionComponent extends Component
     public function update()
     {
         try {
+            $this->authorize('Editar Producto');
             $option = Option::findOrFail($this->codigo);
             $option->update([
                 'description'=>$this->description,
@@ -160,6 +162,7 @@ class OptionComponent extends Component
     public function destroy()
     {
         try {
+            $this->authorize('Eliminar Producto');
             Option::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

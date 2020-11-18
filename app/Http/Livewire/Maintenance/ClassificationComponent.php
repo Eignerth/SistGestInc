@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Maintenance;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Classification;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -53,45 +53,73 @@ class ClassificationComponent extends Component
         ]);
     }
 
-    public function update(){        
-        $area = Classification::findOrFail($this->codigo);        
-        $area->update([
-            'abbreviation'=>$this->abbrev,
-            'description'=>$this->descrip,
-        ]);
-        $this->limpiar();
-        $this->dispatchBrowserEvent('swal',[
-            'title'=>'Actualizado!',
-            'text'=>'La información se actualizó correctamente!',
-            'timer'=>3000,
-            'icon'=>'success',
-            'toast'=>true,
-            'position'=>'top-right'
-        ]);
+    public function update(){    
+        try {
+            $this->authorize('Editar Clasif. Inc.');
+            $classification = Classification::findOrFail($this->codigo);        
+            $classification->update([
+                'abbreviation'=>$this->abbrev,
+                'description'=>$this->descrip,
+            ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Actualizado!',
+                'text'=>'La información se actualizó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Actualizado!',
+                'text'=>'No se pudo actualizar',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }    
+        
     }
 
     public function store(){
-        Classification::create([
-            'abbreviation'=>$this->abbrev,
-            'description'=>$this->descrip,
-        ]);
-        $this->limpiar();
-        $this->dispatchBrowserEvent('swal',[
-            'title'=>'Agregado!',
-            'text'=>'La información se agregó correctamente!',
-            'timer'=>3000,
-            'icon'=>'success',
-            'toast'=>true,
-            'position'=>'top-right'
+        try {
+            $this->authorize('Agregar Clasif. Inc.');
+            Classification::create([
+                'abbreviation'=>$this->abbrev,
+                'description'=>$this->descrip,
             ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Agregado!',
+                'text'=>'La información se agregó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+                ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Agregado!',
+                'text'=>'No se pudo agregar el nuevo registro',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
+        
     }
 
     public function delete($id){
         $this->codigo=$id;
     }
     public function destroy(){
-
         try {
+            $this->authorize('Eliminar Clasif. Inc.');
             Classification::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

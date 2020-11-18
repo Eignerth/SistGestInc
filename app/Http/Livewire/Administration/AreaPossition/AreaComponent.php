@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Administration\AreaPossition;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Area;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -57,37 +58,65 @@ class AreaComponent extends Component
         ]);
     }
 
-    public function update(){        
-        $area = Area::findOrFail($this->codigo);        
-        $area->update([
-            'abbreviation'=>$this->abbrev,
-            'description'=>$this->descrip,
-        ]);
-        $this->limpiar();
-        $this->dispatchBrowserEvent('swal',[
-            'title'=>'Actualizado!',
-            'text'=>'La información se actualizó correctamente!',
-            'timer'=>3000,
-            'icon'=>'success',
-            'toast'=>true,
-            'position'=>'top-right'
-        ]);
+    public function update(){ 
+        try {
+            $this->authorize('Editar Área');       
+            $area = Area::findOrFail($this->codigo);        
+            $area->update([
+                'abbreviation'=>$this->abbrev,
+                'description'=>$this->descrip,
+            ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Actualizado!',
+                'text'=>'La información se actualizó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Actualizado!',
+                'text'=>'No se pudo actualizar',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
+        
     }
 
     public function store(){
-        Area::create([
-            'abbreviation'=>$this->abbrev,
-            'description'=>$this->descrip,
-        ]);
-        $this->limpiar();
-        $this->dispatchBrowserEvent('swal',[
-            'title'=>'Agregado!',
-            'text'=>'La información se agregó correctamente!',
-            'timer'=>3000,
-            'icon'=>'success',
-            'toast'=>true,
-            'position'=>'top-right'
-        ]);
+        try {
+            $this->authorize('Agregar Área');
+            Area::create([
+                'abbreviation'=>$this->abbrev,
+                'description'=>$this->descrip,
+            ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Agregado!',
+                'text'=>'La información se agregó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Agregado!',
+                'text'=>'No se pudo agregar el nuevo registro',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
+        
     }
 
     public function delete($id){
@@ -96,6 +125,7 @@ class AreaComponent extends Component
     public function destroy(){
 
         try {
+            $this->authorize('Eliminar Área');
             Area::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

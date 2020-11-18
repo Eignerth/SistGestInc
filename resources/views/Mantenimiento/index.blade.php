@@ -18,8 +18,10 @@
                     <p>
                         Aquí usted podrá administrar los tipo de documentos de identidad.
                     </p>
+                    @can('Ver Docs Identidad')
                     <a href="{{route('docidentidad.index')}}" class="btn bg-olive">Ir a Tipo Docs. Identidad</a>
-                </div>            
+                    @endcan
+                </div>  
             </div>
 
         </div>
@@ -30,8 +32,10 @@
                 <p>
                     Podrá administrar las áreas de la empresa, así como los cargos que cada área posee
                 </p>
+                @can('Ver Canales de Atención')
                 <a href="{{route('canales_atencion.index')}}" class="btn bg-purple">Ir a Áreas y Cargos</a>
-            </div>            
+                @endcan
+            </div>  
             </div>
         </div>
         <div class="col-md-4">
@@ -39,8 +43,10 @@
             <h4 class="card-header">Clasificación de Incidencias</h4>
             <div class="card-body">
                 <p>En esta opción podrá administrar los permisos de cada rol, incluyendo los roles.</p>
+                @can('Ver Clasif. Inc.')
                 <a href="{{route('clasificacion_inc.index')}}" class="btn bg-navy">Ir a Roles y Permisos</a>
-            </div>
+                @endcan
+            </div>  
             </div>
         </div>
     </div>

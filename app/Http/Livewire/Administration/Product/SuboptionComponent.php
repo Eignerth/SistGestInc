@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Administration\Product;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Option;
 use App\Models\SubOption;
 use Livewire\Component;
@@ -29,7 +29,7 @@ class SuboptionComponent extends Component
     {
         $this->resetPage();
     }
-
+    
     public function sortBy($field)
     {
         if ($this->sortField === $field) {
@@ -79,6 +79,7 @@ class SuboptionComponent extends Component
     public function store()
     {
         try {
+            $this->authorize('Agregar Producto');
             SubOption::create([
                 'idoptions'=>$this->option,
                 'description'=>$this->description,
@@ -116,6 +117,7 @@ class SuboptionComponent extends Component
     public function update()
     {
         try {
+            $this->authorize('Editar Producto');
             $suboption = SubOption::findOrFail($this->codigo);
             $suboption->update([
                 'description'=>$this->description,
@@ -163,6 +165,7 @@ class SuboptionComponent extends Component
     public function destroy()
     {
         try {
+            $this->authorize('Eliminar Producto');
             SubOption::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

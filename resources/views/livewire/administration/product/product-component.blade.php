@@ -1,8 +1,14 @@
 <div>
     <div>
-        @include('Administracion.Productos.create')
-        @include('Administracion.Productos.edit')
-        @include('Administracion.Productos.delete')
+        @can('Agregar Producto')
+            @include('Administracion.Productos.create')
+        @endcan
+        @can('Editar Producto')
+            @include('Administracion.Productos.edit')
+        @endcan
+        @can('Eliminar Producto')
+            @include('Administracion.Productos.delete')
+        @endcan    
     </div>
     <div wire:ignore class="row mb-4">
         <div class="col form-inline">
@@ -51,10 +57,14 @@
                     <td>{{$product->abbreviation}}</td>
                     <td>{{$product->description}}</td>
                     <td>
-                        <div class="d-flex justify-content-center">                        
-                            <button wire:click="edit({{$product->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updateproducto"><i class="fas fa-edit"></i></button>
+                        <div class="d-flex justify-content-center">
+                            @can('Editar Producto')
+                                <button wire:click="edit({{$product->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updateproducto"><i class="fas fa-edit"></i></button>
+                            @endcan                        
                             &nbsp;&nbsp;                        
-                            <button wire:click="delete({{$product->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deleteproducto"><i class="fas fa-trash-alt"></i></button>
+                            @can('Eliminar Producto')
+                                <button wire:click="delete({{$product->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deleteproducto"><i class="fas fa-trash-alt"></i></button>
+                            @endcan
                         </div>
                     </td>
                 </tr>

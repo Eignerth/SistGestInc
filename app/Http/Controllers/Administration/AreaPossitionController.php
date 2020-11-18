@@ -9,12 +9,8 @@ class AreaPossitionController extends Controller
 {
     public function index()
     {
+        $this->authorize('Ver Área-Cargo');
         return view('Administracion.Area_Subarea.index');
     }
-
-/*     public function AreaData(Request $request){
-        $areas=Area::where('description','like','%'.$request->input('search','').'%')->get(['id','description as text']);
-        return ['results'=>$areas];
-    } */
 
 }

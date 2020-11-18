@@ -15,7 +15,4 @@ class Possition extends Model
         'addnote',
         'level'
     ];
-    
-
-
 }

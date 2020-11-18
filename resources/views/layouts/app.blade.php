@@ -28,7 +28,7 @@
     {{-- SEARCH FORM --}}
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fas fa-search"></i>
@@ -92,9 +92,9 @@
       {{-- Sidebar Menu --}}
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          
+          @can('Dashboard')
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('dashboard')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -102,6 +102,8 @@
               </p>
             </a>
           </li>
+          @endcan
+          @can('Tickets')            
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-ticket-alt"></i>
@@ -125,6 +127,8 @@
               </li>
             </ul>
           </li>
+          @endcan
+          @can('Actividades')
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tasks"></i>
@@ -148,6 +152,8 @@
               </li>
             </ul>
           </li>
+          @endcan
+          @can('KB')
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-atlas"></i>
@@ -157,6 +163,7 @@
               </p>
             </a>
           </li>
+          @endcan
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -166,6 +173,8 @@
               </p>
             </a>
           </li>
+          {{--Clientes--}}
+          @can('Clientes')
           <li class="nav-item has-treeview">
             <a href="{{route('clientes')}}" class="nav-link">
               <i class="nav-icon fas fa-address-book"></i>
@@ -175,20 +184,27 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @can('Ver Contactos')
               <li class="nav-item">
                 <a href="{{route('contactos.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Contactos</p>
                 </a>
               </li>
+              @endcan
+              @can('Ver Soporte de Clientes')
               <li class="nav-item">
                 <a href="{{route('soporte_de_clientes.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Soporte de Clientes</p>
                 </a>
               </li>
+              @endcan
             </ul>
           </li>
+          @endcan
+          {{--Informes--}}
+          @can('Informes')
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -198,7 +214,9 @@
               </p>
             </a>
           </li>
+          @endcan
           {{--Menu Administracion--}}
+          @can('Administración')
           <li class="nav-item has-treeview">
             <a href="{{route('administracion')}}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
@@ -208,44 +226,58 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('empresa.index')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Empresa</p>
-                </a>
-              </li>
+              @can('Ver Empresa')
+                <li class="nav-item">
+                  <a href="{{route('empresa.index')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Empresa</p>
+                  </a>
+                </li>
+              @endcan
+              @can('Ver Área-Cargo')
               <li class="nav-item">
                 <a href="{{route('area_cargo.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Áreas y Cargos</p>
                 </a>
               </li>
+              @endcan
+              @can('Ver Rol')
               <li class="nav-item">
                 <a href="{{route('rol_permiso.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Roles y Permisos</p>
                 </a>
               </li>
+              @endcan
+              @can('Ver Personal')
               <li class="nav-item">
                 <a href="{{route('personal.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Personal</p>
                 </a>
-              </li>
+              </li>                
+              @endcan
+              @can('Ver Producto')
               <li class="nav-item">
                 <a href="{{route('productos.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Producto y/o Servicio</p>
                 </a>
               </li>
+              @endcan
+              @can('Ver Usuario')
               <li class="nav-item">
                 <a href="{{route('usuarios.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Usuarios</p>
                 </a>
               </li>
+              @endcan
             </ul>
           </li>
+          @endcan
+          @can('Perfil')
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-circle"></i>
@@ -287,6 +319,8 @@
               </li>
             </ul>
           </li>
+          @endcan
+          @can('Mantenimiento de Tablas')
           {{--Menu Mantenimiento de datos--}}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -297,26 +331,34 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @can('Ver Docs Identidad')
               <li class="nav-item">
                 <a href="{{route('docidentidad.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tipo Docs. Identidad</p>
                 </a>
               </li>
+              @endcan
+              @can('Ver Canales de Atención')
               <li class="nav-item">
                 <a href="{{route('canales_atencion.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Canales de Atención</p>
                 </a>
               </li>
+              @endcan
+              @can('Ver Clasif. Inc.')
+                
               <li class="nav-item">
                 <a href="{{route('clasificacion_inc.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>clasificación de INCs</p>
+                  <p>Clasificación de INC</p>
                 </a>
               </li>
+              @endcan
             </ul>
           </li>
+          @endcan
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -324,7 +366,7 @@
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
     {{--Contenido - Cabezera--}}
       <div class="content-header">
@@ -351,20 +393,14 @@
     </div>
     {{--Fin de Contenido Principal--}}
   </div>
-  <!-- /.content-wrapper -->
 
-  <!-- Main Footer -->
   <footer class="main-footer">
-    <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
       Anything you want
     </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
   </footer>
 </div>
-<!-- ./wrapper -->
-
 
 {{--Modal Logout--}}
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">

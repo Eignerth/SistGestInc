@@ -1,8 +1,14 @@
 <div>
     <div>
-        @include('Administracion.Personal.create')
-        @include('Administracion.Personal.edit')
-        @include('Administracion.Personal.delete')
+        @can('Agregar Personal')
+            @include('Administracion.Personal.create')
+        @endcan
+        @can('Editar Personal')
+            @include('Administracion.Personal.edit')
+        @endcan
+        @can('Eliminar Personal')
+            @include('Administracion.Personal.delete')
+        @endcan
     </div>
     <div wire:ignore class="row mb-4">
         <div class="col form-inline">
@@ -19,9 +25,11 @@
                 <input wire:model="search" class="form-control" type="text" placeholder="Buscar...">
                 <button wire:click="limpiar()" class="btn bg-lightblue" data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i class="fas fa-times"></i></button>
                 &nbsp;&nbsp;
-                <span data-toggle="modal" data-target="#storepersonal">
-                    <button class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Personal"><i class="fas fa-plus-square"></i></button>
-                </span>
+                @can('Agregar Personal')
+                    <span data-toggle="modal" data-target="#storepersonal">
+                        <button class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Personal"><i class="fas fa-plus-square"></i></button>
+                    </span>    
+                @endcan
             </div>
         </div>        
     </div>
@@ -66,10 +74,14 @@
                     <td>{{$personal->ownemail}}</td>
                     <td>{{$personal->possitions}}</td>
                     <td>
-                        <div class="d-flex justify-content-center">                                
+                        <div class="d-flex justify-content-center">
+                            @can('Editar Personal')
                             <button wire:click="edit({{$personal->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updatepersonal"><i class="fas fa-edit"></i></button>
-                            &nbsp;&nbsp;                        
+                            @endcan
+                            &nbsp;&nbsp;
+                            @can('Eliminar Personal')
                             <button wire:click="delete({{$personal->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletepersonal"><i class="fas fa-trash-alt"></i></button>
+                            @endcan                        
                         </div>
                     </td>
                 </tr>
