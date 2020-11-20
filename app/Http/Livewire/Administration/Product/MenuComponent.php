@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 use Illuminate\Validation\Rule;
 class MenuComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
     protected $paginationTheme = 'bootstrap';
     public $porPagina=5;
     public $sortField='id';

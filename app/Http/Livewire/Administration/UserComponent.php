@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Administration;
-
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Personal;
 use App\Models\User;
 use App\Models\ModelRole;
@@ -13,7 +13,7 @@ use Livewire\WithPagination;
 
 class UserComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
     protected $paginationTheme = 'bootstrap';
     public $porPagina=10;
     public $sortField='id';
@@ -45,7 +45,7 @@ class UserComponent extends Component
                 ->where('users.name','like','%'.$this->search.'%')
                 ->orWhere('personals.name','like','%'.$this->search.'%')
                 ->orderBy($this->sortField,$this->sortAsc?'asc':'desc')
-                ->having('users.id','<>','Miauwaiilol17')
+                ->having('users.id','<>',1)
                 ->paginate($this->porPagina),
             'personals'=>Personal::leftJoin('users','personals.id','=','users.idpersonals')->select('personals.id','personals.name')->whereNull('users.idpersonals')->get(),
             'personalsT'=>Personal::all(['id','name']),

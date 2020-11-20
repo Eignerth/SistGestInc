@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 class PossitionComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
     public $codigo,$area,$descripcion,$notas,$nivel;
     protected $paginationTheme = 'bootstrap';
     public $porPagina=10;

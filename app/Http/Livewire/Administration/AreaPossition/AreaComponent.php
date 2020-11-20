@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 
 class AreaComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
     protected $paginationTheme = 'bootstrap';
     public $porPagina=10;
     public $sortField='id';

@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 
 class PersonalComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
     protected $paginationTheme = 'bootstrap';
     public $porPagina=10;
     public $sortField='id';
@@ -39,14 +39,14 @@ class PersonalComponent extends Component
     {
         return view('livewire.administration.personal-component',[
             'personals'=>Personal::join('kindidentifications','personals.idkindident','=','kindidentifications.id')
-            ->join('possitions','personals.idpossitions','=','possitions.id')
+            ->leftJoin('possitions','personals.idpossitions','=','possitions.id')
             ->select('personals.id','personals.name','kindidentifications.abbreviation as kindidentifications','personals.kindident','personals.cel','personals.ownemail','possitions.description as possitions')
             ->where('personals.name','like','%'.$this->search.'%')
             ->orWhere('personals.kindident','like','%'.$this->search.'%')
             ->orWhere('personals.ownemail','like','%'.$this->search.'%')
             ->orWhere('possitions.description','like','%'.$this->search.'%')
             ->orderBy($this->sortField,$this->sortAsc?'asc':'desc')
-            ->having('name','<>','Miauwaiilol17')
+            ->having('personals.id','<>',1)
             ->paginate($this->porPagina),
             'idkindidents'=>Kindidentification::all(['id','description','ndigits']),
             'possitions'=>Possition::all(['id','description']),
@@ -79,11 +79,10 @@ class PersonalComponent extends Component
             'ruc'=>'nullable|size:11|unique:App\Models\Personal,ruc,'.$this->codigo.'id',
             'telf'=>'nullable|max:15|string',
             'cel'=>'nullable|max:15|string',
-            'ownemail'=>'nullable|email',
-            'email'=>'required|email',
+            'ownemail'=>'required|nullable|email',
+            'email'=>'email',
             'address'=>'nullable|max:500',
             'dateborn'=>'date|nullable',
-            'idpossitions'=>'integer',
             'addnote'=>'nullable|string',
             ]);
     }
@@ -130,7 +129,7 @@ class PersonalComponent extends Component
     }
     public function store(){
         
-          try {
+           try { 
             $this->authorize('Agregar Personal');
             $personal = Personal::create([
                 'name' =>$this->name,
@@ -145,8 +144,8 @@ class PersonalComponent extends Component
                 'dateborn'=>$this->dateborn,
                 'idpossitions'=>$this->idpossitions,
                 'addnote'=>$this->addnote,
-            ]);
-            $this->limpiar();
+                ]);
+                $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'Agregado!',
                 'text'=>'La información se agregó correctamente!',
@@ -155,7 +154,7 @@ class PersonalComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
-         } catch (\Throwable $th) {
+          } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',

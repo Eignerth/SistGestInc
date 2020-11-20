@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
         \App\Models\Personal::create($personal);
         
         $user = array('name'=>'Miauwaiilol17','password'=>Hash::make('@SistGesInc~'),'lastactivity'=>Carbon::now(),'idpersonals'=>1,'flgstatus'=>1);
-        \App\Models\User::create($user);     
-        $user->assignRole('Miauwaiilol17');
+        $newuser = \App\Models\User::create($user);     
+        $newuser->assignRole('Miauwaiilol17');
+
     }
 }

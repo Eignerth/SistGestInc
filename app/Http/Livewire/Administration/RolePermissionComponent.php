@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class RolePermissionComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
     protected $paginationTheme = 'bootstrap';
     public $porPagina=10;
     public $sortField='id';

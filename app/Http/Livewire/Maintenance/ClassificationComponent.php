@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 class ClassificationComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
     public $porPagina=10;
     public $search='';
     public $sortField='id';

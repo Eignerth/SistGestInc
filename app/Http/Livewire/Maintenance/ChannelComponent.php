@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 class ChannelComponent extends Component
 {
-    use WithPagination;
+    use WithPagination, AuthorizesRequests;
     protected $paginationTheme = 'bootstrap';
     public $porPagina=10;
     public $search='';

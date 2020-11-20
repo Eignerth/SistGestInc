@@ -101,6 +101,7 @@ class PermissionSeeder extends Seeder
           Permission::create(['name'=>'Agregar Clasif. Inc.']);
           Permission::create(['name'=>'Eliminar Clasif. Inc.']);
 
-        Role::create(['name'=>'Miauwaiilol17']);
+        $role = Role::create(['name'=>'Miauwaiilol17']);
+        $role->givePermissionTo(Permission::all());
   }
 }
