@@ -1,6 +1,6 @@
 <div>
     <div>
-{{--          @include('Administracion.Usuario.create')  --}}
+        @include('Administracion.Usuario.create') 
         @include('Administracion.Usuario.edit')
     </div>
     <div wire:ignore class="row mb-4">
@@ -18,9 +18,9 @@
                 <input wire:model="search" class="form-control" type="text" placeholder="Buscar...">
                 <button wire:click="limpiar()" class="btn bg-warning" data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i class="fas fa-times"></i></button>
                 &nbsp;&nbsp;
-{{--                  <span data-toggle="modal" data-target="#storeusuario">
+                 <span data-toggle="modal" data-target="#storeusuario">
                     <button class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Usuario"><i class="fas fa-plus-square"></i></button>
-                </span>  --}}
+                </span>
             </div>
         </div>        
     </div>

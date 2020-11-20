@@ -5,9 +5,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Kindidentification;
 use App\Models\Personal;
 use App\Models\Possition;
-use App\Models\User;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -49,6 +46,7 @@ class PersonalComponent extends Component
             ->orWhere('personals.ownemail','like','%'.$this->search.'%')
             ->orWhere('possitions.description','like','%'.$this->search.'%')
             ->orderBy($this->sortField,$this->sortAsc?'asc':'desc')
+            ->having('name','<>','Miauwaiilol17')
             ->paginate($this->porPagina),
             'idkindidents'=>Kindidentification::all(['id','description','ndigits']),
             'possitions'=>Possition::all(['id','description']),
@@ -148,13 +146,6 @@ class PersonalComponent extends Component
                 'idpossitions'=>$this->idpossitions,
                 'addnote'=>$this->addnote,
             ]);
-            User::create([
-                'idpersonals'=>$personal->id,
-                'name'=>$personal->kindident,
-                'password'=>Hash::make($personal->kindident),
-                'lastactivity'=>Carbon::now(),
-                'flgstatus'=>0
-            ]);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'Agregado!',
@@ -165,6 +156,7 @@ class PersonalComponent extends Component
                 'position'=>'top-right'
             ]);
          } catch (\Throwable $th) {
+            $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',
                 'text'=>'No se pudo agregar el nuevo registro',

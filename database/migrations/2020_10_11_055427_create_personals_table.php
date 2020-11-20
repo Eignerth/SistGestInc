@@ -25,7 +25,7 @@ class CreatePersonalsTable extends Migration
             $table->string('email')->nullable();
             $table->string('address')->nullable();
             $table->date('dateborn')->nullable();
-            $table->foreignId('idpossitions')->constrained('possitions');
+            $table->foreignId('idpossitions')->nullable()->constrained('possitions')->nullable(true);
             $table->text('addnote')->nullable();
             $table->timestamps();
         });
