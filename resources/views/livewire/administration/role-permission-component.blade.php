@@ -42,7 +42,7 @@
                         @include('includes._sort-icon',['field'=>'id'])
                     </a></th>
                     <th><a wire:click.prevent="sortBy('name')" role="button" href="#">
-                        Descrición
+                        Descripción
                         @include('includes._sort-icon',['field'=>'name'])
                     </a></th>
                     <th>Acciones</th>
