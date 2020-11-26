@@ -37,7 +37,7 @@
         </div>      
     </div>
     <div class="row table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover text-center">
             <thead>
                 <tr>
                     <th><a wire:click.prevent="sortBy('id')" role="button" href="#">
@@ -67,12 +67,12 @@
                     <td>{{$contact->email}}</td>
                     <td>
                         <div class="d-flex justify-content-center">                                
-                            @can('Editar Contactos', Model::class)
+                            @can('Editar Contactos')
                             <button wire:click="edit({{$contact->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updatecontacto"><i class="fas fa-edit"></i></button>
                             @endcan
                             &nbsp;&nbsp;
                                 
-                            @can('Eliminar Contactos', Model::class)
+                            @can('Eliminar Contactos')
                             <button wire:click="delete({{$contact->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletecontacto"><i class="fas fa-trash-alt"></i></button>
                             @endcan                       
                         </div>  

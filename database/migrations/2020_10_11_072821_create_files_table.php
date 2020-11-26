@@ -15,7 +15,7 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idtickets')->constrained('tickets');
+            $table->foreignId('idtksupportm')->constrained('tksupportm');
             $table->string('file');
             $table->foreignId('idpersonals')->constrained('personals');
             $table->timestamps();

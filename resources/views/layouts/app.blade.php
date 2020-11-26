@@ -16,7 +16,7 @@
 <div class="wrapper">
 
   {{-- Navbar --}}
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-dark ">
     {{-- Left navbar links --}}
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -106,25 +106,74 @@
           @can('Tickets')            
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-ticket-alt"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
-                Tickets
+                Soporte
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
+              <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-ticket-alt"></i>
+                  <p>
+                    Tickets
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>General</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Mis Tickets</p>
+                    </a>
+                  </li>
+                  
+                </ul>
+              </li>
+              
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Calidad
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item has-treeview">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>General</p>
+                  <p>
+                    Tickets
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
                 </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>General</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Mis Tickets</p>
+                    </a>
+                  </li>
+                  
+                </ul>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Mis Tickets</p>
-                </a>
-              </li>
+              
             </ul>
           </li>
           @endcan
@@ -356,6 +405,19 @@
                 </a>
               </li>
               @endcan
+
+              <li class="nav-item">
+                <a href="{{route('estado_de_prioridad.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Estado de Prioridad</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('control_de_serie.index')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Control de Series</p>
+                </a>
+              </li>
             </ul>
           </li>
           @endcan
@@ -394,7 +456,7 @@
     {{--Fin de Contenido Principal--}}
   </div>
 
-  <footer class="main-footer">
+  <footer class="main-footer text-sm">
     <div class="float-right d-none d-sm-inline">
       Anything you want
     </div>

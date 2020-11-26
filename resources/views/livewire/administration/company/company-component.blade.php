@@ -15,7 +15,7 @@
             </div>      
         @endcan
     </div>
-    <table class="table table-hover">
+    <table class="table table-hover text-center.">
         <tbody>
             <tr>
                 <th scope="row">RUC</th>

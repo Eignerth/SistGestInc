@@ -28,7 +28,7 @@
 
     </div>
     <div class="row table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover text-center">
             <thead>
                 <tr>
                     <th><a wire:click.prevent="sortBy('id')" role="button" href="#">

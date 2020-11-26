@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTracingsTable extends Migration
+class CreateTksupportmTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,28 +13,25 @@ class CreateTracingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tracings', function (Blueprint $table) {
+        Schema::create('tksupportm', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idtickets')->constrained('tickets');
-            $table->unsignedInteger('ntracingtk');
+            $table->foreignId('idcontacts')->constrained('contacts');
             $table->foreignId('idclassifications')->constrained('classifications');
             $table->foreignId('idpriorities')->constrained('priorities');
-            $table->foreignId('idpersonals')->constrained('personals');
-            $table->longText('description')->nullable(false);
+            $table->string('subject')->nullable(false);
+            $table->longText('message')->nullable(false);
+            $table->foreignId('idproducts')->constrained('products');
+            $table->foreignId('idchannels')->constrained('channels');
             $table->foreignId('idstatusincs')->constrained('statusincs');
             $table->date('registerdate');
             $table->date('registerexpiration');
+            $table->unsignedBigInteger('duration');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('tracings');
+        Schema::dropIfExists('tksupportm');
     }
 }

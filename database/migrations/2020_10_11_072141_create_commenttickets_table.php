@@ -15,7 +15,7 @@ class CreateCommentticketsTable extends Migration
     {
         Schema::create('commenttickets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idtickets')->constrained('tickets');
+            $table->foreignId('idtksupportm')->constrained('tksupportm');
             $table->foreignId('idpersonals')->constrained('personals');
             $table->longText('message');
             $table->timestamps();

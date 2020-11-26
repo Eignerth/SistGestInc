@@ -16,7 +16,7 @@ class CreateRefticketsTable extends Migration
         Schema::create('reftickets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('idkbs')->constrained('knowledgebases');
-            $table->foreignId('idtickets')->constrained('tickets');
+            $table->foreignId('idtksupportm')->constrained('tksupportm');
             $table->foreignId('idpersonals')->constrained('personals');
             $table->text('message');
             $table->timestamps();

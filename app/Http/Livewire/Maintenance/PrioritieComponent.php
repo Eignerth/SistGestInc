@@ -2,20 +2,19 @@
 
 namespace App\Http\Livewire\Maintenance;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Models\Kindidentification;
+use App\Models\Prioritie;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class KinidentificationComponent extends Component
+class PrioritieComponent extends Component
 {
     use WithPagination, AuthorizesRequests;
-
     protected $paginationTheme = 'bootstrap';
     public $porPagina=10;
     public $search='';
     public $sortField='id';
     public $sortAsc=true;
-    public $codigo,$abbreviation,$description,$digits;
+    public $codigo,$color,$description,$level;
 
     public function updatingSearch()
     {
@@ -36,38 +35,68 @@ class KinidentificationComponent extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName,[
-            'abbreviation' =>'required|size:3|string|unique:App\Models\Kindidentification,abbreviation,'.$this->codigo.',id',
-            'description'=>'required|string|max:100|unique:App\Models\Kindidentification,description,'.$this->codigo.',id',
-            'digits'=>'required|numeric|between:1,30'
+            'description'=>'required|max:30|unique:App\Models\Prioritie,description,'.$this->codigo.',id',
+            'color'=>'required|starts_with:#|max:7|unique:App\Models\Prioritie,color,'.$this->codigo.',id',
+            'level'=>'required|unique:App\Models\Prioritie,level,'.$this->codigo.',id',
         ]);
     }
 
     public function render()
     {
-        return view('livewire.maintenance.kinidentification-component',[
-            'identifications'=>Kindidentification::search($this->search)
+        return view('livewire.maintenance.prioritie-component',[
+            'priorities'=>Prioritie::search($this->search)
                 ->orderBy($this->sortField,$this->sortAsc ? 'asc':'desc')
                 ->paginate($this->porPagina),
         ]);
     }
 
-    public function edit($codigo){
-        $docidentity = Kindidentification::findOrFail($codigo);
-        $this->codigo=$docidentity->id;
-        $this->abbreviation = $docidentity->abbreviation;
-        $this->description=$docidentity->description;
-        $this->digits=$docidentity->ndigits;
+    public function store()
+    {
+        try {
+            Prioritie::create([
+                'description'=>$this->description,
+                'color'=>$this->color,
+                'level'=>$this->level,
+            ]);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Agregado!',
+                'text'=>'La información se agregó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No Agregado!',
+                'text'=>'No se pudo agregar el nuevo registro',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
+    }
+
+    public function edit($codigo)
+    {
+        $priority = Prioritie::findOrFail($codigo);
+        $this->codigo=$priority->id;
+        $this->description = $priority->description;
+        $this->level=$priority->level;
+        $this->color=$priority->color;
     }
 
     public function update()
-    {   
+    {
         try {
-            $this->authorize('Editar Docs Identidad');
-            $docidentity = Kindidentification::findOrFail($this->codigo);        
-            $docidentity->update([
-                'abbreviation'=>$this->abbreviation,
+            $priority = Prioritie::findOrFail($this->codigo);
+            $priority->update([
                 'description'=>$this->description,
-                'ndigits'=>$this->digits,
+                'level'=>$this->level,
+                'color'=>$this->color,
             ]);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
@@ -89,46 +118,12 @@ class KinidentificationComponent extends Component
                 'position'=>'top-right'
             ]);
         }
-        
     }
 
-    public function store()
-    {
+    public function destroy()
+    {   
         try {
-            $this->authorize('Agregar Docs Identidad');
-            Kindidentification::create([
-                'abbreviation'=>$this->abbreviation,
-                'description'=>$this->description,
-                'ndigits'=>$this->digits,
-            ]);        
-            $this->limpiar();
-            $this->dispatchBrowserEvent('swal',[
-                'title'=>'Agregado!',
-                'text'=>'La información se agregó correctamente!',
-                'timer'=>3000,
-                'icon'=>'success',
-                'toast'=>true,
-                'position'=>'top-right'
-            ]);
-        } catch (\Throwable $th) {
-            $this->limpiar();
-            $this->dispatchBrowserEvent('swal',[
-                'title'=>'No Agregado!',
-                'text'=>'No se pudo agregar el nuevo registro',
-                'timer'=>3000,
-                'icon'=>'error',
-                'toast'=>true,
-                'position'=>'top-right'
-            ]);
-        }
-        
-    }
-
-    public function destroy(){
-
-        try {
-            $this->authorize('Eliminar Docs Identidad');
-            Kindidentification::destroy($this->codigo);
+            Prioritie::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'Eliminado!',
@@ -148,18 +143,20 @@ class KinidentificationComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
-        }        
+        }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $this->codigo=$id;
     }
+    
     public function limpiar(){
         $this->search='';
         $this->codigo='';
-        $this->abbreviation='';
         $this->description='';
-        $this->digits='';
+        $this->color='';
+        $this->level='';
     }
 
     public function cancel(){

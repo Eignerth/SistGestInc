@@ -44,4 +44,6 @@ Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance','middleware
     Route::resource('docidentidad', 'KindidentificationController')->only(['index']);
     Route::resource('canales_atencion', 'ChannelController')->only(['index']);
     Route::resource('clasificacion_inc', 'ClassificationController')->only(['index']);
+    Route::resource('estado_de_prioridad', 'PrioritieController')->only(['index']);
+    Route::resource('control_de_serie', 'TicketsmController')->only(['index']);
 });

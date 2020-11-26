@@ -18,7 +18,7 @@ class CreatePossitionsTable extends Migration
             $table->foreignId('idareas')->constrained('areas');
             $table->string('description',200)->nullable(false)->unique();
             $table->text('addnote')->nullable();
-            $table->unsignedInteger('level')->default(0);
+            $table->integer('level')->default(0);
             $table->timestamps();
         });
     }

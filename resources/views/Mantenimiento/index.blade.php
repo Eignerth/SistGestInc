@@ -9,7 +9,6 @@
     </ol>
 @endsection
 @section('content')
-
     <div class="row">
         <div class="col-md-4">
             <div class="card card-outline card-olive">
@@ -23,7 +22,6 @@
                     @endcan
                 </div>  
             </div>
-
         </div>
         <div class="col-md-4">
             <div class="card card-outline card-purple">
@@ -65,18 +63,27 @@
 
         <div class="col-md-4">
             <div class="card card-outline card-lightblue">
-            <h4 class="card-header">Status de Base de Conocimientos</h4>
+            <h4 class="card-header">Estado de Prioridad</h4>
             <div class="card-body">
                 <p>
                     Administrar los productos y/o servicios que ofrece la empresa.
                 </p>
-                <a href="{{route('empresa.index')}}" class="btn bg-lightblue">Ir a Productos y Servicios</a>
+                <a href="{{route('estado_de_prioridad.index')}}" class="btn bg-lightblue">Ir a Estados de Prioridad</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-outline card-orange">
+            <h4 class="card-header">Estado de Prioridad</h4>
+            <div class="card-body">
+                <p>
+                    Administrar los productos y/o servicios que ofrece la empresa.
+                </p>
+                <a href="{{route('control_de_serie.index')}}" class="btn bg-orange">Ir a Estados de Prioridad</a>
             </div>
             </div>
         </div>
     </div>
     
     
-@endsection
-@section('js')
 @endsection
