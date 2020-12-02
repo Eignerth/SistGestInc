@@ -6,27 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCommentkbsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
-        Schema::create('commentkbs', function (Blueprint $table) {
+        /* Schema::create('commentkbs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('idkbs')->constrained('knowledgebases');
             $table->foreignId('idpersonals')->constrained('personals');
             $table->longText('message');
             $table->timestamps();
-        });
+        }); */
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('commentkbs');

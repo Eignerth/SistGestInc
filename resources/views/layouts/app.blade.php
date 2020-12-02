@@ -93,8 +93,8 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           @can('Dashboard')
-          <li class="nav-item">
-            <a href="{{route('dashboard')}}" class="nav-link">
+          <li class="nav-item active">
+            <a href="{{route('dashboard')}}" class="nav-link {{active('dashboard')}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -103,44 +103,48 @@
             </a>
           </li>
           @endcan
-          @can('Tickets')            
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+          @can('Soporte')            
+          <li class="nav-item has-treeview ">
+            <a href="#" class="nav-link {{active('soporte/*')}}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Soporte
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" style="display: {{block('soporte/*')}};">
+              @can('Soporte - Tickets')
               <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link {{active('soporte/*')}}">
                   <i class="nav-icon fas fa-ticket-alt"></i>
                   <p>
                     Tickets
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview" style="display: none;">
+                <ul class="nav nav-treeview" style="display: {{block('soporte/*')}};">
+                  @can('Ver Tickets - Generales')                  
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('tickets-support.index')}}" class="nav-link {{active('soporte/tickets')}}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>General</p>
                     </a>
                   </li>
+                  @endcan
+                  @can('Ver Mis Tickets')
                   <li class="nav-item">
                     <a href="#" class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Mis Tickets</p>
                     </a>
                   </li>
-                  
+                  @endcan                  
                 </ul>
               </li>
-              
+              @endcan              
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          {{-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
@@ -175,7 +179,7 @@
               </li>
               
             </ul>
-          </li>
+          </li> --}}
           @endcan
           @can('Actividades')
           <li class="nav-item has-treeview">
@@ -225,17 +229,17 @@
           {{--Clientes--}}
           @can('Clientes')
           <li class="nav-item has-treeview">
-            <a href="{{route('clientes')}}" class="nav-link">
+            <a href="{{route('clientes')}}" class="nav-link {{active('clientes/*')}}">
               <i class="nav-icon fas fa-address-book"></i>
               <p>
                 Clientes
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" style="display:{{block('clientes/*')}};">
               @can('Ver Contactos')
-              <li class="nav-item">
-                <a href="{{route('contactos.index')}}" class="nav-link">
+              <li class="nav-item" >
+                <a href="{{route('contactos.index')}}" class="nav-link {{active('clientes/contactos')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Contactos</p>
                 </a>
@@ -243,7 +247,7 @@
               @endcan
               @can('Ver Soporte de Clientes')
               <li class="nav-item">
-                <a href="{{route('soporte_de_clientes.index')}}" class="nav-link">
+                <a href="{{route('soporte_de_clientes.index')}}" class="nav-link {{active('clientes/soporte_de_clientes')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Soporte de Clientes</p>
                 </a>
@@ -267,17 +271,17 @@
           {{--Menu Administracion--}}
           @can('Administración')
           <li class="nav-item has-treeview">
-            <a href="{{route('administracion')}}" class="nav-link">
+            <a href="{{route('administracion')}}" class="nav-link {{active('administracion/*')}}">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 Administración
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" style="display:{{block('administracion/*')}};">
               @can('Ver Empresa')
                 <li class="nav-item">
-                  <a href="{{route('empresa.index')}}" class="nav-link">
+                  <a href="{{route('empresa.index')}}" class="nav-link {{active('administracion/empresa')}}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Empresa</p>
                   </a>
@@ -285,7 +289,7 @@
               @endcan
               @can('Ver Área-Cargo')
               <li class="nav-item">
-                <a href="{{route('area_cargo.index')}}" class="nav-link">
+                <a href="{{route('area_cargo.index')}}" class="nav-link {{active('administracion/area_cargo')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Áreas y Cargos</p>
                 </a>
@@ -293,7 +297,7 @@
               @endcan
               @can('Ver Rol')
               <li class="nav-item">
-                <a href="{{route('rol_permiso.index')}}" class="nav-link">
+                <a href="{{route('rol_permiso.index')}}" class="nav-link {{active('administracion/rol_permiso')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Roles y Permisos</p>
                 </a>
@@ -301,7 +305,7 @@
               @endcan
               @can('Ver Personal')
               <li class="nav-item">
-                <a href="{{route('personal.index')}}" class="nav-link">
+                <a href="{{route('personal.index')}}" class="nav-link {{active('administracion/personal')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Personal</p>
                 </a>
@@ -309,7 +313,7 @@
               @endcan
               @can('Ver Producto')
               <li class="nav-item">
-                <a href="{{route('productos.index')}}" class="nav-link">
+                <a href="{{route('productos.index')}}" class="nav-link {{active('administracion/productos')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Producto y/o Servicio</p>
                 </a>
@@ -317,7 +321,7 @@
               @endcan
               @can('Ver Usuario')
               <li class="nav-item">
-                <a href="{{route('usuarios.index')}}" class="nav-link">
+                <a href="{{route('usuarios.index')}}" class="nav-link {{active('administracion/usuarios')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Usuarios</p>
                 </a>
@@ -372,17 +376,17 @@
           @can('Mantenimiento de Tablas')
           {{--Menu Mantenimiento de datos--}}
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link {{active('mantenimiento/*')}}">
               <i class="nav-icon fas fa-table"></i>
               <p>
                 Mantenimiento - Tablas
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
+            <ul class="nav nav-treeview" style="display:{{block('mantenimiento/*')}};">
               @can('Ver Docs Identidad')
               <li class="nav-item">
-                <a href="{{route('docidentidad.index')}}" class="nav-link">
+                <a href="{{route('docidentidad.index')}}" class="nav-link {{active('mantenimiento/docidentidad')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tipo Docs. Identidad</p>
                 </a>
@@ -390,7 +394,7 @@
               @endcan
               @can('Ver Canales de Atención')
               <li class="nav-item">
-                <a href="{{route('canales_atencion.index')}}" class="nav-link">
+                <a href="{{route('canales_atencion.index')}}" class="nav-link {{active('mantenimiento/canales_atencion')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Canales de Atención</p>
                 </a>
@@ -399,25 +403,36 @@
               @can('Ver Clasif. Inc.')
                 
               <li class="nav-item">
-                <a href="{{route('clasificacion_inc.index')}}" class="nav-link">
+                <a href="{{route('clasificacion_inc.index')}}" class="nav-link {{active('mantenimiento/clasificacion_inc')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Clasificación de INC</p>
                 </a>
               </li>
               @endcan
-
+              @can('Ver Estado de Prioridad')
               <li class="nav-item">
-                <a href="{{route('estado_de_prioridad.index')}}" class="nav-link">
+                <a href="{{route('estado_de_prioridad.index')}}" class="nav-link {{active('mantenimiento/estado_de_prioridad')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Estado de Prioridad</p>
                 </a>
               </li>
+              @endcan
+              @can('Ver Control de Series')
               <li class="nav-item">
-                <a href="{{route('control_de_serie.index')}}" class="nav-link">
+                <a href="{{route('control_de_serie.index')}}" class="nav-link {{active('mantenimiento/control_de_serie')}}">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Control de Series</p>
                 </a>
               </li>
+              @endcan
+              @can('Ver Estado de Avance')
+              <li class="nav-item">
+                <a href="{{route('estado_de_avance.index')}}" class="nav-link {{active('mantenimiento/estado_de_avance')}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Estados de Avance</p>
+                </a>
+              </li>
+              @endcan
             </ul>
           </li>
           @endcan

@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateStatuskbsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('statuskbs', function (Blueprint $table) {
@@ -21,11 +17,7 @@ class CreateStatuskbsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('statuskbs');

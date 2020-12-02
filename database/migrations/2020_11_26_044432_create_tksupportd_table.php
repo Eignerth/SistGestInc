@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommentticketsTable extends Migration
+class CreateTksupportdTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateCommentticketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commenttickets', function (Blueprint $table) {
+        Schema::create('tksupportd', function (Blueprint $table) {
             $table->id();
             $table->foreignId('idtksupportm')->constrained('tksupportm');
+            $table->unsignedInteger('numberactivity');
             $table->foreignId('idpersonals')->constrained('personals');
-            $table->longText('message');
+            $table->longText('description')->nullable(false);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateCommentticketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commenttickets');
+        Schema::dropIfExists('tksupportd');
     }
 }

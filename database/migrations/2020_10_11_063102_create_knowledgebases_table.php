@@ -6,14 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateKnowledgebasesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
-        Schema::create('knowledgebases', function (Blueprint $table) {
+        /* Schema::create('knowledgebases', function (Blueprint $table) {
             $table->id();
             $table->string('subject',100)->nullable(false);
             $table->longText('message')->nullable(false);
@@ -21,14 +17,10 @@ class CreateKnowledgebasesTable extends Migration
             $table->foreignId('idpersonals')->constrained('personals');
             $table->foreignId('idstatuskbs')->constrained('statuskbs');
             $table->timestamps();
-        });
+        }); */
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('knowledgebases');

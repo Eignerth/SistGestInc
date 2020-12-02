@@ -3,7 +3,7 @@
         <label for="customer">Empresa</label>
 
         <select class="form-control" wire:model="customer" name="customer" >
-            <option></option>
+            <option>Elige...</option>
             @foreach ($customers as $customer)
             <option value="{{$customer->id}}">{{$customer->descripcion}}</option>
             @endforeach

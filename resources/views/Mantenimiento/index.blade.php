@@ -56,7 +56,9 @@
                 <p>
                     En esta opción podrá administrar el personal que usará el sistema.
                 </p>
-                <a href="{{route('empresa.index')}}" class="btn bg-teal">Ir a Personal</a>
+                @can('Ver Estado de avance')
+                <a href="{{route('estado_de_avance.index')}}" class="btn bg-teal">Ir a Status</a>
+                @endcan
             </div>            
             </div>
         </div>
@@ -68,18 +70,22 @@
                 <p>
                     Administrar los productos y/o servicios que ofrece la empresa.
                 </p>
+                @can('Ver Estado de Prioridad')
                 <a href="{{route('estado_de_prioridad.index')}}" class="btn bg-lightblue">Ir a Estados de Prioridad</a>
+                @endcan
             </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card card-outline card-orange">
-            <h4 class="card-header">Estado de Prioridad</h4>
+            <h4 class="card-header">Control de Serie</h4>
             <div class="card-body">
                 <p>
                     Administrar los productos y/o servicios que ofrece la empresa.
                 </p>
+                @can('Ver Control de Series')
                 <a href="{{route('control_de_serie.index')}}" class="btn bg-orange">Ir a Estados de Prioridad</a>
+                @endcan  
             </div>
             </div>
         </div>

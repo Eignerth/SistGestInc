@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSubmenuTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('submenus', function (Blueprint $table) {
@@ -22,13 +18,9 @@ class CreateSubmenuTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
-        Schema::dropIfExists('submenu');
+        Schema::dropIfExists('submenus');
     }
 }

@@ -1,29 +1,29 @@
 <div>
     <div>
-        {{-- @can('Agregar Docs Identidad') --}}
+        @can('Agregar Control de Series')
         @include('Mantenimiento.ManejoSerie.delete')
             
-        {{-- @endcan
-        @can('Editar Docs Identidad') --}}
+        @endcan
+        @can('Editar Control de Series')
         @include('Mantenimiento.ManejoSerie.create')
             
-        {{-- @endcan
-        @can('Eliminar Docs Identidad') --}}
+        @endcan
+        @can('Eliminar Control de Series')
         @include('Mantenimiento.ManejoSerie.edit')
             
-        {{-- @endcan --}}
+        @endcan
     </div>
     <div wire:ignore class="row mb-4">
         <div class="input-group">
             <input wire:model="search" class="form-control" type="text" placeholder="Buscar...">
             <button wire:click="limpiar()" class="btn bg-orange" data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i class="fas fa-times"></i></button>
             &nbsp;&nbsp;
-            {{-- @can('Agregar Docs Identidad') --}}
+            @can('Agregar Control de Series')
                 
             <span data-toggle="modal" data-target="#storeserie">
                 <button class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Nueva Serie"><i class="fas fa-plus-square"></i></button>
             </span>
-            {{-- @endcan --}}
+            @endcan
         </div>
     </div>
     <div class="row table-responsive">
@@ -67,13 +67,13 @@
                     </td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            {{-- @can('Editar Docs Identidad') --}}
+                            @can('Editar Control de Series')
                             <button wire:click="edit({{$serie->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updateserie"><i class="fas fa-edit"></i></button>
-                            {{-- @endcan    --}}                             
+                            @endcan                                
                             &nbsp;&nbsp;                        
-                            {{-- @can('Eliminar Docs Identidad') --}}
+                            @can('Eliminar Control de Series')
                             <button wire:click="delete({{$serie->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deleteserie"><i class="fas fa-trash-alt"></i></button>
-                            {{-- @endcan --}}
+                            @endcan
                         </div>
                     </td>
                 </tr>

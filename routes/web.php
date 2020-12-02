@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 //login
 Route::get('login','Auth\LoginController@showLogin')->name('login');
 Route::post('login','Auth\LoginController@login')->name('loadloging');
@@ -10,6 +11,14 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index')->name('dashboard');
 
+//soporte
+Route::group(['prefix' => 'soporte','namespace'=>'Support','middleware'=>'auth'], function () {
+    Route::get('/', function () {
+        return view('Soporte.index');
+    })->name('soporte');
+    Route::resource('tickets', 'TksupportmController')->only(['index'])->names('tickets-support');
+    Route::get('reporte_ticket/{id}','ReportsController@support')->name('ReporteSoporte.ticket');
+});
 
 
 //clientes
@@ -44,6 +53,7 @@ Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance','middleware
     Route::resource('docidentidad', 'KindidentificationController')->only(['index']);
     Route::resource('canales_atencion', 'ChannelController')->only(['index']);
     Route::resource('clasificacion_inc', 'ClassificationController')->only(['index']);
+    Route::resource('estado_de_avance', 'TkstatusController')->only(['index']);
     Route::resource('estado_de_prioridad', 'PrioritieController')->only(['index']);
     Route::resource('control_de_serie', 'TicketsmController')->only(['index']);
 });

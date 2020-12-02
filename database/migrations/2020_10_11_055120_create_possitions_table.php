@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePossitionsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::create('possitions', function (Blueprint $table) {
@@ -23,11 +19,7 @@ class CreatePossitionsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::dropIfExists('possitions');

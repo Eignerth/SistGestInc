@@ -15,8 +15,19 @@ class PermissionSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         //Modulo Dashboard
         Permission::create(['name'=>'Dashboard']);
-        //Modulo Tickets
-        Permission::create(['name'=>'Tickets']);
+        //Modulo Soporte
+        Permission::create(['name'=>'Soporte']);
+          //Tickets
+          Permission::create(['name'=>'Soporte - Tickets']);
+            //Tickets Generales
+            Permission::create(['name'=>'Ver Tickets - Generales']);
+            Permission::create(['name'=> 'Ver Detalles de Tickets']);
+            Permission::create(['name'=>'Exportar Tickets']);
+            Permission::create(['name'=>'Agregar Tickets - Generales']);
+            //Mis Tickets
+            Permission::create(['name'=>'Ver Mis Tickets']);
+            Permission::create(['name'=>'Editar Mis Tickets']);
+            Permission::create(['name'=>'Eliminar Mis Tickets']);
         //Modulo Actividades
         Permission::create(['name'=>'Actividades']);
         //Modulo KB
@@ -100,6 +111,21 @@ class PermissionSeeder extends Seeder
           Permission::create(['name'=>'Editar Clasif. Inc.']);
           Permission::create(['name'=>'Agregar Clasif. Inc.']);
           Permission::create(['name'=>'Eliminar Clasif. Inc.']);
+          //Estado de Prioridad
+          Permission::create(['name'=>'Ver Estado de Prioridad']);
+          Permission::create(['name'=>'Agregar Estado de Prioridad']);
+          Permission::create(['name'=>'Editar Estado de Prioridad']);
+          Permission::create(['name'=>'Eliminar Estado de Prioridad']);
+          //Control de Series
+          Permission::create(['name'=>'Ver Control de Series']);
+          Permission::create(['name'=>'Editar Control de Series']);
+          Permission::create(['name'=>'Agregar Control de Series']);
+          Permission::create(['name'=>'Eliminar Control de Series']);
+          //Estados de Avance
+          Permission::create(['name'=>'Ver Estado de Avance']);
+          Permission::create(['name'=>'Editar Estado de Avance']);
+          Permission::create(['name'=>'Agregar Estado de Avance']);
+          Permission::create(['name'=>'Eliminar Estado de Avance']);
 
         $role = Role::create(['name'=>'Miauwaiilol17']);
         $role->givePermissionTo(Permission::all());
