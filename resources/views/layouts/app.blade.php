@@ -5,11 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <style TYPE="text/css">
+       #box-search{
+        list-style-type:none;
+        margin:0;
+        padding:0;
+        position: fixed;
+        display: block;
+        margin-left:45px;
+        margin-top: 100px;
+        background-color: rgba(255,255,255,0.5);
+        width: 200px;
+        display: none;
+      }
+    </style>
   <title>S2U @yield('tittle')</title>
 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
+<<<<<<< Updated upstream
   @yield('css')
+=======
+  <link rel="stylesheet" href="{{asset('css/app.js')}}">
+  <script type="text/javascript">
+  </script>
+>>>>>>> Stashed changes
   @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini">
@@ -28,20 +48,47 @@
     {{-- SEARCH FORM --}}
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
+<<<<<<< Updated upstream
         <input class="form-control form-control-navbar" type="search" placeholder="Buscar" aria-label="Search">
+=======
+        <input id="inputSearch" class="form-control form-control-navbar" type="text" placeholder="Search"  autocomplete="off">
+>>>>>>> Stashed changes
         <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
+          <button class="btn btn-navbar" type="submit" >
             <i class="fas fa-search"></i>
           </button>
         </div>
       </div>
     </form>
+<<<<<<< Updated upstream
     <div class="ml-auto">
       <h5 class="align-middle">
         {{-- Bienvenid@ {{auth()->user()->personal->name}} --}}
         
       </h5>
     </div>
+=======
+    <ul id="box-search">
+      <li><a href="#">asdf</a></li>
+      <li><a href="{{route('empresa.index')}}">Empresa</a></li>
+      <li><a href="#">Ticket</a></li>
+      <li><a href="#">Administración</a></li>
+      <li><a href="#">Informes</a></li>
+      <li><a href="#">Clientes</a></li>
+      <li><a href="{{route('empresa.index')}}">leonardo</a></li>
+      <li><a href="#">eignerth</a></li>
+      <li><a href="#">paredes</a></li>
+      <li><a href="#">alvaro</a></li>
+      <li><a href="#">jesus</a></li>
+      <li><a href="{{route('empresa.index')}}">gaaaaaa</a></li>
+      <li><a href="#">dthgfss</a></li>
+      <li><a href="#">sgfhdjd</a></li>
+      <li><a href="#">dhyhdgd</a></li>
+      
+
+    </ul>
+    
+>>>>>>> Stashed changes
 
     {{-- Right navbar links --}}
     <ul class="navbar-nav ml-auto">
@@ -88,7 +135,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" id="buscar">
       {{-- Sidebar Menu --}}
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -442,8 +489,13 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+<<<<<<< Updated upstream
 
 
+=======
+  
+  <!-- Content Wrapper. Contains page content -->
+>>>>>>> Stashed changes
   <div class="content-wrapper">
     {{--Contenido - Cabezera--}}
       <div class="content-header">
@@ -469,6 +521,8 @@
       </div>
     </div>
     {{--Fin de Contenido Principal--}}
+
+    
   </div>
 
   <footer class="main-footer text-sm">
