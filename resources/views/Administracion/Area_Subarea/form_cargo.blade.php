@@ -1,7 +1,8 @@
 <form wire:submit.prevent="update">                
     <div wire:ignore class="form-group">
         <label for="area">Área</label>
-        <select wire:model="area" id="area" class="form-control" name="area">
+        <select wire:model="area" class="form-control" name="area">
+            <option>--Elegir--</option>
             @foreach ($areas as $aarea)
                 <option value="{{$aarea->id}}">{{$aarea->description}}</option>                
             @endforeach

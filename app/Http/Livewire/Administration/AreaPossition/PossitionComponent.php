@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 class PossitionComponent extends Component
 {
     use WithPagination, AuthorizesRequests;
-    public $codigo,$area,$descripcion,$notas,$nivel;
+    public $codigo,$area,$descripcion,$notas,$nivel=1;
     protected $paginationTheme = 'bootstrap';
     public $porPagina=10;
     public $sortField='id';
@@ -100,7 +100,7 @@ class PossitionComponent extends Component
 
     public function store()
     {
-        try {
+/*         try { */
             $this->authorize('Agregar Cargo');
             Possition::create([
                 'idareas'=>$this->area,
@@ -117,7 +117,7 @@ class PossitionComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
-        } catch (\Throwable $th) {
+/*         } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',
@@ -127,7 +127,7 @@ class PossitionComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
-        }
+        } */
     }
     public function delete($id){
         $this->codigo=$id;

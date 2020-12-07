@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Support\Tickets;
+namespace App\Http\Livewire\Support;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Tksupportm;
 use App\Models\Auth;
@@ -14,6 +14,7 @@ use App\Models\Prioritie;
 use App\Models\Tkstatus;
 use App\Models\Area;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
@@ -27,7 +28,9 @@ class TicketsComponent extends Component
     public $sortField='id';
     public $sortAsc=true;
     public $codigo,$serie,$num,$contacto,$clasificacion,$prioridad,$asunto,$mensaje,$producto,$canal,$status,$dateregister,$timeregister,$dateexpire,$timeexpire;
-    //public $archivos=[];
+    public $files=[];
+    public $archivos=[];
+    public $showserie,$showasunto,$showmensaje;
 
     public function updatingSearch()
     {
@@ -47,17 +50,19 @@ class TicketsComponent extends Component
 
     public function render()
     {
-        return view('livewire.support.tickets.tickets-component',[
+        return view('livewire.support.tickets-component',[
             'tickets'=>Tksupportm::join('ticketsm','tksupportm.idticketsm','=','ticketsm.id')
+                ->join('personals','tksupportm.idpersonals','=','personals.id')
                 ->join('contacts','tksupportm.idcontacts','=','contacts.id')
                 ->join('customers','contacts.idcustomers','=','customers.id')
                 ->join('classifications','tksupportm.idclassifications','=','classifications.id')
                 ->join('priorities','tksupportm.idpriorities','=','priorities.id')
                 ->join('tkstatus','tksupportm.idtkstatus','=','tkstatus.id')
-                ->select('tksupportm.id','tksupportm.serie','customers.descripcion as customer','contacts.name as contact','tksupportm.registerdate','priorities.description as priority','priorities.color as prioritycolor','tkstatus.color as status')
+                ->select('tksupportm.id','tksupportm.serie','tksupportm.idpersonals','personals.name as personal','customers.descripcion as customer','contacts.name as contact','tksupportm.registerdate','priorities.description as priority','priorities.color as prioritycolor','tkstatus.color as status')
                 ->where('tksupportm.serie','like','%'.$this->search.'%')
                 ->orWhere('contacts.name','like','%'.$this->search.'%')
                 ->orWhere('tksupportm.registerdate','like','%'.$this->search.'%')
+                ->orWhere('personals.name','like','%'.$this->search.'%')
                 ->orderBy($this->sortField,$this->sortAsc?'asc':'desc')
                 ->paginate($this->porPagina),
             'series'=>Ticketsm::join('areas','ticketsm.idareas','=','areas.id')
@@ -89,10 +94,20 @@ class TicketsComponent extends Component
             'timeregister'=>'required|date_format:H:i:s',
             'dateexpire'=>'date|nullable',
             'timeexpire'=>'date_format:H:i:s|nullable',
-            //'archivos.*'=>'mimes:doc,pdf,docx,jpeg,jpg,png',
+           
         ],[
             'dateregister.required'=>'Fecha de Registro es obligatorio.',
             'timeregister.required'=>'Hora de Registro es obligatorio.',
+        ]);
+    }
+    public function updatedArchivos()
+    {
+        $this->resetValidation('archivos');
+        $this->validate([
+            'archivos.*'=>'file|mimetypes:text/plain,image/jpeg,image/png,image/jpg,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|max:7168',
+
+        ],[
+            'archivos.*.mimetypes'=>'Los archivos deben ser del tipo .txt, .jpeg, .png, .jpg, .doc, .docx, .xls, .xlsx, ppt, pptx y .pdf'
         ]);
     }
 
@@ -101,7 +116,7 @@ class TicketsComponent extends Component
         $date = Carbon::now();
         $this->dateregister = $date->toDateString();
         $this->timeregister = $date->toTimeString();
-    }
+    }    
 
     public function store()
     {   
@@ -128,23 +143,7 @@ class TicketsComponent extends Component
                 'expirationdate'=>$this->dateexpire,
                 'expirationtime'=>$this->timeexpire,    
             ]);
-
-  /*           if(!empty($this->archivo)){
-                $idpersonal = auth()->user()->idpersonals;
-                foreach ($this->archivo as $file) {
-                    $realname = $file->getClientOriginalName();
-                    $file->store('SupportFiles','local');
-                    Supportfile::create([
-                        'idtksupportms'=>$ticketnew->id,
-                        'idpersonals'=>$idpersonal,
-                        'tittle'=>$realname,
-                        'file'=>$file->hashName(),
-                    ]);
-                    
-                }           
-                //$extension = $this->archivo->extension();
-                //Storage::disk('do_spaces')->putFileAs('SupportFiles',$this->archivo,'prueba.'.$extension);
-            } */
+            
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'Agregado!',
@@ -154,6 +153,7 @@ class TicketsComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
+
         } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
@@ -165,15 +165,127 @@ class TicketsComponent extends Component
                 'position'=>'top-right'
             ]);
         }
-        
-        
+    }
 
+    public function edit($id)
+    {
+        $ticket = Tksupportm::findOrFail($id);
+        $this->codigo=$ticket->id;
+        $this->serie=$ticket->serie;
+        $this->contacto=$ticket->idcontacts;
+        $this->clasificacion=$ticket->idclassifications;
+        $this->canal=$ticket->idchannels;
+        $this->prioridad=$ticket->idpriorities;
+        $this->asunto=$ticket->subject;
+        $this->mensaje=$ticket->message;
+        $this->producto=$ticket->idproducts;
+        $this->status=$ticket->idtkstatus;
+        $this->dateregister=$ticket->registerdate;
+        $this->timeregister=$ticket->registertime;
+        $this->dateexpire=$ticket->expirationdate;
+        $this->timeexpire=$ticket->expirationtime;
+        $this->files=Supportfile::where('idtksupportms','=',$ticket->id)->get(['id','tittle']);
+        
+    }
+
+    public function update()
+    {
+        try {
+            $ticket=Tksupportm::findOrFail($this->codigo);
+            $ticket->update([
+                'idcontacts'=>$this->contacto,
+                'idclassifications'=>$this->clasificacion,
+                'idpriorities'=>$this->prioridad,
+                'idtkstatus'=>$this->status,
+                'subject'=>$this->asunto,
+                'message'=>$this->mensaje,
+                'idproducts'=>$this->producto,
+                'idchannels'=>$this->canal,
+                'registerdate'=>$this->dateregister,
+                'registertime'=>$this->timeregister,
+                'expirationdate'=>$this->dateexpire,
+                'expirationtime'=>$this->timeexpire,
+            ]);
+            if(!empty($this->archivos)){
+                $idpersonal = auth()->user()->idpersonals;
+                foreach ($this->archivos as $file) {
+                    $realname = $file->getClientOriginalName();
+                    $file->store('SupportFiles','local');
+                    Supportfile::create([
+                        //$extension = $this->archivo->extension();
+                        'idtksupportms'=>$this->codigo,
+                        'idpersonals'=>$idpersonal,
+                        'tittle'=>$realname,
+                        'file'=>$file->hashName(),
+                    ]);            
+                }
+            }
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Actualizado!',
+                'text'=>'La información se actualizó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]); 
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No eliminado!',
+                'text'=>'Quizás este registro este anexo a otro registro',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }
+        
+    }
+
+    public function delete($id){
+        $this->codigo=$id;
+    }
+    
+    public function deleteFile($id)
+    {
+        $file=Supportfile::findOrFail($id);
+        if (Storage::delete('SupportFiles/'.$file->file)) {
+            Supportfile::destroy($file->id);
+        }
+        $this->files=Supportfile::where('idtksupportms','=',$this->codigo)->get(['id','tittle']);
+    }
+
+    public function destroy(){
+
+        try {
+            //$this->authorize('Eliminar Canales de Atención');
+            Tksupportm::destroy($this->codigo);
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'Eliminado!',
+                'text'=>'La información se eliminó correctamente!',
+                'timer'=>3000,
+                'icon'=>'success',
+                'toast'=>true,
+                'position'=>'top-right'
+                ]);
+        } catch (\Throwable $th) {
+            $this->limpiar();
+            $this->dispatchBrowserEvent('swal',[
+                'title'=>'No eliminado!',
+                'text'=>'Quizas este registro ya tiene movimientos',
+                'timer'=>3000,
+                'icon'=>'error',
+                'toast'=>true,
+                'position'=>'top-right'
+            ]);
+        }        
     }
 
     public function limpiar(){
         $this->search='';
         $this->codigo='';
-        $this->idserie='';
         $this->serie='';
         $this->num='';
         $this->contacto='';
@@ -188,12 +300,23 @@ class TicketsComponent extends Component
         $this->timeregister=null;
         $this->dateexpire=null;
         $this->timeexpire=null;
-        //$this->archivos=[];
+        $this->archivos=null;
+        $this->files=[];
     }
 
     public function cancel(){
         $this->limpiar();
         $this->resetValidation();
+    }
+
+    //Detalle de Ticket
+    public function show($id)
+    {
+        $ticket=Tksupportm::findOrFail($id);
+        $this->showserie=$ticket->serie;
+        $this->showasunto=$ticket->subject;
+        $this->showmensaje=$ticket->message;
+        
     }
 
 }

@@ -1,8 +1,16 @@
 <div>
     <div>
         @can('Agregar Tickets - Generales')
-        @include('Soporte.Tickets.General.create')
+        @include('Soporte.Tickets.create')
         @endcan
+
+        @include('Soporte.Tickets.edit')
+
+      {{--   @can('Agregar Tickets - Generales') --}}
+        @include('Soporte.Tickets.delete')
+      {{--   @endcan --}}
+        @include('Soporte.Tickets.show')
+     
             
     </div>
     <div wire:ignore class="row mb-4">
@@ -21,7 +29,7 @@
                 <button wire:click="limpiar()" class="btn bg-purple" data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i class="fas fa-times"></i></button>
                 &nbsp;&nbsp;
                 @can('Agregar Tickets - Generales')
-                    <span data-toggle="modal" data-target="#storeticket">
+                    <span data-toggle="modal" data-target="#createticket">
                         <button wire:click="create()" class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Ticket"><i class="fas fa-plus-square"></i></button>
                     </span>
                 @endcan
@@ -40,8 +48,12 @@
                         Cliente
                         @include('includes._sort-icon',['field'=>'contact'])
                     </a></th>
+                    <th><a wire:click.prevent="sortBy('personal')" role="button" href="#">
+                        Responsable
+                        @include('includes._sort-icon',['field'=>'personal'])
+                    </a></th>
                     <th><a wire:click.prevent="sortBy('registerdate')" role="button" href="#">
-                        Fecha de Registro
+                        Registro
                         @include('includes._sort-icon',['field'=>'registerdate'])
                     </a></th>
                     <th>Prioridad</th>
@@ -54,20 +66,28 @@
                 <tr>
                     <td scope="row">{{$ticket->serie}}</td>
                     <td>{{$ticket->customer}}&nbsp;|&nbsp;{{$ticket->contact}}</td>
+                    <td>{{$ticket->personal}}</td>
                     <td>{{date('d-m-Y',strtotime($ticket->registerdate))}}</td>
                     <td> <span class="badge text-white text-wrap" style="background-color: {{$ticket->prioritycolor}}">{{$ticket->priority}}</span></td>
                     <td>
-                        <span style="font-size: 2em;color: {{$ticket->status}}" >
+                        <span style="font-size: 1.5em;color: {{$ticket->status}}" >
                         <i class="fas fa-circle"></i>
                         </span>
                     </td>
                     <td>
-                        <div class="d-flex justify-content-center">                                
-                           
-                            &nbsp;&nbsp;
+                        <div class="d-flex justify-content-center">
                             @can('Exportar Tickets')
-                            <a href="{{route('ReporteSoporte.ticket',$ticket->id)}}" class="btn"><span style="font-size: 20px; color: Red;"><i class="far fa-file-pdf"></i></span></a>
+                            <a href="{{route('ReporteSoporte.ticket',$ticket->id)}}" class="btn btn-outline-danger btn-sm"><span style="font-size: 20px; color: Red;"><i class="fas fa-file-pdf"></i></span></a>
                             @endcan
+                            &nbsp;
+                            <button wire:click="show({{$ticket->id}})" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#showticket"><i class="fas fa-eye"></i></button>
+                            &nbsp;
+                            @if ($ticket->idpersonals === auth()->user()->idpersonals)
+                                <button wire:click="edit({{$ticket->id}})" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateticket"><i class="fas fa-edit"></i></button>
+                                &nbsp;
+                                <button wire:click="delete({{$ticket->id}})" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteticket"><i class="fas fa-trash-alt"></i></button>    
+                            @endif
+                            
                         </div>  
                     </td>
                 </tr>

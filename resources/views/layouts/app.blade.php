@@ -45,7 +45,6 @@
 
     {{-- Right navbar links --}}
     <ul class="navbar-nav ml-auto">
-
       {{-- Notifications Dropdown Menu --}}
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -73,7 +72,6 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
-
     </ul>
   </nav>
   {{-- /.navbar --}}
@@ -114,32 +112,11 @@
             </a>
             <ul class="nav nav-treeview" style="display: {{block('soporte/*')}};">
               @can('Soporte - Tickets')
-              <li class="nav-item has-treeview">
-                <a href="#" class="nav-link {{active('soporte/*')}}">
+              <li class="nav-item">
+                <a href="{{route('tickets-support.index')}}" class="nav-link {{active('soporte/*')}}">
                   <i class="nav-icon fas fa-ticket-alt"></i>
-                  <p>
-                    Tickets
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
+                  <p>Tickets</p>
                 </a>
-                <ul class="nav nav-treeview" style="display: {{block('soporte/*')}};">
-                  @can('Ver Tickets - Generales')                  
-                  <li class="nav-item">
-                    <a href="{{route('tickets-support.index')}}" class="nav-link {{active('soporte/tickets')}}">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>General</p>
-                    </a>
-                  </li>
-                  @endcan
-                  @can('Ver Mis Tickets')
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Mis Tickets</p>
-                    </a>
-                  </li>
-                  @endcan                  
-                </ul>
               </li>
               @endcan              
             </ul>
@@ -436,6 +413,7 @@
             </ul>
           </li>
           @endcan
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

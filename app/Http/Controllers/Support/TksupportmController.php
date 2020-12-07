@@ -9,6 +9,6 @@ class TksupportmController extends Controller
 {
     public function index()
     {
-        return view('Soporte.Tickets.General.index');
+        return view('Soporte.Tickets.index');
     }
 }

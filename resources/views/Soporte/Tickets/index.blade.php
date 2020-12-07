@@ -1,4 +1,13 @@
 @extends('layouts.app')
+@section('css')
+    <style>
+        .multiline{
+            white-space: pre-wrap;
+            overflow-y: scroll;
+            height: 100px;
+        }
+    </style>
+@endsection
 @section('tittle','| Tickets - Soporte')
 @section('tittlePage')
     <h1 class="m-0 text-dark">Tickets - Soporte</h1>
@@ -14,7 +23,7 @@
     <div class="card card-outline card-purple">
         <div class="card-body">
             {{--Componente Listado de Tickets--}}
-            @livewire('support.tickets.tickets-component')
+            @livewire('support.tickets-component')
         </div>
     </div>
     
