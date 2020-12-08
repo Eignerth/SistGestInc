@@ -131,7 +131,7 @@
     </div>       
     <div class="form-group col-md-3">
         <label for="timeregister">Hora de Registro</label><span id="timeregsitro" class="text-danger">*</span>
-        <input wire:model="timeregister" type="time" class="form-control"  aria-describedby="timeregsitro">
+        <input wire:model="timeregister" step="1" type="time" class="form-control"  aria-describedby="timeregsitro">
         @error('timeregister')
         <div class="text-danger">{{ $message }}</div>                        
         @enderror
@@ -145,7 +145,7 @@
     <div class="form-group col-md-3">
         <label for="timecierre">Hora de Cierre</label>
         <div class="input-group">
-            <input wire:model="timeexpire" type="time" class="form-control" id="timecierre">
+            <input wire:model="timeexpire" step="1" type="time" class="form-control" id="timecierre">
         </div>
     </div>
 </div>

@@ -12,24 +12,24 @@
                     <div class="col-12 col-sm-4">
                       <div class="info-box bg-light">
                         <div class="info-box-content">
-                          <span class="info-box-text text-center text-muted">Estimated budget</span>
-                          <span class="info-box-number text-center text-muted mb-0">2300</span>
+                          <span class="info-box-text text-center text-muted">Duración</span>
+                          <span class="info-box-number text-center text-muted mb-0">{{$showduracion}}</span>
                         </div>
                       </div>
                     </div>
                     <div class="col-12 col-sm-4">
                       <div class="info-box bg-light">
                         <div class="info-box-content">
-                          <span class="info-box-text text-center text-muted">Total amount spent</span>
-                          <span class="info-box-number text-center text-muted mb-0">2000</span>
+                          <span class="info-box-text text-center text-muted">Clasificación</span>
+                          <span class="info-box-number text-center text-muted mb-0">{{$showclasificacion}}</span>
                         </div>
                       </div>
                     </div>
                     <div class="col-12 col-sm-4">
                       <div class="info-box bg-light">
                         <div class="info-box-content">
-                          <span class="info-box-text text-center text-muted">Estimated project duration</span>
-                          <span class="info-box-number text-center text-muted mb-0">20</span>
+                          <span class="info-box-text text-center text-muted">Estado</span>
+                          <span class="info-box-number text-center text-muted mb-0">{{$showstatus}}</span>
                         </div>
                       </div>
                     </div>
@@ -66,36 +66,61 @@
                       <b class="d-block">{{$showasunto}}</b>
                     </p>
                   </div>
-                  <div class="multiline">{{$showmensaje}}</div>
+                  <div class="multiline overflow-auto">{{$showmensaje}}</div>
                   <br>
-                  <div class="text-muted">
-                    
-                    <p class="text-sm">Client Company
-                      <b class="d-block">Deveint Inc</b>
+                  <div class="text-muted">                    
+                    <p class="text-sm">Cliente y Contacto
+                      <b class="d-block">{{$showcliente}} - {{$showcontacto}}</b>
                     </p>
-                    <p class="text-sm">Project Leader
-                      <b class="d-block">Tony Chicken</b>
+                    <p class="text-sm">Responsable
+                      <b class="d-block">{{$showresponsable}}</b>
+                    </p>
+                    <p class="text-sm">Registro
+                        <b class="d-block">{{date('d-m-Y',strtotime($showfecregistro))}} {{$showhoraregistro}}</b>
+                    </p>
+                    <p class="text-sm">Cierre
+                        <b class="d-block">{{date('d-m-Y',strtotime($showfeccierre))}} {{$showhoracierre}}</b>
                     </p>
                   </div>
     
-                  <h5 class="mt-5 text-muted">Project files</h5>
-                  <ul class="list-unstyled">
-                    <li>
-                      <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>
-                    </li>
-                    <li>
-                      <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>
-                    </li>
-                    <li>
-                      <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>
-                    </li>
-                    <li>
-                      <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>
-                    </li>
-                    <li>
-                      <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>
-                    </li>
-                  </ul>
+                  <h5 class="mt-5 text-muted">Documentos Adjuntos</h5>
+                  <div class="overflow-auto" style="height: 150px">
+                    <ul class="list-unstyled">
+                        @foreach ($files as $key=>$file)
+                            <li>
+                                <a href="#" wire:click="downloadFile({{$file->id}})" class="btn-link text-secondary">
+                                    <span class="text-navy" style="font-size: 1.2rem">
+                                    @php
+                                        $extension = new SplFileInfo($file->tittle);
+                                        $extension = $extension->getExtension();
+                                    @endphp
+                                    @if ($extension == 'doc' || $extension == 'docx')
+                                        <i class="far fa-file-word"></i>
+                                    @endif
+                                    @if ($extension == 'xls' || $extension == 'xlsx')
+                                        <i class="far fa-file-excel"></i>
+                                    @endif
+                                    @if ($extension == 'ppt' || $extension == 'pptx')
+                                        <i class="far fa-file-powerpoint"></i>
+                                    @endif
+                                    @if ($extension=='pdf')
+                                        <i class="far fa-file-pdf"></i>
+                                    @endif
+                                    @if ($extension=='txt')
+                                        <i class="far fa-file-alt"></i>
+                                    @endif
+                                    @if ($extension=='png'||$extension=='jpg'||$extension=='jpeg')
+                                        <i class="far fa-file-image"></i>
+                                    @endif
+                                    </span>
+                                    {{$file->tittle}}
+                                </a>
+                            </li>
+                            
+                        @endforeach
+                      </ul>
+                  </div>
+                  
                   <div class="text-center mt-5 mb-3">
                     <a href="#" class="btn btn-sm btn-primary">Add files</a>
                     <a href="#" class="btn btn-sm btn-warning">Report contact</a>

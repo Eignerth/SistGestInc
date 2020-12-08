@@ -3,8 +3,7 @@
     <style>
         .multiline{
             white-space: pre-wrap;
-            overflow-y: scroll;
-            height: 100px;
+            height: 150px;
         }
     </style>
 @endsection
