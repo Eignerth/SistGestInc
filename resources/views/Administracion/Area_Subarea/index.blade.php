@@ -55,24 +55,7 @@
             theme:'bootstrap4',
             minimumInputLength:1,
             placeholder:'Área',
-            allowClear: true,
-            /* ajax:{
-            url: '/areadata',
-            dataType:'json',
-            delay:200,
-            data:function(params){
-                var query={
-                    search:params.term,
-                    _type: 'query'
-                }
-                return query;
-            },
-            processResults: function(data){
-                return{
-                    results: data.results,
-                };
-            }
-        } */
+            allowClear: true,            
         });
     });  
 </script>

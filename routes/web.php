@@ -57,3 +57,10 @@ Route::group(['prefix' => 'mantenimiento','namespace'=>'Maintenance','middleware
     Route::resource('estado_de_prioridad', 'PrioritieController')->only(['index']);
     Route::resource('control_de_serie', 'TicketsmController')->only(['index']);
 });
+
+//ayuda
+Route::group(['prefix' => 'ayuda','namespace'=>'Help'], function () {
+    Route::get('/', function(){
+        return view('Ayuda.index');
+    })->name('ayuda');
+});
