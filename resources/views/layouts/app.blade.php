@@ -413,6 +413,12 @@
             </ul>
           </li>
           @endcan
+          <li class="nav-item">
+            <a href="{{route('ayuda')}}" class="nav-link {{active('ayuda')}}">
+              <i class="nav-icon fas fa-question-circle"></i>
+              <p>Ayuda</p>
+            </a>
+          </li>
           
         </ul>
       </nav>
