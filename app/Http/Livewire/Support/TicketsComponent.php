@@ -5,7 +5,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Tksupportm;
 use App\Models\Auth;
 use App\Models\Ticketsm;
-use App\Models\Listtksupport;
 use App\Models\Supportfile;
 use App\Models\Contact;
 use App\Models\Classification;
@@ -31,8 +30,6 @@ class TicketsComponent extends Component
     public $codigo,$serie,$num,$contacto,$clasificacion,$prioridad,$asunto,$mensaje,$producto,$canal,$status,$dateregister,$timeregister,$dateexpire,$timeexpire;
     public $files=[];
     public $archivos=[];
-    public $showserie,$showasunto,$showmensaje,$showcliente,$showcontacto,$showresponsable,$showstatus,$showclasificacion,$showfecregistro,$showhoraregistro,$showfeccierre,$showhoracierre,$showduracion;
-
     public function updatingSearch()
     {
         $this->resetPage();
@@ -303,14 +300,6 @@ class TicketsComponent extends Component
         $this->timeexpire=null;
         $this->archivos=null;
         $this->files=[];
-        $this->showserie='';
-        $this->showasunto='';
-        $this->showmensaje='';
-        $this->showcliente='';
-        $this->showcontacto='';
-        $this->showresponsable='';
-        $this->showclasificacion='';
-        $this->showstatus='';
     }
 
     public function cancel(){
@@ -318,35 +307,5 @@ class TicketsComponent extends Component
         $this->resetValidation();
     }
 
-    //Detalle de Ticket
-    public function show($id)
-    {
-        $ticket=Listtksupport::findOrFail($id);
-        $this->showserie=$ticket->serie;
-        $this->showasunto=$ticket->asunto;
-        $this->showmensaje=$ticket->mensaje;
-        $this->showcliente=$ticket->cliente;
-        $this->showcontacto=$ticket->contacto;
-        $this->showresponsable=$ticket->personal;
-        $this->showclasificacion=$ticket->clasificacion;
-        $this->showstatus=$ticket->status;
-        $this->showfecregistro=$ticket->fecregistro;
-        $this->showfeccierre=$ticket->fectermino;
-        $this->showhoraregistro=$ticket->horregistro;
-        $this->showhoracierre=$ticket->hortermino;
-        //diferencia de horas - falta
-        //$f1 = new \DateTime($ticket->fecregistro.' '.$ticket->horregistro);
-        
-        //$f2 = new \DateTime($ticket->fectermino.' '.$ticket->hortermino);
-        //$this->showduracion = $f1->diff($f2);
-
-        $this->files=Supportfile::where('idtksupportms','=',$id)->get(['id','tittle']);
-        
-    }
-    public function downloadFile($id)
-    {
-        $file = Supportfile::findOrFail($id);
-        return response()->download(storage_path('app/SupportFiles/'.$file->file),$file->tittle);
-    }
 
 }

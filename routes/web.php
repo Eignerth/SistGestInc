@@ -17,6 +17,7 @@ Route::group(['prefix' => 'soporte','namespace'=>'Support','middleware'=>'auth']
         return view('Soporte.index');
     })->name('soporte');
     Route::resource('tickets', 'TksupportmController')->only(['index'])->names('tickets-support');
+    Route::get('tickets/{ticket:serie}', 'TksupportmController@show')->name('tickets-support.show');
     Route::get('reporte_ticket/{id}','ReportsController@support')->name('ReporteSoporte.ticket');
 });
 

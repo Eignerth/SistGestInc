@@ -9,7 +9,7 @@
       {{--   @can('Agregar Tickets - Generales') --}}
         @include('Soporte.Tickets.delete')
       {{--   @endcan --}}
-        @include('Soporte.Tickets.show')
+
      
             
     </div>
@@ -76,18 +76,22 @@
                     </td>
                     <td>
                         <div class="d-flex justify-content-center">
-                            @can('Exportar Tickets')
-                            <a href="{{route('ReporteSoporte.ticket',$ticket->id)}}" class="btn btn-outline-danger btn-sm"><span style="font-size: 20px; color: Red;"><i class="fas fa-file-pdf"></i></span></a>
-                            @endcan
+                            
                             &nbsp;
-                            <button wire:click="show({{$ticket->id}})" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#showticket"><i class="fas fa-eye"></i></button>
+                            
                             &nbsp;
-                            @if ($ticket->idpersonals === auth()->user()->idpersonals)
+                            
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                @can('Exportar Tickets')
+                                    <a href="{{route('ReporteSoporte.ticket',$ticket->id)}}" class="btn btn-outline-danger"><span style="font-size: 20px; color: Red;"><i class="fas fa-file-pdf"></i></span></a>
+                                @endcan
+                                <a class="btn btn-primary btn-sm" href="{{route('tickets-support.show',$ticket)}}" target="_blank" rel="noopener"><span class="text-center" style="vertical-align: sub"><i class="fas fa-eye"></i></span> </a>
+                                @if ($ticket->idpersonals === auth()->user()->idpersonals)
                                 <button wire:click="edit({{$ticket->id}})" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateticket"><i class="fas fa-edit"></i></button>
-                                &nbsp;
+                                
                                 <button wire:click="delete({{$ticket->id}})" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteticket"><i class="fas fa-trash-alt"></i></button>    
                             @endif
-                            
+                            </div>
                         </div>  
                     </td>
                 </tr>
