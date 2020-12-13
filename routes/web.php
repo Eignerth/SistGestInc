@@ -19,6 +19,7 @@ Route::group(['prefix' => 'soporte','namespace'=>'Support','middleware'=>'auth']
     Route::resource('tickets', 'TksupportmController')->only(['index'])->names('tickets-support');
     Route::get('tickets/{ticket:serie}', 'TksupportmController@show')->name('tickets-support.show');
     Route::get('reporte_ticket/{id}','ReportsController@support')->name('ReporteSoporte.ticket');
+    Route::get('reporte_ticket/excel/exportar', 'ReportsController@excel')->name('tickets-support.excel');
 });
 
 

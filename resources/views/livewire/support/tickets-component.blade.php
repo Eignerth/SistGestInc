@@ -33,6 +33,8 @@
                         <button wire:click="create()" class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Ticket"><i class="fas fa-plus-square"></i></button>
                     </span>
                 @endcan
+                &nbsp;&nbsp;
+                <a href="{{route('tickets-support.excel')}}" class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Exportar a Excel"><i class="far fa-file-excel"></i></a>
             </div>
         </div>      
     </div>
