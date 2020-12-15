@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Exceptions;
-
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -33,5 +33,9 @@ class Handler extends ExceptionHandler
     public function register()
     {
         //
+    }
+
+    protected function unauthenticated($request,AuthenticationException $exception){
+        return redirect()->route('login')->with('Mensaje','Se inició sesión en otro dispositivo');
     }
 }

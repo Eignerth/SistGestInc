@@ -36,12 +36,6 @@
         </div>
       </div>
     </form>
-    <div class="ml-auto">
-      <h5 class="align-middle">
-        {{-- Bienvenid@ {{auth()->user()->personal->name}} --}}
-        
-      </h5>
-    </div>
 
     {{-- Right navbar links --}}
     <ul class="navbar-nav ml-auto">
@@ -72,6 +66,33 @@
           <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
       </li>
+      <li class="nav-item dropdown user user-menu">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+          <i class="far fa-user-circle fa-2x"></i>
+        </a>
+        <ul class="dropdown-menu">
+          <!-- User image -->
+          <li class="user-header">
+            <img src="{{asset('img/default-profile.png')}}" class="img-circle" alt="User Image">
+            <p>
+              {{auth()->user()->personal->name}}
+              <small>Creado {{auth()->user()->created_at->diffForHumans()}}</small>
+              <small>Últ. Acceso: <strong>{{auth()->user()->lastactivity}}</strong></small>
+            </p>
+          </li>
+          <!-- Menu Footer-->
+          <li class="user-footer">
+            <div class="pull-right">
+              <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button type="submit" class="btn btn-default btn-flat">
+                  <i class="fas fa-sign-out-alt"></i>Cerrar Sesión
+                </button>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </li>
     </ul>
   </nav>
   {{-- /.navbar --}}
@@ -90,7 +111,7 @@
       {{-- Sidebar Menu --}}
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          @can('Dashboard')
+          
           <li class="nav-item active">
             <a href="{{route('dashboard')}}" class="nav-link {{active('dashboard')}}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -100,7 +121,7 @@
               </p>
             </a>
           </li>
-          @endcan
+         
           @can('Soporte')            
           <li class="nav-item has-treeview ">
             <a href="#" class="nav-link {{active('soporte/*')}}">
@@ -158,31 +179,7 @@
             </ul>
           </li> --}}
           @endcan
-          @can('Actividades')
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tasks"></i>
-              <p>
-                Actividades
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Llamadas</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Reuniones</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          @endcan
+          
           @can('KB')
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -194,15 +191,6 @@
             </a>
           </li>
           @endcan
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Equipo
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
           {{--Clientes--}}
           @can('Clientes')
           <li class="nav-item has-treeview">
@@ -306,8 +294,7 @@
               @endcan
             </ul>
           </li>
-          @endcan
-          @can('Perfil')
+          @endcan         
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-circle"></i>
@@ -332,24 +319,11 @@
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Actividades Recientes</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
                   <p>Cambiar Contraseña</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link" data-toggle="modal" data-target="#logoutModal">
-                  <i class="far fa-circle nav-icon text-danger"></i>
-                  <p>Cerrar Sesión</p>
-                </a>
-              </li>
             </ul>
-          </li>
-          @endcan
+          </li>          
           @can('Mantenimiento de Tablas')
           {{--Menu Mantenimiento de datos--}}
           <li class="nav-item has-treeview">
@@ -455,30 +429,6 @@
     </div>
     <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
   </footer>
-</div>
-
-{{--Modal Logout--}}
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-  <div class="modal-content">
-      <div class="modal-header">
-          <h5 class="modal-title" id="ModalLabel">Cerrar Sesión</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-      </div>          
-      <form action="{{route('logout')}}" method="POST">
-          @csrf
-          <div class="modal-body">
-              Se perderán todos los datos no guardados.
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-danger">Cerrar</button>
-          </div>
-      </form>
-  </div>
-  </div>
 </div>
 
   @livewireScripts

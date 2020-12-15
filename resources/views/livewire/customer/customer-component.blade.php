@@ -28,7 +28,7 @@
                 <input wire:model="search" class="form-control" type="text" placeholder="Buscar...">
                 <button wire:click="limpiar()" class="btn bg-navy" data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i class="fas fa-times"></i></button>
                 &nbsp;&nbsp;
-                @can('Agregar Soporte de Clientes', Model::class)
+                @can('Agregar Soporte de Clientes')
                 <span data-toggle="modal" data-target="#storecliente">
                     <button class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Cliente"><i class="fas fa-plus-square"></i></button>
                 </span>

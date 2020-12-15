@@ -13,8 +13,7 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-        //Modulo Dashboard
-        Permission::create(['name'=>'Dashboard']);
+        //Modulo Dashboard - Siempre deben tener acceso
         //Modulo Soporte
         Permission::create(['name'=>'Soporte']);
           //Tickets
@@ -28,8 +27,7 @@ class PermissionSeeder extends Seeder
             Permission::create(['name'=>'Ver Mis Tickets']);
             Permission::create(['name'=>'Editar Mis Tickets']);
             Permission::create(['name'=>'Eliminar Mis Tickets']);
-        //Modulo Actividades
-        Permission::create(['name'=>'Actividades']);
+        
         //Modulo KB
         Permission::create(['name'=>'KB']);
         //Modulo Clientes
@@ -82,7 +80,8 @@ class PermissionSeeder extends Seeder
           Permission::create(['name'=>'Agregar Usuario']);
           Permission::create(['name'=>'Editar Usuario']);
         //Perfil
-        Permission::create(['name'=>'Perfil']);
+        //Permiso x defecto al modulo perfil
+        
           //Datos Personales
           Permission::create(['name'=>'Ver Datos Personales']);
           Permission::create(['name'=>'Editar Datos Personales']);

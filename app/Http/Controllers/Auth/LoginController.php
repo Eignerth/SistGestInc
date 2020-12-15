@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\VerifyForm;
 use Illuminate\Support\Facades\Auth;
@@ -26,9 +26,13 @@ class LoginController extends Controller
         return back()->withErrors(['usuario'=>trans('auth.failed')]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->flush();
+        $request->session()->regenerate();
+        $request->session()->regenerateToken();
         return redirect()->route('login');
     }
 }

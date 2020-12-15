@@ -18,7 +18,7 @@ class RolePermissionComponent extends Component
     public $search='';
     public $codigo,$name;
     //modulos
-    public $dashboard=0,$tickets=0,$actividades=0,$kb=0,$equipo=0,$clientes=0,$informes=0,$administracion=0,$perfil=0,$mantenimiento=0;
+    public $tickets=0,$kb=0,$clientes=0,$informes=0,$administracion=0,$perfil=0,$mantenimiento=0;
     //clientes
     public $rcontacto=0,$ccontacto=0,$ucontacto=0,$dcontacto=0,$rsopcliente=0, $csopcliente=0, $usopcliente=0, $dsopcliente=0;
     //administracion
@@ -71,14 +71,10 @@ class RolePermissionComponent extends Component
             //$this->authorize('Agregar Rol');
             $role = Role::create(['name'=>$this->name]);
             $permissions = array();
-            if ($this->dashboard==1) {
-                array_push($permissions,Permission::findByName('Dashboard'));    
-            }
+             
+            
             if ($this->tickets==1) {
                 array_push($permissions,Permission::findByName('Tickets'));
-            }
-            if ($this->actividades==1) {
-                array_push($permissions,Permission::findByName('Actividades'));
             }
             if ($this->kb==1) {
                 array_push($permissions,Permission::findByName('KB'));
@@ -287,14 +283,9 @@ class RolePermissionComponent extends Component
             //$this->authorize('Editar Rol');
             $role = Role::findById($this->codigo);
             $permissions = array();
-            if ($this->dashboard==1) {
-                array_push($permissions,Permission::findByName('Dashboard'));    
-            }
+            
             if ($this->tickets==1) {
                 array_push($permissions,Permission::findByName('Tickets'));
-            }
-            if ($this->actividades==1) {
-                array_push($permissions,Permission::findByName('Actividades'));
             }
             if ($this->kb==1) {
                 array_push($permissions,Permission::findByName('KB'));
@@ -506,20 +497,12 @@ class RolePermissionComponent extends Component
         inner join permissions on role_has_permissions.permission_id = permissions.id where role_has_permissions.role_id=?', [$role->id]);
         foreach ($permissions as $permission) {
             if(isset($permission->description)){
-                if($permission->description == 'Dashboard'){
-                    $this->dashboard = 1;
-                }
+                
                 if($permission->description == 'Tickets'){
                     $this->tickets = 1;
                 }
-                if ($permission->description == 'Actividades') {
-                    $this->actividades = 1;
-                }
                 if ($permission->description == 'KB') {
                     $this->kb=1;
-                }
-                if ($permission->description == 'Equipo') {
-                    $this->equipo=1;
                 }
                 if ($permission->description == 'Clientes') {
                     $this->clientes=1;
@@ -701,7 +684,7 @@ class RolePermissionComponent extends Component
         $this->search='';
         $this->codigo='';
         $this->name='';
-        $this->dashboard=0;$this->tickets=0;$this->actividades=0;$this->kb=0;$this->equipo=0;$this->clientes=0;$this->informes=0;$this->administracion=0;$this->perfil=0;$this->mantenimiento=0;
+        $this->tickets=0;$this->kb=0;$this->clientes=0;$this->informes=0;$this->administracion=0;$this->perfil=0;$this->mantenimiento=0;
         $this->rcontacto=0;$this->ccontacto=0;$this->ucontacto=0;$this->dcontacto=0;
         $this->rsopcliente=0;$this->usopcliente=0;$this->csopcliente=0;$this->dsopcliente=0;
         $this->rempresa=0;$this->uempresa=0;

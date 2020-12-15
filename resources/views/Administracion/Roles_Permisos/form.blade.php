@@ -6,22 +6,11 @@
     <label for="permisoWindows">Permisos de módulos</label>
     <div class="form-row align-items-center">
         <div wire:ignore class="col-auto my-3">
-            <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" type="checkbox"  id="dashboard" wire:model="dashboard" name="dashboard">
-                <label class="custom-control-label user-select-none" for="dashboard">
-                  Dashboard
-                </label>
-            </div>
+            
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"  id="tickets" wire:model="tickets" name="tickets">
                 <label class="custom-control-label user-select-none" for="tickets">
                   Tickets
-                </label>
-            </div>
-            <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" type="checkbox"  id="actividades" wire:model="actividades" name="actividades">
-                <label class="custom-control-label user-select-none" for="actividades">
-                  Actividades
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -32,12 +21,6 @@
             </div>
         </div>
         <div wire:ignore class="col-auto my-3">
-            <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" type="checkbox"  id="equipo" wire:model="equipo" name="equipo">
-                <label class="custom-control-label user-select-none" for="equipo">
-                  Equipo
-                </label>
-            </div>
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"  id="clientes" wire:model="clientes" name="clientes">
                 <label class="custom-control-label user-select-none" for="clientes">
@@ -50,19 +33,13 @@
                   Informes
                 </label>
             </div>
+            
+        </div>
+        <div wire:ignore class="col-auto my-3">
             <div class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox"  id="administracion" wire:model="administracion" name="administracion">
                 <label class="custom-control-label user-select-none" for="administracion">
                   Administración
-                </label>
-            </div>
-        </div>
-        <div wire:ignore class="col-auto my-3">
-
-            <div class="custom-control custom-checkbox">
-                <input class="custom-control-input" type="checkbox"  id="perfil" wire:model="perfil" name="perfil">
-                <label class="custom-control-label user-select-none" for="perfil">
-                  Perfil
                 </label>
             </div>
             <div class="custom-control custom-checkbox">
@@ -75,26 +52,9 @@
     </div>
     <br><br>
     <div>
-        {{--Dashboard--}}
         <div wire:ignore class="row">
-            <div class="col">
-                <div class="card card-outline card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Dashboard</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{--Tickets--}}
-        <div wire:ignore class="row">
-            <div class="col">
+            <div class="col-md-6">
+                {{--Tickets--}}
                 <div class="card card-outline card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Tickets</h3>
@@ -108,27 +68,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        {{--Actividades--}}
-        <div wire:ignore class="row">
-            <div class="col">
-                <div class="card card-outline card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Actividades</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        The body of the card
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{--KB--}}
-        <div wire:ignore class="row">
-            <div class="col">
+            <div class="col-md-6">
+                {{--KB--}}
                 <div class="card card-outline card-primary">
                     <div class="card-header">
                         <h3 class="card-title">KB</h3>
@@ -143,26 +84,10 @@
                 </div>
             </div>
         </div>
-        {{--Equipo--}}
+        
         <div wire:ignore class="row">
-            <div class="col">
-                <div class="card card-outline card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Equipo</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        The body of the card
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{--Clientes--}}
-        <div wire:ignore class="row">
-            <div class="col">
+            <div class="col-md-6">
+                {{--Clientes--}}
                 <div class="card card-outline card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Clientes</h3>
@@ -249,12 +174,10 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>                
             </div>
-        </div>
-        {{--Informes--}}
-        <div wire:ignore class="row">
-            <div class="col">
+            <div class="col-md-6">
+                {{--Informes--}}
                 <div class="card card-outline card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Informes</h3>
@@ -269,9 +192,12 @@
                 </div>
             </div>
         </div>
-        {{--Administracion--}}
+        
+        
+        
         <div wire:ignore class="row">
-            <div class="col">
+            <div class="col-md-6">
+                {{--Administracion--}}
                 <div class="card card-outline card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Administración</h3>
@@ -524,107 +450,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        {{--Perfil--}}
-        <div wire:ignore class="row">
-            <div class="col">
-                <div class="card card-outline card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Perfil</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                <strong>Datos Personales</strong>
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" wire:model="rdatopersonal" id="rdatopersonal" name="rdatopersonal">
-                                            <label class="custom-control-label" for="rdatopersonal">
-                                            Ver
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto my-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" wire:model="udatopersonal" id="udatopersonal" name="udatopersonal">
-                                            <label class="custom-control-label" for="udatopersonal">
-                                            Editar
-                                            </label>
-                                        </div>
-                                    </div>                                
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Bitácora</strong>
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" wire:model="rbitacora" id="rbitacora" name="rbitacora">
-                                            <label class="custom-control-label" for="rbitacora">
-                                            Ver
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto my-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" wire:model="cbitacora" id="cbitacora" name="cbitacora">
-                                            <label class="custom-control-label" for="cbitacora">
-                                            Crear
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto my-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" wire:model="ubitacora" id="ubitacora" name="ubitacora">
-                                            <label class="custom-control-label" for="ubitacora">
-                                            Editar
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto my-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" wire:model="dbitacora" id="dbitacora" name="dbitacora">
-                                            <label class="custom-control-label" for="dbitacora">
-                                            Eliminar
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Cambiar Contraseña</strong>
-                                <div class="form-row align-items-center">
-                                    <div class="col-auto my-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" wire:model="rcambiarcontra" id="rcambiarcontra" name="rcambiarcontra">
-                                            <label class="custom-control-label" for="rcambiarcontra">
-                                            Ver
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto my-1">
-                                        <div class="custom-control custom-checkbox">
-                                            <input class="custom-control-input" type="checkbox" wire:model="ucambiarcontra" id="ucambiarcontra" name="ucambiarcontra">
-                                            <label class="custom-control-label" for="ucambiarcontra">
-                                            Editar
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{--Mantenimiento de Tablas--}}
-        <div wire:ignore class="row">
-            <div class="col">
+            <div class="col-md-6">
+                {{--Mantenimiento de Tablas--}}
                 <div class="card card-outline card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Mantenimiento de Tablas</h3>
@@ -741,6 +568,103 @@
                                             <input class="custom-control-input" type="checkbox" wire:model="dclasifinc" id="dclasifinc" name="dclasifinc">
                                             <label class="custom-control-label" for="dclasifinc">
                                             Eliminar
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div wire:ignore class="row">            
+            <div class="col-md-6">
+                {{--Perfil--}}
+                <div class="card card-outline card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Perfil</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Datos Personales</strong>
+                                <div class="form-row align-items-center">
+                                    <div class="col-auto my-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" wire:model="rdatopersonal" id="rdatopersonal" name="rdatopersonal">
+                                            <label class="custom-control-label" for="rdatopersonal">
+                                            Ver
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto my-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" wire:model="udatopersonal" id="udatopersonal" name="udatopersonal">
+                                            <label class="custom-control-label" for="udatopersonal">
+                                            Editar
+                                            </label>
+                                        </div>
+                                    </div>                                
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Bitácora</strong>
+                                <div class="form-row align-items-center">
+                                    <div class="col-auto my-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" wire:model="rbitacora" id="rbitacora" name="rbitacora">
+                                            <label class="custom-control-label" for="rbitacora">
+                                            Ver
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto my-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" wire:model="cbitacora" id="cbitacora" name="cbitacora">
+                                            <label class="custom-control-label" for="cbitacora">
+                                            Crear
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto my-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" wire:model="ubitacora" id="ubitacora" name="ubitacora">
+                                            <label class="custom-control-label" for="ubitacora">
+                                            Editar
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto my-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" wire:model="dbitacora" id="dbitacora" name="dbitacora">
+                                            <label class="custom-control-label" for="dbitacora">
+                                            Eliminar
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Cambiar Contraseña</strong>
+                                <div class="form-row align-items-center">
+                                    <div class="col-auto my-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" wire:model="rcambiarcontra" id="rcambiarcontra" name="rcambiarcontra">
+                                            <label class="custom-control-label" for="rcambiarcontra">
+                                            Ver
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto my-1">
+                                        <div class="custom-control custom-checkbox">
+                                            <input class="custom-control-input" type="checkbox" wire:model="ucambiarcontra" id="ucambiarcontra" name="ucambiarcontra">
+                                            <label class="custom-control-label" for="ucambiarcontra">
+                                            Editar
                                             </label>
                                         </div>
                                     </div>
