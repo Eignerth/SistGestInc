@@ -18,7 +18,7 @@ class RolePermissionComponent extends Component
     public $search='';
     public $codigo,$name;
     //modulos
-    public $tickets=0,$kb=0,$clientes=0,$informes=0,$administracion=0,$perfil=0,$mantenimiento=0;
+    public $tickets=0,$kb=0,$clientes=0,$informes=0,$administracion=0,$mantenimiento=0;
     //clientes
     public $rcontacto=0,$ccontacto=0,$ucontacto=0,$dcontacto=0,$rsopcliente=0, $csopcliente=0, $usopcliente=0, $dsopcliente=0;
     //administracion
@@ -29,9 +29,9 @@ class RolePermissionComponent extends Component
     public $rrol=0,$crol=0,$urol=0,$drol=0;
     public $rusuario=0,$cusuario=0,$uusuario=0,$dusuario=0;
     //perfil
-    public $rdatopersonal=0,$udatopersonal=0,$rbitacora=0,$cbitacora=0,$ubitacora=0,$dbitacora,$rcambiarcontra=0,$ucambiarcontra=0;
+    public $rdatopersonal=0,$udatopersonal=0,$rbitacora=0,$rcambiarcontra=0,$ucambiarcontra=0;
     //matenimiento
-    public $ridentidad=0,$cidentidad=0,$uidentidad=0,$didentidad=0,$rcanal=0,$ccanal=0,$ucanal=0,$dcanal=0,$rclasifinc=0,$cclasifinc=0,$uclasifinc=0,$dclasifinc=0;
+    public $ridentidad=0,$cidentidad=0,$uidentidad=0,$didentidad=0,$rcanal=0,$ccanal=0,$ucanal=0,$dcanal=0,$rclasifinc=0,$cclasifinc=0,$uclasifinc=0,$dclasifinc=0,$rprioridad=0,$cprioridad=0,$uprioridad=0,$dprioridad=0,$rconserie=0,$cconserie=0,$uconserie=0,$dconserie=0,$rstatus=0,$cstatus=0,$ustatus=0,$dstatus=0;
 
     public function updatingSearch()
     {
@@ -197,15 +197,6 @@ class RolePermissionComponent extends Component
                 }
                 if ($this->rbitacora==1) {
                     array_push($permissions,Permission::findByName('Ver Bitácora'));
-                    if ($this->cbitacora==1) {
-                        array_push($permissions,Permission::findByName('Agregar Bitácora'));
-                    }
-                    if ($this->ubitacora==1) {
-                        array_push($permissions,Permission::findByName('Editar Bitácora'));
-                    }
-                    if ($this->dbitacora==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Bitácora'));
-                    }
                 }
                 if ($this->rcambiarcontra==1) {
                     array_push($permissions,Permission::findByName('Ver Cambiar Contraseña'));
@@ -251,8 +242,43 @@ class RolePermissionComponent extends Component
                     }
                     if ($this->dclasifinc) {
                         array_push($permissions,Permission::findByName('Eliminar Clasif. Inc.'));
+                    }                        
+                }
+                if ($this->rprioridad==1) {
+                    array_push($permissions,Permission::findByName('Ver Estado de Prioridad'));
+                    if ($this->cprioridad) {
+                        array_push($permissions,Permission::findByName('Agregar Estado de Prioridad'));
                     }
-                        
+                    if ($this->uprioridad) {
+                        array_push($permissions,Permission::findByName('Editar Estado de Prioridad'));
+                    }
+                    if ($this->dprioridad) {
+                        array_push($permissions,Permission::findByName('Eliminar Estado de Prioridad'));
+                    }
+                }
+                if ($this->rconserie==1) {
+                    array_push($permissions,Permission::findByName('Ver Control de Series'));
+                    if ($this->cconserie) {
+                        array_push($permissions,Permission::findByName('Agregar Control de Series'));
+                    }
+                    if ($this->uconserie) {
+                        array_push($permissions,Permission::findByName('Editar Control de Series'));
+                    }
+                    if ($this->dconserie) {
+                        array_push($permissions,Permission::findByName('Eliminar Control de Series'));
+                    }
+                }
+                if ($this->rstatus==1) {
+                    array_push($permissions,Permission::findByName('Ver Estado de Avance'));
+                    if ($this->cstatus) {
+                        array_push($permissions,Permission::findByName('Agregar Estado de Avance'));
+                    }
+                    if ($this->ustatus) {
+                        array_push($permissions,Permission::findByName('Editar Estado de Avance'));
+                    }
+                    if ($this->dstatus) {
+                        array_push($permissions,Permission::findByName('Eliminar Estado de Avance'));
+                    }
                 }       
             }
             $role->syncPermissions($permissions);

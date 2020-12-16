@@ -17,17 +17,16 @@ class PermissionSeeder extends Seeder
         //Modulo Soporte
         Permission::create(['name'=>'Soporte']);
           //Tickets
-          Permission::create(['name'=>'Soporte - Tickets']);
+          Permission::create(['name'=>'Ver Soporte - Tickets']);
             //Tickets Generales
-            Permission::create(['name'=>'Ver Tickets - Generales']);
-            Permission::create(['name'=> 'Ver Detalles de Tickets']);
-            Permission::create(['name'=>'Exportar Tickets']);
-            Permission::create(['name'=>'Agregar Tickets - Generales']);
-            //Mis Tickets
-            Permission::create(['name'=>'Ver Mis Tickets']);
-            Permission::create(['name'=>'Editar Mis Tickets']);
-            Permission::create(['name'=>'Eliminar Mis Tickets']);
-        
+            Permission::create(['name'=>'Agregar Sop. Tickets']);
+            Permission::create(['name'=> 'Editar Sop. Tickets']);
+            Permission::create(['name'=>'Eliminar Sop. Tickets']);
+            Permission::create(['name'=>'Ver Detalle Sop. Tickets']);
+            Permission::create(['name'=>'Exportar Sop. Tickets']);
+            Permission::create(['name'=>'Exportar Excel']);
+            Permission::create(['name'=>'Comentar Sop. Ticket']);
+                
         //Modulo KB
         Permission::create(['name'=>'KB']);
         //Modulo Clientes
@@ -87,9 +86,6 @@ class PermissionSeeder extends Seeder
           Permission::create(['name'=>'Editar Datos Personales']);
           //Bitacora
           Permission::create(['name'=>'Ver Bitácora']);
-          Permission::create(['name'=>'Agregar Bitácora']);
-          Permission::create(['name'=>'Editar Bitácora']);
-          Permission::create(['name'=>'Eliminar Bitácora']);
           //Cambiar Contraseña
           Permission::create(['name'=>'Ver Cambiar Contraseña']);
           Permission::create(['name'=>'Editar Cambiar Contraseña']);
