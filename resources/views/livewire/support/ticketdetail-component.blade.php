@@ -1,6 +1,8 @@
 <div>
     <div>
-        @include('Soporte.Tickets.comment')
+        @can('Comentar Sop. Ticket')
+            @include('Soporte.Tickets.comment')
+        @endcan
     </div>
     <div>
         <div class="card-body" style="display: block;">
@@ -114,9 +116,11 @@
                     @endforeach
                     </ul>
                 </div>
-                <div class="text-center mt-3 mb-3">                
-                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#commentticket" type="button">Comentar</button>
-                </div>
+                @can('Comentar Sop. Ticket')
+                    <div class="text-center mt-3 mb-3">
+                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#commentticket" type="button">Comentar</button>
+                    </div>
+                @endcan                
             </div>
             </div>
         </div>

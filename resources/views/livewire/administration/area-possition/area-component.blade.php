@@ -62,10 +62,11 @@
                         <td>{{$area->abbreviation}}</td>
                         <td>{{$area->description}}</td>
                         <td>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-center">
                                 @can('Editar Área')
                                     <button wire:click="edit({{$area->id}})"  data-toggle="modal" data-target="#updatearea" class="btn btn-warning" ><i class="fas fa-edit"></i></button>                           
                                 @endcan
+                                &nbsp;&nbsp;
                                 @can('Eliminar Área')
                                     <button wire:click="delete({{$area->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletearea"><i class="fas fa-trash-alt"></i></button>
                                 @endcan

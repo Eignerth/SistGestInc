@@ -3,6 +3,9 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="updatecontactotittle">Editar Contacto</h5>
+          <div wire:ignore>
+            <button class="btn" data-toggle="tooltip" data-placement="bottom" title="Actualizar" wire:click="$refresh"><span style="color: green"><i class="fas fa-sync"></i></span></button>
+          </div>
         </div>
         <div class="modal-body">
             @include('Clientes.Contactos.form')

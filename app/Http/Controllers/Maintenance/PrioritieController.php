@@ -9,6 +9,7 @@ class PrioritieController extends Controller
 {
     public function index()
     {
+        $this->authorize('Ver Estado de Prioridad');
         return view('Mantenimiento.Prioridad.index');
     }
 }

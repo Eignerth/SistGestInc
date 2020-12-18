@@ -64,6 +64,7 @@ class TicketsComponent extends Component
                 ->orderBy($this->sortField,$this->sortAsc?'asc':'desc')
                 ->paginate($this->porPagina),
             'series'=>Ticketsm::join('areas','ticketsm.idareas','=','areas.id')
+                ->where('ticketsm.flgstatus','=','1')
                 ->get(['ticketsm.id','ticketsm.serie','areas.abbreviation as area']),
             'contacts'=>Contact::join('customers','contacts.idcustomers','=','customers.id')
                 ->get(['contacts.id','customers.descripcion as customers','contacts.name']),
@@ -119,6 +120,7 @@ class TicketsComponent extends Component
     public function store()
     {   
         try {
+            $this->authorize('Agregar Sop. Tickets');
             //obtener serie
             $serie = Ticketsm::find($this->serie);
             $area = Area::find($serie->idareas);
@@ -189,6 +191,7 @@ class TicketsComponent extends Component
     public function update()
     {
         try {
+            $this->authorize('Editar Sop. Tickets');
             $ticket=Tksupportm::findOrFail($this->codigo);
             $ticket->update([
                 'idcontacts'=>$this->contacto,
@@ -257,7 +260,7 @@ class TicketsComponent extends Component
     public function destroy(){
 
         try {
-            //$this->authorize('Eliminar Canales de Atención');
+            $this->authorize('Eliminar Sop. Tickets');
             Tksupportm::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

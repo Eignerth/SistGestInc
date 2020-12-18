@@ -62,6 +62,7 @@ class TicketsmComponent extends Component
     public function store()
     {
         try {
+            $this->authorize('Agregar Control de Series');
             Ticketsm::create([
                 'idareas'=>$this->area,
                 'serie'=>Str::upper($this->serie),
@@ -102,9 +103,9 @@ class TicketsmComponent extends Component
     public function update()
     {
         try {
+            $this->authorize('Editar Control de Series');
             $serie = Ticketsm::findOrFail($this->codigo);
             $serie->update([
-                'serie'=>Str::upper($this->serie),
                 'flgstatus'=>$this->status,
             ]);
             $this->limpiar();
@@ -137,6 +138,7 @@ class TicketsmComponent extends Component
     public function destroy()
     {
         try {
+            $this->authorize('Eliminar Control de Series');
             $serie = Ticketsm::find($this->codigo);
             if ($serie->num == 0) {
                 Ticketsm::destroy($this->codigo);

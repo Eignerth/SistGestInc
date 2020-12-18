@@ -52,6 +52,7 @@ class TkstatusComponent extends Component
     public function store()
     {
         try {
+            $this->authorize('Agregar Estado de Avance');
             Tkstatus::create([
                 'description'=>$this->description,
                 'color'=>$this->color,
@@ -89,6 +90,7 @@ class TkstatusComponent extends Component
     public function update()
     {
         try {
+            $this->authorize('Editar Estado de Avance');
             $priority = Tkstatus::findOrFail($this->codigo);
             $priority->update([
                 'description'=>$this->description,
@@ -119,6 +121,7 @@ class TkstatusComponent extends Component
     public function destroy()
     {   
         try {
+            $this->authorize('Eliminar Estado de Avanc');
             Tkstatus::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

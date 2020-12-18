@@ -19,14 +19,86 @@
                         </div>                
                         <div class="col-md-2 mt-2">                 
                             <div class="form-check form-check-inline">
-                                <input class=" align-middle form-check-input position-static" type="checkbox" aria-label="Soporte">
+                                <input class=" align-middle form-check-input position-static" wire:model="soporte" type="checkbox" aria-label="Soporte">
                             </div>
                         </div>
                     </div>                       
               </div>          
               <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Ticket</strong>
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" wire:model="rticketsupp" id="rticketsuppl">
+                                        <label class="custom-control-label" for="rticketsuppl">
+                                        Ver
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" wire:model="cticketsupp" id="cticketsuppl">
+                                        <label class="custom-control-label" for="cticketsuppl">
+                                        Crear
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" wire:model="uticketsupp" id="uticketsuppl">
+                                        <label class="custom-control-label" for="uticketsuppl">
+                                        Editar
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" wire:model="dticketsupp" id="dticketsuppl">
+                                        <label class="custom-control-label" for="dticketsuppl">
+                                        Eliminar
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" wire:model="expdftksupp" id="expdftksuppl">
+                                        <label class="custom-control-label" for="expdftksuppl">
+                                        Exportar Ticket PDF
+                                        </label>
+                                    </div>
+                                </div>               
+                            </div>
+                            <div class="form-row align-items-center">                                
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" wire:model="exexceltksupp" id="exexceltksuppl">
+                                        <label class="custom-control-label" for="exexceltksuppl">
+                                        Exportar Excel Tickets
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" wire:model="rdetticketsupp" id="rdetticketsuppl">
+                                        <label class="custom-control-label" for="rdetticketsuppl">
+                                        Ver Detalle de Ticket
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" wire:model="commentticketsupp" id="commentticketsuppl">
+                                        <label class="custom-control-label" for="commentticketsuppl">
+                                        Comentar Ticket
+                                        </label>
+                                    </div>
+                                </div>                 
+                            </div>
+                        </li>
+                    </ul>
                 </div>
               </div>
             </div>

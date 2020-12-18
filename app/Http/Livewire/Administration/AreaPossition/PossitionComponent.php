@@ -16,6 +16,9 @@ class PossitionComponent extends Component
     public $sortField='id';
     public $sortAsc=true;
     public $search='';
+    protected $listeners = [
+        'area:refresh' => '$refresh',
+    ];
 
     public function sortBy($field)
     {
@@ -42,7 +45,7 @@ class PossitionComponent extends Component
             ->orWhere('possitions.description','like','%'.$this->search.'%')
             ->orderBy($this->sortField,$this->sortAsc?'asc':'desc')
             ->paginate($this->porPagina),
-            'areas'=>Area::all(['id','description'])
+            'areass'=>Area::all(['id','description']),
         ]);
         
        
@@ -100,7 +103,7 @@ class PossitionComponent extends Component
 
     public function store()
     {
-/*         try { */
+        try {
             $this->authorize('Agregar Cargo');
             Possition::create([
                 'idareas'=>$this->area,
@@ -117,7 +120,7 @@ class PossitionComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
-/*         } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',
@@ -127,7 +130,7 @@ class PossitionComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
-        } */
+        }
     }
     public function delete($id){
         $this->codigo=$id;

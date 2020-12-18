@@ -53,6 +53,7 @@ class PrioritieComponent extends Component
     public function store()
     {
         try {
+            $this->authorize('Agregar Estado de Prioridad');
             Prioritie::create([
                 'description'=>$this->description,
                 'color'=>$this->color,
@@ -92,6 +93,7 @@ class PrioritieComponent extends Component
     public function update()
     {
         try {
+            $this->authorize('Editar Estado de Prioridad');
             $priority = Prioritie::findOrFail($this->codigo);
             $priority->update([
                 'description'=>$this->description,
@@ -123,6 +125,7 @@ class PrioritieComponent extends Component
     public function destroy()
     {   
         try {
+            $this->authorize('Eliminar Estado de Prioridad');
             Prioritie::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

@@ -63,7 +63,7 @@ class AreaComponent extends Component
             $this->authorize('Editar Área');       
             $area = Area::findOrFail($this->codigo);        
             $area->update([
-                'abbreviation'=>$this->abbrev,
+                'abbreviation'=>Str::upper($this->abbrev),
                 'description'=>$this->descrip,
             ]);
             $this->limpiar();
@@ -75,6 +75,7 @@ class AreaComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
+            $this->emit('area:refresh');
         } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
@@ -93,7 +94,7 @@ class AreaComponent extends Component
         try {
             $this->authorize('Agregar Área');
             Area::create([
-                'abbreviation'=>$this->abbrev,
+                'abbreviation'=>Str::upper($this->abbrev),
                 'description'=>$this->descrip,
             ]);
             $this->limpiar();
@@ -105,6 +106,7 @@ class AreaComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
+            $this->emit('area:refresh');
         } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
@@ -136,6 +138,7 @@ class AreaComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
                 ]);
+                $this->emit('area:refresh');
         } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

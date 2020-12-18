@@ -1,6 +1,8 @@
 
-<small class="text-muted">
-    Campos Obligatorios (*)
+<small class="text-danger">
+    <strong>
+        Campos Obligatorios (*)
+    </strong>
 </small>
 <div class="form-row">
     <div class="form-group col-md-6">
@@ -31,8 +33,10 @@
                 <option value="{{$contact->id}}">{{$contact->customers}}&nbsp;|&nbsp;{{$contact->name}}</option>
                 @endforeach
             </select>
+            @can('Ver Contactos')
             &nbsp;&nbsp;
             <a class="btn btn-success" href="{{route('contactos.index')}}" target="_blank" rel="noopener"><i class="fas fa-plus-square"></i></a>
+            @endcan
         </div>
         @error('contacto')
         <div class="invalid-feedback"> {{$message}} </div>                            
@@ -44,24 +48,37 @@
     
     <div class="form-group col-md-6">
         <label for="clasificacion">Clasificación</label><span id="clasifhelp" class="text-danger">*</span>
-        <select class="custom-select" wire:model="clasificacion" name="clasificacion" aria-describedby="clasifhelp">
-            <option>Elige...</option>
-            @foreach ($classifications as $classification)
-            <option value="{{$classification->id}}">{{$classification->description}}</option>
-            @endforeach
-        </select>
+        <div class="input-group">
+            <select class="custom-select" wire:model="clasificacion" name="clasificacion" aria-describedby="clasifhelp">
+                <option>Elige...</option>
+                @foreach ($classifications as $classification)
+                <option value="{{$classification->id}}">{{$classification->description}}</option>
+                @endforeach
+            </select>
+            @can('Ver Clasif. Inc.')
+                &nbsp;&nbsp;
+                <a class="btn btn-success" href="{{route('clasificacion_inc.index')}}" target="_blank" rel="noopener"><i class="fas fa-plus-square"></i></a>
+            @endcan
+        </div>
+        
         @error('clasificacion')
             <div class="invalid-feedback"> {{$message}} </div>                        
         @enderror
     </div>
     <div class="form-group col-md-6">
         <label for="canal">Canal de Atención</label><span id="canalhelp" class="text-danger">*</span>
-        <select class="custom-select" wire:model="canal" name="canal" aria-describedby="canalhelp">
-            <option>Elige...</option>
-            @foreach ($channels as $canal)
-            <option value="{{$canal->id}}">{{$canal->description}}</option>
-            @endforeach
-        </select>
+        <div class="input-group">
+            <select class="custom-select" wire:model="canal" name="canal" aria-describedby="canalhelp">
+                <option>Elige...</option>
+                @foreach ($channels as $canal)
+                <option value="{{$canal->id}}">{{$canal->description}}</option>
+                @endforeach
+            </select>
+            @can('Ver Canales de Atención')
+                &nbsp;&nbsp;
+                <a class="btn btn-success" href="{{route('canales_atencion.index')}}" target="_blank" rel="noopener"><i class="fas fa-plus-square"></i></a>
+            @endcan
+        </div>
         @error('canal')
             <div class="invalid-feedback"> {{$message}} </div>                        
         @enderror
@@ -71,24 +88,38 @@
     
     <div class="form-group col-md-6">
         <label for="producto">Producto</label><span id="productohelp" class="text-danger">*</span>
-        <select class="custom-select" wire:model="producto" name="producto" aria-describedby="productohelp">
-            <option>Elige...</option>
-            @foreach ($products as $product)
-            <option value="{{$product->id}}">{{$product->description}}</option>
-            @endforeach
-        </select>
+        <div class="input-group">
+            <select class="custom-select" wire:model="producto" name="producto" aria-describedby="productohelp">
+                <option>Elige...</option>
+                @foreach ($products as $product)
+                <option value="{{$product->id}}">{{$product->description}}</option>
+                @endforeach
+            </select>
+            @can('Ver Producto')
+            &nbsp;&nbsp;
+            <a class="btn btn-success" href="{{route('productos.index')}}" target="_blank" rel="noopener"><i class="fas fa-plus-square"></i></a>
+            @endcan
+        </div>
+        
         @error('producto')
             <div class="invalid-feedback"> {{$message}} </div>                        
         @enderror
     </div>
     <div class="form-group col-md-6">
         <label for="prioridad">Prioridad</label><span id="prioridadhelp" class="text-danger">*</span>
-        <select class="custom-select" wire:model="prioridad" name="prioridad" aria-describedby="prioridadhelp">
-            <option>Elige...</option>
-            @foreach ($priorities as $priority)
-            <option value="{{$priority->id}}">{{$priority->description}}</option>
-            @endforeach
-        </select>
+        <div class="input-group">
+            <select class="custom-select" wire:model="prioridad" name="prioridad" aria-describedby="prioridadhelp">
+                <option>Elige...</option>
+                @foreach ($priorities as $priority)
+                <option value="{{$priority->id}}">{{$priority->description}}</option>
+                @endforeach
+            </select>
+            @can('Ver Estado de Prioridad')
+            &nbsp;&nbsp;
+            <a class="btn btn-success" href="{{route('estado_de_prioridad.index')}}" target="_blank" rel="noopener"><i class="fas fa-plus-square"></i></a>
+            @endcan
+        </div>
+        
         @error('prioridad')
             <div class="invalid-feedback"> {{$message}} </div>                        
         @enderror
@@ -96,12 +127,19 @@
 </div>
 <div class="form-group ">
     <label for="status">Status de Avance</label><span id="statushelp" class="text-danger">*</span>
-    <select class="custom-select" wire:model="status" aria-describedby="statushelp">
-        <option>Elige...</option>
-        @foreach ($statuses as $status)
-        <option value="{{$status->id}}">{{$status->description}}</option>
-        @endforeach
-    </select>
+    <div class="input-group">
+        <select class="custom-select" wire:model="status" aria-describedby="statushelp">
+            <option>Elige...</option>
+            @foreach ($statuses as $status)
+            <option value="{{$status->id}}">{{$status->description}}</option>
+            @endforeach
+        </select>
+        @can('Ver Estado de Avance')
+            &nbsp;&nbsp;
+            <a class="btn btn-success" href="{{route('estado_de_avance.index')}}" target="_blank" rel="noopener"><i class="fas fa-plus-square"></i></a>
+        @endcan
+    </div>
+    
     @error('status')
         <div class="invalid-feedback"> {{$message}} </div>                        
     @enderror

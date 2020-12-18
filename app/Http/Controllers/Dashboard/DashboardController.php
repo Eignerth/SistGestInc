@@ -11,7 +11,6 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        $this->authorize('Dashboard');
         return view('Dashboard.index');
     }
 }

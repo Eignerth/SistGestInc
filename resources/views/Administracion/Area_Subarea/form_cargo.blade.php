@@ -1,9 +1,14 @@
-<form wire:submit.prevent="update">                
-    <div wire:ignore class="form-group">
-        <label for="area">Área</label>
-        <select wire:model="area" class="form-control" name="area">
-            <option>--Elegir--</option>
-            @foreach ($areas as $aarea)
+<div>
+    <small class="text-danger">
+        <strong>
+            Campos Obligatorios (*)
+        </strong>
+    </small>
+    <div class="form-group">
+        <label for="areal">Área</label><span id="areahelp" class="text-danger">*</span>
+        <select wire:model="area" class="form-control" id="areal" aria-describedby="seriehelp">
+            <option>Elige...</option>
+            @foreach ($areass as $aarea)
                 <option value="{{$aarea->id}}">{{$aarea->description}}</option>                
             @endforeach
         </select>
@@ -13,18 +18,18 @@
         @enderror
     </div>
     <div class="form-group">
-        <label for="descripcion">Descripción</label>
-        <input wire:model="descripcion" type="text" class="form-control {{$errors->has('descripcion')?'is-invalid':''}}" id="descripcion" name="descripcion" placeholder="Descripción">
+        <label for="descripcionl">Descripción</label><span id="descriphelp" class="text-danger">*</span>
+        <input wire:model="descripcion" type="text" class="form-control {{$errors->has('descripcion')?'is-invalid':''}}" id="descripcionl" placeholder="Descripción" aria-describedby="descriphelp">
         @error('descripcion')
             <div class="invalid-feedback"> {{$message}} </div>                            
         @enderror
     </div>
     <div>
-        <label for="nivel">Nivel</label>
-        <input wire:model="nivel" type="number" name="nivel" id="nivel" class="form-control {{$errors->has('nivel')?'is-invalid':''}}">
+        <label for="nivell">Nivel</label>
+        <input wire:model="nivel" type="number" id="nivell" class="form-control {{$errors->has('nivel')?'is-invalid':''}}">
     </div>
     <div class="form-group">
-        <label for="notas">Notas Adicionales</label>
-        <textarea wire:model="notas" id="notas" class="form-control" name="notas" rows="3" placeholder="Notas Adicionales"></textarea>
+        <label for="notasl">Notas Adicionales</label>
+        <textarea wire:model="notas" id="notasl" class="form-control"rows="3" placeholder="Notas Adicionales"></textarea>
     </div>
-</form>
+</div>

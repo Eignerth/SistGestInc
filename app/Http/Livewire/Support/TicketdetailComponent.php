@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Support;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 use App\Models\Tksupportd;
 use App\Models\Supportfile;
@@ -9,6 +10,7 @@ use Illuminate\Support\Str;
 
 class TicketdetailComponent extends Component
 {
+    use AuthorizesRequests;
     public $codigo;
     public $mensaje='';
     public function mount($ticket)
@@ -44,6 +46,7 @@ class TicketdetailComponent extends Component
     public function comment()
     {
         try {
+            $this->authorize('Comentar Sop. Ticket');
             $mensaje = Str::of($this->mensaje)->trim();
             if(strlen($mensaje)>1){
                 Tksupportd::create([

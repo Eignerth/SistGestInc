@@ -70,8 +70,7 @@
                             @can('Editar Contactos')
                             <button wire:click="edit({{$contact->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updatecontacto"><i class="fas fa-edit"></i></button>
                             @endcan
-                            &nbsp;&nbsp;
-                                
+                            &nbsp;&nbsp;                                
                             @can('Eliminar Contactos')
                             <button wire:click="delete({{$contact->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletecontacto"><i class="fas fa-trash-alt"></i></button>
                             @endcan                       

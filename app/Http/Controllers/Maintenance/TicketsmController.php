@@ -9,6 +9,7 @@ class TicketsmController extends Controller
 {
     public function index()
     {
+        $this->authorize('Ver Control de Series');
         return view('Mantenimiento.ManejoSerie.index');
     }
 }

@@ -13,7 +13,7 @@
     </div>
     <div class="form-group">
         <label for="serie">Serie</label>
-        <input type="text" maxlength="3" class="form-control {{$errors->has('serie')?'is-invalid':''}}" id="serie" wire:model="serie" name="serie" placeholder="Serie">
+        <input type="text" maxlength="3" class="form-control {{$errors->has('serie')?'is-invalid':''}}" id="serie" wire:model="serie" name="serie" placeholder="Serie" {{$mode == 'edit' ? 'disabled':''}}>
         @error('serie')
             <div class="invalid-feedback"> {{$message}} </div>                            
         @enderror

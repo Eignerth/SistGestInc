@@ -65,7 +65,7 @@
                     </tr>
                     <tr>
                         <th scope="row">Producto y/o Servicio</th>
-                        <td colspan="3"></td>
+                        <td colspan="3">{{$producto}}</td>
                     </tr>                    
                     <tr>
                         <th scope="row">Fecha Inicio de Atención</th>

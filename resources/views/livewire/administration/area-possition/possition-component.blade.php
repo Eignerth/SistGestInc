@@ -64,10 +64,11 @@
                         <td>{{$possition->description}}</td>
                         <td>{{$possition->level}}</td>
                         <td>
-                            <div>
+                            <div class="d-flex justify-content-center">
                                 @can('Editar Cargo')
                                     <button wire:click="edit({{$possition->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updatecargo"><i class="fas fa-edit"></i></button>
                                 @endcan
+                                &nbsp;&nbsp;
                                 @can('Eliminar Cargo')
                                    <button wire:click="delete({{$possition->id}})" class="btn btn-danger" data-toggle="modal" data-target="#deletecargo"><i class="fas fa-trash-alt"></i></button>
                                 @endcan

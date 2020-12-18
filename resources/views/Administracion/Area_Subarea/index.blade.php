@@ -14,66 +14,47 @@
     </ol>
 @endsection
 @section('content')
-
-    <div class="card card-purple card-tabs">
-        <div class="card-header p-0 pt-1">
-        <ul class="nav nav-tabs justify-content-center" id="custom-tabs-one-tab" role="tablist">
-            <li class="nav-item">
-            <a class="nav-link active" id="areas-tab" data-toggle="pill" href="#areas-body" role="tab" aria-controls="areas-body" aria-selected="true">Áreas</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" id="cargos-tab" data-toggle="pill" href="#cargos-body" role="tab" aria-controls="cargos-body" aria-selected="false">Cargos</a>
-            </li>
-        </ul>
-        </div>
-        <div class="card-body">
-        <div class="tab-content" id="custom-tabs-one-tabContent">
-            <div class="tab-pane fade active show" id="areas-body" role="tabpanel" aria-labelledby="areas-tab">
-                {{--Componente Area--}}
-                @livewire('administration.area-possition.area-component')
-            </div>
-            <div class="tab-pane fade" id="cargos-body" role="tabpanel" aria-labelledby="cargos-tab">
-                {{--Componente Possition--}}
-                @livewire('administration.area-possition.possition-component')
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-purple">
+                <div class="card-header">
+                    <h3 class="card-title">Áreas</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                        </button>
+                    </div>                
+                </div>
+                <div class="card-body">
+                    {{--Componente Area--}}
+                    @livewire('administration.area-possition.area-component')
+                </div>
             </div>
         </div>
-        </div>          
-    </div>    
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-outline card-purple">
+                <div class="card-header">
+                    <h3 class="card-title">Cargos</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                        </button>
+                    </div>                
+                </div>
+                <div class="card-body">
+                    {{--Componente Cargo--}}
+                    @livewire('administration.area-possition.possition-component')
+                </div>
+            </div>
+        </div>
+    </div>   
 @endsection
 
 @section('js')
 
-<script type="text/javascript" src="{{asset('vendor/select2/js/select2.full.min.js')}}"></script>
-<script src="{{asset('vendor/select2/js/i18n/es.js')}}"></script>
 <script>
     window.addEventListener('swal',function(e){ 
         Swal.fire(e.detail);
-    });
-     $(document).ready(function() {
-        $('#area').select2({
-            language: "es",
-            theme:'bootstrap4',
-            minimumInputLength:1,
-            placeholder:'Área',
-            allowClear: true,
-            /* ajax:{
-            url: '/areadata',
-            dataType:'json',
-            delay:200,
-            data:function(params){
-                var query={
-                    search:params.term,
-                    _type: 'query'
-                }
-                return query;
-            },
-            processResults: function(data){
-                return{
-                    results: data.results,
-                };
-            }
-        } */
-        });
     });  
 </script>
     

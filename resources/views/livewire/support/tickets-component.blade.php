@@ -1,14 +1,16 @@
 <div>
     <div>
-        @can('Agregar Tickets - Generales')
-        @include('Soporte.Tickets.create')
+        @can('Agregar Sop. Tickets')
+            @include('Soporte.Tickets.create')
         @endcan
 
-        @include('Soporte.Tickets.edit')
+        @can('Editar Sop. Tickets')
+            @include('Soporte.Tickets.edit')
+        @endcan
 
-      {{--   @can('Agregar Tickets - Generales') --}}
-        @include('Soporte.Tickets.delete')
-      {{--   @endcan --}}
+        @can('Eliminar Sop. Tickets')
+            @include('Soporte.Tickets.delete')
+        @endcan
 
      
             
@@ -28,13 +30,15 @@
                 <input wire:model="search" class="form-control" type="text" placeholder="Buscar...">
                 <button wire:click="limpiar()" class="btn bg-purple" data-toggle="tooltip" data-placement="bottom" title="Limpiar"><i class="fas fa-times"></i></button>
                 &nbsp;&nbsp;
-                @can('Agregar Tickets - Generales')
+                @can('Agregar Sop. Tickets')
                     <span data-toggle="modal" data-target="#createticket">
                         <button wire:click="create()" class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Agregar Ticket"><i class="fas fa-plus-square"></i></button>
                     </span>
                 @endcan
                 &nbsp;&nbsp;
-                <a href="{{route('tickets-support.excel')}}" class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Exportar a Excel"><i class="far fa-file-excel"></i></a>
+                @can('Exportar Excel Sop. Tickets')
+                    <a href="{{route('tickets-support.excel')}}" class="btn btn-success" data-placement="bottom" data-toggle="tooltip" title="Exportar a Excel"><i class="far fa-file-excel"></i></a>
+                @endcan
             </div>
         </div>      
     </div>
@@ -77,22 +81,23 @@
                         </span>
                     </td>
                     <td>
-                        <div class="d-flex justify-content-center">
-                            
-                            &nbsp;
-                            
-                            &nbsp;
-                            
+                        <div class="d-flex justify-content-center">                            
+                                                      
                             <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                @can('Exportar Tickets')
+                                @can('Exportar PDF Sop. Tickets')
                                     <a href="{{route('ReporteSoporte.ticket',$ticket->id)}}" class="btn btn-outline-danger"><span style="font-size: 20px; color: Red;"><i class="fas fa-file-pdf"></i></span></a>
                                 @endcan
-                                <a class="btn btn-primary btn-sm" href="{{route('tickets-support.show',$ticket)}}" target="_blank" rel="noopener"><span class="text-center" style="vertical-align: sub"><i class="fas fa-eye"></i></span> </a>
+                                @can('Ver Detalle Sop. Tickets')
+                                    <a class="btn btn-primary btn-sm" href="{{route('tickets-support.show',$ticket)}}" target="_blank" rel="noopener"><span class="text-center" style="vertical-align: sub"><i class="fas fa-eye"></i></span> </a>
+                                @endcan
                                 @if ($ticket->idpersonals === auth()->user()->idpersonals)
-                                <button wire:click="edit({{$ticket->id}})" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateticket"><i class="fas fa-edit"></i></button>
-                                
-                                <button wire:click="delete({{$ticket->id}})" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteticket"><i class="fas fa-trash-alt"></i></button>    
-                            @endif
+                                @can('Editar Sop. Tickets')
+                                    <button wire:click="edit({{$ticket->id}})" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#updateticket"><i class="fas fa-edit"></i></button>
+                                @endcan
+                                @can('Eliminar Sop. Tickets')
+                                    <button wire:click="delete({{$ticket->id}})" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteticket"><i class="fas fa-trash-alt"></i></button>    
+                                @endcan 
+                                @endif
                             </div>
                         </div>  
                     </td>

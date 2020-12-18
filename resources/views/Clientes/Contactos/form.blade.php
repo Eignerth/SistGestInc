@@ -1,13 +1,19 @@
 <form>                
     <div class="form-group">
         <label for="customer">Empresa</label>
-
-        <select class="form-control" wire:model="customer" name="customer" >
-            <option>Elige...</option>
-            @foreach ($customers as $customer)
-            <option value="{{$customer->id}}">{{$customer->descripcion}}</option>
-            @endforeach
-        </select>
+        <div class="input-group">
+            <select class="form-control" wire:model="customer" name="customer" >
+                <option>Elige...</option>
+                @foreach ($customers as $customer)
+                <option value="{{$customer->id}}">{{$customer->descripcion}}</option>
+                @endforeach
+            </select>
+            @can('Ver Soporte de Clientes')
+            &nbsp;&nbsp;
+            <a class="btn btn-success" href="{{route('soporte_de_clientes.index')}}" target="_blank" rel="noopener"><i class="fas fa-plus-square"></i></a>
+            @endcan
+        </div>
+        
         @error('customer')
             <div class="invalid-feedback"> {{$message}} </div>                        
         @enderror

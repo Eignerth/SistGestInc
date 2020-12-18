@@ -18,7 +18,9 @@ class RolePermissionComponent extends Component
     public $search='';
     public $codigo,$name;
     //modulos
-    public $tickets=0,$kb=0,$clientes=0,$informes=0,$administracion=0,$mantenimiento=0;
+    public $soporte=0,$kb=0,$clientes=0,$informes=0,$administracion=0,$mantenimiento=0;
+    //soporte
+    public $rticketsupp=0,$cticketsupp=0,$uticketsupp=0,$dticketsupp=0,$rdetticketsupp=0,$commentticketsupp=0,$expdftksupp=0,$exexceltksupp=0;
     //clientes
     public $rcontacto=0,$ccontacto=0,$ucontacto=0,$dcontacto=0,$rsopcliente=0, $csopcliente=0, $usopcliente=0, $dsopcliente=0;
     //administracion
@@ -27,7 +29,7 @@ class RolePermissionComponent extends Component
     public $rpersonal=0,$cpersonal=0,$upersonal=0,$dpersonal=0;
     public $rproducto=0,$cproducto=0,$uproducto=0,$dproducto=0;
     public $rrol=0,$crol=0,$urol=0,$drol=0;
-    public $rusuario=0,$cusuario=0,$uusuario=0,$dusuario=0;
+    public $rusuario=0,$cusuario=0,$uusuario=0;
     //perfil
     public $rdatopersonal=0,$udatopersonal=0,$rbitacora=0,$rcambiarcontra=0,$ucambiarcontra=0;
     //matenimiento
@@ -65,222 +67,247 @@ class RolePermissionComponent extends Component
             
         ]);
     }
+    public function getDatos(){
+        $permissions = array(); 
+        if ($this->soporte==1) {
+            array_push($permissions,Permission::findByName('Soporte'));
+            if ($this->rticketsupp==1) {
+                array_push($permissions,Permission::findByName('Ver Soporte - Tickets'));
+                if ($this->cticketsupp==1) {
+                    array_push($permissions,Permission::findByName('Agregar Sop. Tickets'));
+                }
+                if ($this->uticketsupp==1) {
+                    array_push($permissions,Permission::findByName('Editar Sop. Tickets'));
+                }
+                if ($this->dticketsupp==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Sop. Tickets'));
+                }
+                if ($this->rdetticketsupp==1) {
+                    array_push($permissions,Permission::findByName('Ver Detalle Sop. Tickets'));
+                    if ($this->commentticketsupp==1) {
+                        array_push($permissions,Permission::findByName('Comentar Sop. Ticket'));
+                    }
+                }
+                if ($this->expdftksupp==1) {
+                    array_push($permissions,Permission::findByName('Exportar PDF Sop. Tickets'));
+                }
+                if ($this->exexceltksupp==1) {
+                    array_push($permissions,Permission::findByName('Exportar Excel Sop. Tickets'));
+                }
+            }
+        }
+        if ($this->kb==1) {
+            array_push($permissions,Permission::findByName('KB'));
+        }
+        if ($this->clientes==1) {
+            array_push($permissions,Permission::findByName('Clientes'));
+            if ($this->rcontacto==1) {
+                array_push($permissions,Permission::findByName('Ver Contactos'));
+                if ($this->ccontacto==1) {
+                    array_push($permissions,Permission::findByName('Agregar Contactos'));
+                }
+                if ($this->ucontacto==1) {
+                    array_push($permissions,Permission::findByName('Editar Contactos'));
+                }
+                if ($this->dcontacto==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Contactos'));
+                }                        
+            }
+            if ($this->rsopcliente==1) {
+                array_push($permissions,Permission::findByName('Ver Soporte de Clientes'));
+                if ($this->csopcliente==1) {
+                    array_push($permissions,Permission::findByName('Agregar Soporte de Clientes'));
+                }
+                if ($this->usopcliente==1) {
+                    array_push($permissions,Permission::findByName('Editar Soporte de Clientes'));
+                }
+                if ($this->dsopcliente==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Soporte de Clientes'));
+                }
+            }
+                
+        }
+        if ($this->informes==1) {
+            array_push($permissions,Permission::findByName('Informes'));
+        }
+        if ($this->administracion==1) {
+            array_push($permissions,Permission::findByName('Administración'));
+            if ($this->rempresa==1) {
+                array_push($permissions,Permission::findByName('Ver Empresa'));
+                if ($this->uempresa==1) {
+                    array_push($permissions,Permission::findByName('Editar Empresa'));
+                }
+            }
+            if ($this->rareacargo==1) {
+                array_push($permissions,Permission::findByName('Ver Área-Cargo'));
+                if ($this->carea==1) {
+                    array_push($permissions,Permission::findByName('Agregar Área'));
+                }
+                if ($this->uarea==1) {
+                    array_push($permissions,Permission::findByName('Editar Área'));
+                }
+                if ($this->darea==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Área'));
+                }
+                if ($this->ccargo==1) {
+                    array_push($permissions,Permission::findByName('Agregar Cargo'));
+                }
+                if ($this->ucargo==1) {
+                    array_push($permissions,Permission::findByName('Editar Cargo'));
+                }
+                if ($this->dcargo==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Cargo'));
+                }
+            }
+            if ($this->rpersonal==1) {
+                array_push($permissions,Permission::findByName('Ver Personal'));
+                if ($this->cpersonal==1) {
+                    array_push($permissions,Permission::findByName('Agregar Personal'));
+                }
+                if ($this->upersonal==1) {
+                    array_push($permissions,Permission::findByName('Editar Personal'));
+                }
+                if ($this->dpersonal==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Personal'));
+                }
+            }
+            if ($this->rproducto==1) {
+                array_push($permissions,Permission::findByName('Ver Producto'));
+                if ($this->cproducto==1) {
+                    array_push($permissions,Permission::findByName('Agregar Producto'));
+                }
+                if ($this->uproducto==1) {
+                    array_push($permissions,Permission::findByName('Editar Producto'));
+                }
+                if ($this->dproducto==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Producto'));
+                }
+            }
+            if ($this->rrol==1) {
+                array_push($permissions,Permission::findByName('Ver Rol'));
+                if ($this->crol==1) {
+                    array_push($permissions,Permission::findByName('Agregar Rol'));
+                }
+                if ($this->urol==1) {
+                    array_push($permissions,Permission::findByName('Editar Rol'));
+                }
+                if ($this->drol==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Rol'));
+                }
+            }
+            if ($this->rusuario==1) {
+                array_push($permissions,Permission::findByName('Ver Usuario'));
+                if ($this->cusuario==1) {
+                    array_push($permissions,Permission::findByName('Agregar Usuario'));
+                }
+                if ($this->uusuario==1) {
+                    array_push($permissions,Permission::findByName('Editar Usuario'));
+                }
+            }
+            
+        }
+        //Perfil
+        
+        if ($this->rdatopersonal==1) {
+            array_push($permissions,Permission::findByName('Ver Datos Personales'));
+            if ($this->udatopersonal==1) {
+                array_push($permissions,Permission::findByName('Editar Datos Personales'));
+            }
+        }
+        if ($this->rbitacora==1) {
+            array_push($permissions,Permission::findByName('Ver Bitácora'));
+        }
+        if ($this->rcambiarcontra==1) {
+            array_push($permissions,Permission::findByName('Ver Cambiar Contraseña'));
+            if ($this->ucambiarcontra==1) {
+                array_push($permissions,Permission::findByName('Editar Cambiar Contraseña'));
+            }
+        }
+            
+        
+        if ($this->mantenimiento==1) {
+            array_push($permissions,Permission::findByName('Mantenimiento de Tablas'));
+            if ($this->ridentidad==1) {
+                array_push($permissions,Permission::findByName('Ver Docs Identidad'));
+                if ($this->cidentidad==1) {
+                    array_push($permissions,Permission::findByName('Agregar Docs Identidad'));
+                }
+                if ($this->uidentidad==1) {
+                    array_push($permissions,Permission::findByName('Editar Docs Identidad'));
+                }
+                if ($this->didentidad==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Docs Identidad'));
+                }
+            }
+            if ($this->rcanal==1) {
+                array_push($permissions,Permission::findByName('Ver Canales de Atención'));
+                if ($this->ccanal==1) {
+                    array_push($permissions,Permission::findByName('Agregar Canales de Atención'));
+                }
+                if ($this->ucanal==1) {
+                    array_push($permissions,Permission::findByName('Editar Canales de Atención'));
+                }
+                if ($this->dcanal==1) {
+                    array_push($permissions,Permission::findByName('Eliminar Canales de Atención'));
+                }
+            }
+            if ($this->rclasifinc==1) {
+                array_push($permissions,Permission::findByName('Ver Clasif. Inc.'));
+                if ($this->cclasifinc) {
+                    array_push($permissions,Permission::findByName('Agregar Clasif. Inc.'));
+                }
+                if ($this->uclasifinc) {
+                    array_push($permissions,Permission::findByName('Editar Clasif. Inc.'));
+                }
+                if ($this->dclasifinc) {
+                    array_push($permissions,Permission::findByName('Eliminar Clasif. Inc.'));
+                }                        
+            }
+            if ($this->rprioridad==1) {
+                array_push($permissions,Permission::findByName('Ver Estado de Prioridad'));
+                if ($this->cprioridad) {
+                    array_push($permissions,Permission::findByName('Agregar Estado de Prioridad'));
+                }
+                if ($this->uprioridad) {
+                    array_push($permissions,Permission::findByName('Editar Estado de Prioridad'));
+                }
+                if ($this->dprioridad) {
+                    array_push($permissions,Permission::findByName('Eliminar Estado de Prioridad'));
+                }
+            }
+            if ($this->rconserie==1) {
+                array_push($permissions,Permission::findByName('Ver Control de Series'));
+                if ($this->cconserie) {
+                    array_push($permissions,Permission::findByName('Agregar Control de Series'));
+                }
+                if ($this->uconserie) {
+                    array_push($permissions,Permission::findByName('Editar Control de Series'));
+                }
+                if ($this->dconserie) {
+                    array_push($permissions,Permission::findByName('Eliminar Control de Series'));
+                }
+            }
+            if ($this->rstatus==1) {
+                array_push($permissions,Permission::findByName('Ver Estado de Avance'));
+                if ($this->cstatus) {
+                    array_push($permissions,Permission::findByName('Agregar Estado de Avance'));
+                }
+                if ($this->ustatus) {
+                    array_push($permissions,Permission::findByName('Editar Estado de Avance'));
+                }
+                if ($this->dstatus) {
+                    array_push($permissions,Permission::findByName('Eliminar Estado de Avance'));
+                }
+            }       
+        }
+        return $permissions;
+    }
     public function store()
     {
         try {
             //$this->authorize('Agregar Rol');
             $role = Role::create(['name'=>$this->name]);
-            $permissions = array();
-             
-            
-            if ($this->tickets==1) {
-                array_push($permissions,Permission::findByName('Tickets'));
-            }
-            if ($this->kb==1) {
-                array_push($permissions,Permission::findByName('KB'));
-            }
-            if ($this->clientes==1) {
-                array_push($permissions,Permission::findByName('Clientes'));
-                if ($this->rcontacto==1) {
-                    array_push($permissions,Permission::findByName('Ver Contactos'));
-                    if ($this->ccontacto==1) {
-                        array_push($permissions,Permission::findByName('Agregar Contactos'));
-                    }
-                    if ($this->ucontacto==1) {
-                        array_push($permissions,Permission::findByName('Editar Contactos'));
-                    }
-                    if ($this->dcontacto==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Contactos'));
-                    }
-                        
-                }
-                if ($this->rsopcliente==1) {
-                    array_push($permissions,Permission::findByName('Ver Soporte de Clientes'));
-                    if ($this->csopcliente==1) {
-                        array_push($permissions,Permission::findByName('Agregar Soporte de Clientes'));
-                    }
-                    if ($this->usopcliente==1) {
-                        array_push($permissions,Permission::findByName('Editar Soporte de Clientes'));
-                    }
-                    if ($this->dsopcliente==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Soporte de Clientes'));
-                    }
-                }
-                    
-            }
-            if ($this->informes==1) {
-                array_push($permissions,Permission::findByName('Informes'));
-            }
-            if ($this->administracion==1) {
-                array_push($permissions,Permission::findByName('Administración'));
-                if ($this->rempresa==1) {
-                    array_push($permissions,Permission::findByName('Ver Empresa'));
-                    if ($this->uempresa==1) {
-                        array_push($permissions,Permission::findByName('Editar Empresa'));
-                    }
-                }
-                if ($this->rareacargo==1) {
-                    array_push($permissions,Permission::findByName('Ver Área-Cargo'));
-                    if ($this->carea==1) {
-                        array_push($permissions,Permission::findByName('Agregar Área'));
-                    }
-                    if ($this->uarea==1) {
-                        array_push($permissions,Permission::findByName('Editar Área'));
-                    }
-                    if ($this->darea==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Área'));
-                    }
-                    if ($this->ccargo==1) {
-                        array_push($permissions,Permission::findByName('Agregar Cargo'));
-                    }
-                    if ($this->ucargo==1) {
-                        array_push($permissions,Permission::findByName('Editar Cargo'));
-                    }
-                    if ($this->dcargo==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Cargo'));
-                    }
-                }
-                if ($this->rpersonal==1) {
-                    array_push($permissions,Permission::findByName('Ver Personal'));
-                    if ($this->cpersonal==1) {
-                        array_push($permissions,Permission::findByName('Agregar Personal'));
-                    }
-                    if ($this->upersonal==1) {
-                        array_push($permissions,Permission::findByName('Editar Personal'));
-                    }
-                    if ($this->dpersonal==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Personal'));
-                    }
-                }
-                if ($this->rproducto==1) {
-                    array_push($permissions,Permission::findByName('Ver Producto'));
-                    if ($this->cproducto==1) {
-                        array_push($permissions,Permission::findByName('Agregar Producto'));
-                    }
-                    if ($this->uproducto==1) {
-                        array_push($permissions,Permission::findByName('Editar Producto'));
-                    }
-                    if ($this->dproducto==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Producto'));
-                    }
-                }
-                if ($this->rrol==1) {
-                    array_push($permissions,Permission::findByName('Ver Rol'));
-                    if ($this->crol==1) {
-                        array_push($permissions,Permission::findByName('Agregar Rol'));
-                    }
-                    if ($this->urol==1) {
-                        array_push($permissions,Permission::findByName('Editar Rol'));
-                    }
-                    if ($this->drol==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Rol'));
-                    }
-                }
-                if ($this->rusuario==1) {
-                    array_push($permissions,Permission::findByName('Ver Usuario'));
-                    if ($this->cusuario==1) {
-                        array_push($permissions,Permission::findByName('Agregar Usuario'));
-                    }
-                    if ($this->uusuario==1) {
-                        array_push($permissions,Permission::findByName('Editar Usuario'));
-                    }
-                }
-                
-            }
-            if ($this->perfil==1) {
-                array_push($permissions,Permission::findByName('Perfil'));
-                if ($this->rdatopersonal==1) {
-                    array_push($permissions,Permission::findByName('Ver Datos Personales'));
-                    if ($this->udatopersonal==1) {
-                        array_push($permissions,Permission::findByName('Editar Datos Personales'));
-                    }
-                }
-                if ($this->rbitacora==1) {
-                    array_push($permissions,Permission::findByName('Ver Bitácora'));
-                }
-                if ($this->rcambiarcontra==1) {
-                    array_push($permissions,Permission::findByName('Ver Cambiar Contraseña'));
-                    if ($this->ucambiarcontra==1) {
-                        array_push($permissions,Permission::findByName('Editar Cambiar Contraseña'));
-                    }
-                }
-                
-            }
-            if ($this->mantenimiento==1) {
-                array_push($permissions,Permission::findByName('Mantenimiento de Tablas'));
-                if ($this->ridentidad==1) {
-                    array_push($permissions,Permission::findByName('Ver Docs Identidad'));
-                    if ($this->cidentidad==1) {
-                        array_push($permissions,Permission::findByName('Agregar Docs Identidad'));
-                    }
-                    if ($this->uidentidad==1) {
-                        array_push($permissions,Permission::findByName('Editar Docs Identidad'));
-                    }
-                    if ($this->didentidad==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Docs Identidad'));
-                    }
-                }
-                if ($this->rcanal==1) {
-                    array_push($permissions,Permission::findByName('Ver Canales de Atención'));
-                    if ($this->ccanal==1) {
-                        array_push($permissions,Permission::findByName('Agregar Canales de Atención'));
-                    }
-                    if ($this->ucanal==1) {
-                        array_push($permissions,Permission::findByName('Editar Canales de Atención'));
-                    }
-                    if ($this->dcanal==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Canales de Atención'));
-                    }
-                }
-                if ($this->rclasifinc==1) {
-                    array_push($permissions,Permission::findByName('Ver Clasif. Inc.'));
-                    if ($this->cclasifinc) {
-                        array_push($permissions,Permission::findByName('Agregar Clasif. Inc.'));
-                    }
-                    if ($this->uclasifinc) {
-                        array_push($permissions,Permission::findByName('Editar Clasif. Inc.'));
-                    }
-                    if ($this->dclasifinc) {
-                        array_push($permissions,Permission::findByName('Eliminar Clasif. Inc.'));
-                    }                        
-                }
-                if ($this->rprioridad==1) {
-                    array_push($permissions,Permission::findByName('Ver Estado de Prioridad'));
-                    if ($this->cprioridad) {
-                        array_push($permissions,Permission::findByName('Agregar Estado de Prioridad'));
-                    }
-                    if ($this->uprioridad) {
-                        array_push($permissions,Permission::findByName('Editar Estado de Prioridad'));
-                    }
-                    if ($this->dprioridad) {
-                        array_push($permissions,Permission::findByName('Eliminar Estado de Prioridad'));
-                    }
-                }
-                if ($this->rconserie==1) {
-                    array_push($permissions,Permission::findByName('Ver Control de Series'));
-                    if ($this->cconserie) {
-                        array_push($permissions,Permission::findByName('Agregar Control de Series'));
-                    }
-                    if ($this->uconserie) {
-                        array_push($permissions,Permission::findByName('Editar Control de Series'));
-                    }
-                    if ($this->dconserie) {
-                        array_push($permissions,Permission::findByName('Eliminar Control de Series'));
-                    }
-                }
-                if ($this->rstatus==1) {
-                    array_push($permissions,Permission::findByName('Ver Estado de Avance'));
-                    if ($this->cstatus) {
-                        array_push($permissions,Permission::findByName('Agregar Estado de Avance'));
-                    }
-                    if ($this->ustatus) {
-                        array_push($permissions,Permission::findByName('Editar Estado de Avance'));
-                    }
-                    if ($this->dstatus) {
-                        array_push($permissions,Permission::findByName('Eliminar Estado de Avance'));
-                    }
-                }       
-            }
+            $permissions = $this->getDatos();            
             $role->syncPermissions($permissions);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
@@ -308,190 +335,7 @@ class RolePermissionComponent extends Component
         try {
             //$this->authorize('Editar Rol');
             $role = Role::findById($this->codigo);
-            $permissions = array();
-            
-            if ($this->tickets==1) {
-                array_push($permissions,Permission::findByName('Tickets'));
-            }
-            if ($this->kb==1) {
-                array_push($permissions,Permission::findByName('KB'));
-            }
-            if ($this->clientes==1) {
-                array_push($permissions,Permission::findByName('Clientes'));
-                if ($this->rcontacto==1) {
-                    array_push($permissions,Permission::findByName('Ver Contactos'));
-                    if ($this->ccontacto==1) {
-                        array_push($permissions,Permission::findByName('Agregar Contactos'));
-                    }
-                    if ($this->ucontacto==1) {
-                        array_push($permissions,Permission::findByName('Editar Contactos'));
-                    }
-                    if ($this->dcontacto==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Contactos'));
-                    }
-                        
-                }
-                if ($this->rsopcliente==1) {
-                    array_push($permissions,Permission::findByName('Ver Soporte de Clientes'));
-                    if ($this->csopcliente==1) {
-                        array_push($permissions,Permission::findByName('Agregar Soporte de Clientes'));
-                    }
-                    if ($this->usopcliente==1) {
-                        array_push($permissions,Permission::findByName('Editar Soporte de Clientes'));
-                    }
-                    if ($this->dsopcliente==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Soporte de Clientes'));
-                    }
-                }
-                    
-            }
-            if ($this->informes==1) {
-                array_push($permissions,Permission::findByName('Informes'));
-            }
-            if ($this->administracion==1) {
-                array_push($permissions,Permission::findByName('Administración'));
-                if ($this->rempresa==1) {
-                    array_push($permissions,Permission::findByName('Ver Empresa'));
-                    if ($this->uempresa==1) {
-                        array_push($permissions,Permission::findByName('Editar Empresa'));
-                    }
-                }
-                if ($this->rareacargo==1) {
-                    array_push($permissions,Permission::findByName('Ver Área-Cargo'));
-                    if ($this->carea==1) {
-                        array_push($permissions,Permission::findByName('Agregar Área'));
-                    }
-                    if ($this->uarea==1) {
-                        array_push($permissions,Permission::findByName('Editar Área'));
-                    }
-                    if ($this->darea==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Área'));
-                    }
-                    if ($this->ccargo==1) {
-                        array_push($permissions,Permission::findByName('Agregar Cargo'));
-                    }
-                    if ($this->ucargo==1) {
-                        array_push($permissions,Permission::findByName('Editar Cargo'));
-                    }
-                    if ($this->dcargo==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Cargo'));
-                    }
-                }
-                if ($this->rpersonal==1) {
-                    array_push($permissions,Permission::findByName('Ver Personal'));
-                    if ($this->cpersonal==1) {
-                        array_push($permissions,Permission::findByName('Agregar Personal'));
-                    }
-                    if ($this->upersonal==1) {
-                        array_push($permissions,Permission::findByName('Editar Personal'));
-                    }
-                    if ($this->dpersonal==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Personal'));
-                    }
-                }
-                if ($this->rproducto==1) {
-                    array_push($permissions,Permission::findByName('Ver Producto'));
-                    if ($this->cproducto==1) {
-                        array_push($permissions,Permission::findByName('Agregar Producto'));
-                    }
-                    if ($this->uproducto==1) {
-                        array_push($permissions,Permission::findByName('Editar Producto'));
-                    }
-                    if ($this->dproducto==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Producto'));
-                    }
-                }
-                if ($this->rrol==1) {
-                    array_push($permissions,Permission::findByName('Ver Rol'));
-                    if ($this->crol==1) {
-                        array_push($permissions,Permission::findByName('Agregar Rol'));
-                    }
-                    if ($this->urol==1) {
-                        array_push($permissions,Permission::findByName('Editar Rol'));
-                    }
-                    if ($this->drol==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Rol'));
-                    }
-                }
-                if ($this->rusuario==1) {
-                    array_push($permissions,Permission::findByName('Ver Usuario'));
-                    if ($this->cusuario==1) {
-                        array_push($permissions,Permission::findByName('Agregar Usuario'));
-                    }
-                    if ($this->uusuario==1) {
-                        array_push($permissions,Permission::findByName('Editar Usuario'));
-                    }
-                }
-                
-            }
-            if ($this->perfil==1) {
-                array_push($permissions,Permission::findByName('Perfil'));
-                if ($this->rdatopersonal==1) {
-                    array_push($permissions,Permission::findByName('Ver Datos Personales'));
-                    if ($this->udatopersonal==1) {
-                        array_push($permissions,Permission::findByName('Editar Datos Personales'));
-                    }
-                }
-                if ($this->rbitacora==1) {
-                    array_push($permissions,Permission::findByName('Ver Bitácora'));
-                    if ($this->cbitacora==1) {
-                        array_push($permissions,Permission::findByName('Agregar Bitácora'));
-                    }
-                    if ($this->ubitacora==1) {
-                        array_push($permissions,Permission::findByName('Editar Bitácora'));
-                    }
-                    if ($this->dbitacora==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Bitácora'));
-                    }
-                }
-                if ($this->rcambiarcontra==1) {
-                    array_push($permissions,Permission::findByName('Ver Cambiar Contraseña'));
-                    if ($this->ucambiarcontra==1) {
-                        array_push($permissions,Permission::findByName('Editar Cambiar Contraseña'));
-                    }
-                }
-                
-            }
-            if ($this->mantenimiento==1) {
-                array_push($permissions,Permission::findByName('Mantenimiento de Tablas'));
-                if ($this->ridentidad==1) {
-                    array_push($permissions,Permission::findByName('Ver Docs Identidad'));
-                    if ($this->cidentidad==1) {
-                        array_push($permissions,Permission::findByName('Agregar Docs Identidad'));
-                    }
-                    if ($this->uidentidad==1) {
-                        array_push($permissions,Permission::findByName('Editar Docs Identidad'));
-                    }
-                    if ($this->didentidad==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Docs Identidad'));
-                    }
-                }
-                if ($this->rcanal==1) {
-                    array_push($permissions,Permission::findByName('Ver Canales de Atención'));
-                    if ($this->ccanal==1) {
-                        array_push($permissions,Permission::findByName('Agregar Canales de Atención'));
-                    }
-                    if ($this->ucanal==1) {
-                        array_push($permissions,Permission::findByName('Editar Canales de Atención'));
-                    }
-                    if ($this->dcanal==1) {
-                        array_push($permissions,Permission::findByName('Eliminar Canales de Atención'));
-                    }
-                }
-                if ($this->rclasifinc==1) {
-                    array_push($permissions,Permission::findByName('Ver Clasif. Inc.'));
-                    if ($this->cclasifinc) {
-                        array_push($permissions,Permission::findByName('Agregar Clasif. Inc.'));
-                    }
-                    if ($this->uclasifinc) {
-                        array_push($permissions,Permission::findByName('Editar Clasif. Inc.'));
-                    }
-                    if ($this->dclasifinc) {
-                        array_push($permissions,Permission::findByName('Eliminar Clasif. Inc.'));
-                    }
-                        
-                }       
-            }
+            $permissions = $this->getDatos(); 
             $role->syncPermissions($permissions);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
@@ -524,8 +368,8 @@ class RolePermissionComponent extends Component
         foreach ($permissions as $permission) {
             if(isset($permission->description)){
                 
-                if($permission->description == 'Tickets'){
-                    $this->tickets = 1;
+                if($permission->description == 'Soporte'){
+                    $this->soporte = 1;
                 }
                 if ($permission->description == 'KB') {
                     $this->kb=1;
@@ -544,6 +388,30 @@ class RolePermissionComponent extends Component
                 }
                 if ($permission->description == 'Mantenimiento de Tablas') {
                     $this->mantenimiento=1;
+                }
+                if ($permission->description=='Ver Soporte - Tickets') {
+                    $this->rticketsupp=1;
+                }
+                if ($permission->description=='Agregar Sop. Tickets') {
+                    $this->cticketsupp=1;
+                }
+                if ($permission->description=='Editar Sop. Tickets') {
+                    $this->uticketsupp=1;
+                }
+                if ($permission->description=='Eliminar Sop. Tickets') {
+                    $this->dticketsupp=1;
+                }
+                if ($permission->description=='Ver Detalle Sop. Tickets') {
+                    $this->rdetticketsupp=1;
+                }
+                if ($permission->description=='Exportar PDF Sop. Tickets') {
+                    $this->expdftksupp=1;
+                }
+                if ($permission->description=='Exportar Excel Sop. Tickets') {
+                    $this->exexceltksupp=1;
+                }
+                if ($permission->description=='Comentar Sop. Ticket') {
+                    $this->commentticketsupp=1;
                 }
                 if ($permission->description == 'Ver Contactos') {
                     $this->rcontacto=1;
@@ -650,15 +518,6 @@ class RolePermissionComponent extends Component
                 if($permission->description =='Ver Bitácora'){
                     $this->rbitacora=1;
                 }
-                if($permission->description =='Agregar Bitácora'){
-                    $this->cbitacora=1;
-                }
-                if($permission->description =='Editar Bitácora'){
-                    $this->ubitacora=1;
-                }
-                if($permission->description =='Eliminar Bitácora'){
-                    $this->dbitacora=1;
-                }
                 if ($permission->description == 'Ver Cambiar Contraseña') {
                     $this->rcambiarcontra=1;
                 }
@@ -701,6 +560,43 @@ class RolePermissionComponent extends Component
                 if($permission->description =='Eliminar Clasif. Inc.'){
                     $this->dclasifinc=1;
                 }
+                if($permission->description =='Ver Estado de Prioridad'){
+                    $this->rprioridad=1;
+                }
+                if($permission->description =='Agregar Estado de Prioridad'){
+                    $this->cprioridad=1;
+                }
+                if($permission->description =='Editar Estado de Prioridad'){
+                    $this->uprioridad=1;
+                }
+                if($permission->description =='Eliminar Estado de Prioridad'){
+                    $this->dprioridad=1;
+                }
+                if($permission->description =='Ver Control de Series'){
+                    $this->rconserie=1;
+                }
+                if($permission->description =='Agregar Control de Series'){
+                    $this->cconserie=1;
+                }
+                if($permission->description =='Editar Control de Series'){
+                    $this->uconserie=1;
+                }
+                if($permission->description =='Eliminar Control de Series'){
+                    $this->dconserie=1;
+                }
+                if($permission->description =='Ver Estado de Avance'){
+                    $this->rstatus=1;
+                }
+                if($permission->description =='Agregar Estado de Avance'){
+                    $this->cstatus=1;
+                }
+                if($permission->description =='Editar Estado de Avance'){
+                    $this->ustatus=1;
+                }
+                if($permission->description =='Eliminar Estado de Avance'){
+                    $this->dstatus=1;
+                }
+
                 
             }
         }
@@ -710,17 +606,17 @@ class RolePermissionComponent extends Component
         $this->search='';
         $this->codigo='';
         $this->name='';
-        $this->tickets=0;$this->kb=0;$this->clientes=0;$this->informes=0;$this->administracion=0;$this->perfil=0;$this->mantenimiento=0;
-        $this->rcontacto=0;$this->ccontacto=0;$this->ucontacto=0;$this->dcontacto=0;
-        $this->rsopcliente=0;$this->usopcliente=0;$this->csopcliente=0;$this->dsopcliente=0;
+        $this->soporte=0;$this->kb=0;$this->clientes=0;$this->informes=0;$this->administracion=0;$this->mantenimiento=0;
+        $this->rticketsupp=0;$this->cticketsupp=0;$this->uticketsupp=0;$this->dticketsupp=0;$this->rdetticketsupp=0;$this->commentticketsupp=0;$this->expdftksupp=0;$this->exexceltksupp=0;
+        $this->rcontacto=0;$this->ccontacto=0;$this->ucontacto=0;$this->dcontacto=0;$this->rsopcliente=0;$this->usopcliente=0;$this->csopcliente=0;$this->dsopcliente=0;
         $this->rempresa=0;$this->uempresa=0;
         $this->rareacargo=0;$this->carea=0;$this->uarea=0;$this->darea=0;$this->ccargo=0;$this->ucargo=0;$this->dcargo=0;
         $this->rpersonal=0;$this->cpersonal=0;$this->upersonal=0;$this->dpersonal=0;
         $this->rproducto=0;$this->uproducto=0;$this->cproducto=0;$this->dproducto=0;
         $this->rrol=0;$this->crol=0;$this->urol=0;$this->drol=0;
-        $this->rusuario=0;$this->cusuario=0;$this->uusuario=0;$this->dusuario=0;
-        $this->rdatopersonal=0;$this->udatopersonal=0;$this->rbitacora=0;$this->cbitacora=0;$this->ubitacora=0;$this->dbitacora=0;$this->rcambiarcontra=0;$this->ucambiarcontra=0;
-        $this->ridentidad=0;$this->cidentidad=0;$this->uidentidad=0;$this->didentidad=0;$this->rcanal=0;$this->ccanal=0;$this->ucanal=0;$this->dcanal=0;$this->rclasifinc=0;$this->cclasifinc=0;$this->uclasifinc=0;$this->dclasifinc=0;
+        $this->rusuario=0;$this->cusuario=0;$this->uusuario=0;
+        $this->rdatopersonal=0;$this->udatopersonal=0;$this->rbitacora=0;$this->rcambiarcontra=0;$this->ucambiarcontra=0;
+        $this->ridentidad=0;$this->cidentidad=0;$this->uidentidad=0;$this->didentidad=0;$this->rcanal=0;$this->ccanal=0;$this->ucanal=0;$this->dcanal=0;$this->rclasifinc=0;$this->cclasifinc=0;$this->uclasifinc=0;$this->dclasifinc=0;$this->rprioridad=0;$this->cprioridad=0;$this->uprioridad=0;$this->dprioridad=0;$this->rconserie=0;$this->cconserie=0;$this->uconserie=0;$this->dconserie=0;$this->rstatus=0;$this->cstatus=0;$this->ustatus=0;$this->dstatus=0;
     }
 
     public function cancel(){

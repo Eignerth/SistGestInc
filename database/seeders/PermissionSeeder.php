@@ -23,8 +23,8 @@ class PermissionSeeder extends Seeder
             Permission::create(['name'=> 'Editar Sop. Tickets']);
             Permission::create(['name'=>'Eliminar Sop. Tickets']);
             Permission::create(['name'=>'Ver Detalle Sop. Tickets']);
-            Permission::create(['name'=>'Exportar Sop. Tickets']);
-            Permission::create(['name'=>'Exportar Excel']);
+            Permission::create(['name'=>'Exportar PDF Sop. Tickets']);
+            Permission::create(['name'=>'Exportar Excel Sop. Tickets']);
             Permission::create(['name'=>'Comentar Sop. Ticket']);
                 
         //Modulo KB
