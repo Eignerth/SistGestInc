@@ -9,13 +9,13 @@ class CreateCommentkbsTable extends Migration
     
     public function up()
     {
-        /* Schema::create('commentkbs', function (Blueprint $table) {
+        Schema::create('commentkbs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('idkbs')->constrained('knowledgebases');
             $table->foreignId('idpersonals')->constrained('personals');
             $table->longText('message');
             $table->timestamps();
-        }); */
+        });
     }
 
     

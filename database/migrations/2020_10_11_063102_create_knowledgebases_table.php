@@ -9,15 +9,18 @@ class CreateKnowledgebasesTable extends Migration
     
     public function up()
     {
-        /* Schema::create('knowledgebases', function (Blueprint $table) {
+        Schema::create('knowledgebases', function (Blueprint $table) {
             $table->id();
             $table->string('subject',100)->nullable(false);
             $table->longText('message')->nullable(false);
-            $table->foreignId('idmenus')->constrained('menus');
+            $table->foreignId('idproducts')->nullable(true)->constrained('products');
+            $table->foreignId('idmenus')->nullable(true)->constrained('menus');
+            $table->foreignId('idsubmenus')->nullable(true)->constrained('submenus');
+            $table->foreignId('idoptions')->nullable(true)->constrained('options');
             $table->foreignId('idpersonals')->constrained('personals');
-            $table->foreignId('idstatuskbs')->constrained('statuskbs');
             $table->timestamps();
-        }); */
+            $table->index('subject'); 
+        });
     }
 
     

@@ -22,6 +22,11 @@ Route::group(['prefix' => 'soporte','namespace'=>'Support','middleware'=>'auth']
     Route::get('reporte_ticket/excel/exportar', 'ReportsController@excel')->name('tickets-support.excel');
 });
 
+//KB
+Route::group(['prefix' => 'kb','namespace'=>'Kb','middleware'=>'auth'], function () {
+    Route::resource('base_de_conocimiento','KbController')->only(['index'])->names('base-conocimiento');
+});
+
 
 //clientes
 Route::group(['prefix' => 'clientes','namespace'=>'Customer','middleware'=>'auth'], function () {
