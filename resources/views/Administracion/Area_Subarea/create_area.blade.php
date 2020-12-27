@@ -4,7 +4,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="storeareatittle">Crear Nueva Área</h5>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" wire:submit.prevent="store">
             @include('Administracion.Area_Subarea.form_area')
         </div>
         <div class="modal-footer">

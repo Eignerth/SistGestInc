@@ -11,7 +11,7 @@ class CreateKnowledgebasesTable extends Migration
     {
         Schema::create('knowledgebases', function (Blueprint $table) {
             $table->id();
-            $table->string('subject',100)->nullable(false);
+            $table->string('subject',100)->nullable(false)->unique();
             $table->longText('message')->nullable(false);
             $table->foreignId('idproducts')->nullable(true)->constrained('products');
             $table->foreignId('idmenus')->nullable(true)->constrained('menus');

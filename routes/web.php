@@ -25,6 +25,7 @@ Route::group(['prefix' => 'soporte','namespace'=>'Support','middleware'=>'auth']
 //KB
 Route::group(['prefix' => 'kb','namespace'=>'Kb','middleware'=>'auth'], function () {
     Route::resource('base_de_conocimiento','KbController')->only(['index'])->names('base-conocimiento');
+    Route::get('base_de_conocimiento/{id}','KbController@show')->name('base-conocimiento.show');
 });
 
 

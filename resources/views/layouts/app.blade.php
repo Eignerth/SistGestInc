@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>S2U @yield('tittle')</title>
+  <title>SistGesInc @yield('tittle')</title>
 
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('css/app.css')}}">
@@ -180,11 +180,10 @@
           </li> --}}
           @can('KB')
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('base-conocimiento.index')}}" class="nav-link" class="nav-link {{active('kb/*')}}">
               <i class="nav-icon fas fa-atlas"></i>
               <p>
-                KB
-                <span class="right badge badge-danger">New</span>
+                KB                
               </p>
             </a>
           </li>

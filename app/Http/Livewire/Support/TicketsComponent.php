@@ -233,8 +233,8 @@ class TicketsComponent extends Component
         } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
-                'title'=>'No eliminado!',
-                'text'=>'Quizás este registro este anexo a otro registro',
+                'title'=>'No Actualizado!',
+                'text'=>'Intente de Nuevo',
                 'timer'=>3000,
                 'icon'=>'error',
                 'toast'=>true,
@@ -270,7 +270,7 @@ class TicketsComponent extends Component
                 'icon'=>'success',
                 'toast'=>true,
                 'position'=>'top-right'
-                ]);
+            ]);
         } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
