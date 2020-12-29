@@ -13,7 +13,7 @@ class CreateCommentkbsTable extends Migration
             $table->id();
             $table->foreignId('idkbs')->constrained('knowledgebases');
             $table->foreignId('idpersonals')->constrained('personals');
-            $table->longText('message');
+            $table->longText('description');
             $table->timestamps();
         });
     }

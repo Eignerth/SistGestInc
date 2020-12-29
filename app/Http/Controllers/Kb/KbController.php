@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Kb;
 
 use App\Http\Controllers\Controller;
-use App\Models\Knowledgebase;
 
 class KbController extends Controller
 {
@@ -12,8 +11,8 @@ class KbController extends Controller
         return view('Kb.KbGeneral.index');
     }
 
-    public function show(Knowledgebase $kb)
+    public function show($id)
     {
-        return view('Kb.KbGeneral.show',['kb'=>$kb]);
+        return view('Kb.KbGeneral.show',['kb'=>$id]);
     }
 }

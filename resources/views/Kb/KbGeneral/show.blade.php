@@ -9,7 +9,7 @@
 @endsection
 @section('tittle','| Base de Conocimiento')
 @section('tittlePage')
-    <h1 class="m-0 text-dark">Kb - Detalle</h1>
+    <h1 class="m-0 text-dark">Base de Conocimientos - Detalle</h1>
 @endsection
 @section('content')
 
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="card-body">
-            {{--Componente Detalle de Tickets--}}
+            {{--Componente Detalle de Kb--}}
             
             @livewire('kb.kbdetail-component',['kb'=>$kb])
         </div>

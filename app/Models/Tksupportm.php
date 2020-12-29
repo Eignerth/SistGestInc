@@ -26,4 +26,13 @@ class Tksupportm extends Model
         'expirationdate',
         'expirationtime'
     ];
+
+    public static function findBySerie(string $serie)
+    {
+        $ticket = static::where('serie','=',$serie)->first();
+        if(empty($ticket)){
+            return null;
+        }
+        return $ticket;
+    }
 }

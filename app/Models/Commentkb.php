@@ -13,6 +13,6 @@ class Commentkb extends Model
     protected $fillable=[
         'idkbs',
         'idpersonals',
-        'message',
+        'description',
     ];
 }

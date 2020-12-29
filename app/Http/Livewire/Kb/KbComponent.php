@@ -8,6 +8,7 @@ use App\Models\Menu;
 use App\Models\SubMenu;
 use App\Models\Option;
 use App\Models\Kbfile;
+use App\Models\Kbtkref;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithPagination;
@@ -194,6 +195,7 @@ class KbComponent extends Component
     public function destroy()
     {
         try {
+           
             Knowledgebase::destroy($this->codigo);
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[

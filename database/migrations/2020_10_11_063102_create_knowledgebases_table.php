@@ -13,7 +13,7 @@ class CreateKnowledgebasesTable extends Migration
             $table->id();
             $table->string('subject',100)->nullable(false)->unique();
             $table->longText('message')->nullable(false);
-            $table->foreignId('idproducts')->nullable(true)->constrained('products');
+            $table->foreignId('idproducts')->nullable(false)->constrained('products');
             $table->foreignId('idmenus')->nullable(true)->constrained('menus');
             $table->foreignId('idsubmenus')->nullable(true)->constrained('submenus');
             $table->foreignId('idoptions')->nullable(true)->constrained('options');

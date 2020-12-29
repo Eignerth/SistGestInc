@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-12 col-xl-4 order-1 order-md-1">
-                <h4 class="text-navy"><i class="fas fa-ticket-alt"></i></i> {{$detalle->serie}}</h4>
+                <h4 class="text-navy"><i class="fas fa-ticket-alt"></i> {{$detalle->serie}}</h4>
                 <div class="text-muted">                    
                 <p class="text-sm">Asunto
                     <b class="d-block">{{$detalle->asunto}}</b>

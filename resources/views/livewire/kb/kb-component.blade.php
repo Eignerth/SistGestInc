@@ -74,7 +74,7 @@
                               {{--   <a href="{{route('ReporteSoporte.ticket',$ticket->id)}}" class="btn btn-outline-danger"><span style="font-size: 20px; color: Red;"><i class="fas fa-file-pdf"></i></span></a>
                             --}}
                              
-                                <a class="btn btn-primary btn-sm" href="{{route('base-conocimiento.show',$kb)}}" target="_blank" rel="noopener"><span class="text-center" style="vertical-align: sub"><i class="fas fa-eye"></i></span> </a>
+                                <a class="btn btn-primary btn-sm" href="{{route('base-conocimiento.show',$kb->id)}}" target="_blank" rel="noopener"><span class="text-center" style="vertical-align: sub"><i class="fas fa-eye"></i></span> </a>
                                                     
                            
                                 <button wire:click="edit({{$kb->id}})" class="btn btn-warning" data-toggle="modal" data-target="#updatekb"><i class="fas fa-edit"></i></button>
