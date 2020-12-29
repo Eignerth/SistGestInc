@@ -11,7 +11,7 @@ class CreateCommentkbsTable extends Migration
     {
         Schema::create('commentkbs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idkbs')->constrained('knowledgebases');
+            $table->foreignId('idkbs')->constrained('knowledgebases')->cascadeOnDelete();
             $table->foreignId('idpersonals')->constrained('personals');
             $table->longText('description');
             $table->timestamps();

@@ -1,9 +1,5 @@
 <div>
-    <small class="text-danger">
-        <strong>
-            Campos Obligatorios (*)
-        </strong>
-    </small>                
+    @include('includes.obligatorio')               
     <div class="form-group">
         <label for="abbrev">Abreviatura</label><span id="abrevhelp" class="text-danger">*</span>
         <input type="text" size="3" class="form-control {{$errors->has('abbrev')?'is-invalid':''}}" id="abbrev" wire:model="abbrev" name="abbrev" placeholder="Abreviatura" aria-describedby="abrevhelp">

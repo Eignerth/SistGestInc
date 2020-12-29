@@ -1,4 +1,5 @@
 <div>
+    @include('includes.obligatorio')
     <div class="form-group">
         <label for="descripcion">Descripción</label>
         <input type="text" class="form-control" wire:model="name" name="descripcion">

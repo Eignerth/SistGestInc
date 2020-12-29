@@ -11,7 +11,7 @@ class CreateSupportfilesTable extends Migration
     {
         Schema::create('supportfiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idtksupportms')->constrained('tksupportm');
+            $table->foreignId('idtksupportms')->constrained('tksupportm')->cascadeOnDelete();
             $table->foreignId('idtksupportds')->nullable(true)->constrained('tksupportd');
             $table->foreignId('idpersonals')->constrained('personals');
             $table->string('tittle');

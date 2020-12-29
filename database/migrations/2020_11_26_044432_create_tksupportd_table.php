@@ -15,7 +15,7 @@ class CreateTksupportdTable extends Migration
     {
         Schema::create('tksupportd', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('idtksupportm')->constrained('tksupportm');
+            $table->foreignId('idtksupportm')->constrained('tksupportm')->cascadeOnDelete();
             $table->foreignId('idpersonals')->constrained('personals');
             $table->longText('description')->nullable(false);
             $table->timestamps();

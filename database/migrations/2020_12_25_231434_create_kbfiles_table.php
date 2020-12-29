@@ -16,7 +16,7 @@ class CreateKbfilesTable extends Migration
         Schema::create('kbfiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('idkbs')->constrained('knowledgebases');
-            $table->foreignId('idcommentkbds')->nullable(true)->constrained('commentkbs');
+            $table->foreignId('idcommentkbds')->nullable(true)->constrained('commentkbs')->cascadeOnDelete();
             $table->foreignId('idpersonals')->constrained('personals');
             $table->string('tittle');
             $table->text('file');

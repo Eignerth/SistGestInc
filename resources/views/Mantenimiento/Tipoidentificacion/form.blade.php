@@ -1,23 +1,26 @@
-<form>                
-    <div class="form-group">
-        <label for="abbreviation">Abreviatura</label>
-        <input type="text" size="3" class="form-control {{$errors->has('abbreviation')?'is-invalid':''}}" id="abbreviation" wire:model="abbreviation" name="abbreviation" placeholder="Abreviatura">
-        @error('abbreviation')
-            <div class="invalid-feedback"> {{$message}} </div>                        
-        @enderror
-    </div>
-    <div class="form-group">
-        <label for="description">Descripción</label>
-        <input type="text" class="form-control {{$errors->has('description')?'is-invalid':''}}" id="description" wire:model="description" name="description" placeholder="Descripción">
-        @error('description')
-            <div class="invalid-feedback"> {{$message}} </div>                            
-        @enderror
-    </div>
-    <div>
-        <label for="digits">N° Digitos</label>
-        <input wire:model="digits" type="number" name="digits" id="digits" class="form-control {{$errors->has('digits')?'is-invalid':''}}">
-        @error('digits')
-            <div class="invalid-feedback"> {{$message}} </div>                            
-        @enderror
-    </div>
-</form>
+<div>
+    @include('includes.obligatorio')
+    <form>                
+        <div class="form-group">
+            <label for="abbreviationl">Abreviatura</label><span id="abbrevhelp" class="text-danger">*</span>
+            <input type="text" size="3" class="form-control {{$errors->has('abbreviation')?'is-invalid':''}}" id="abbreviationl" wire:model="abbreviation" placeholder="Abreviatura" aria-describedby="abbrevhelp">
+            @error('abbreviation')
+                <div class="invalid-feedback"> {{$message}} </div>                        
+            @enderror
+        </div>
+        <div class="form-group">
+            <label for="descriptionl">Descripción</label><span id="descriphelp" class="text-danger">*</span>
+            <input type="text" class="form-control {{$errors->has('description')?'is-invalid':''}}" id="descriptionl" wire:model="description" placeholder="Descripción" aria-describedby="descriphelp">
+            @error('description')
+                <div class="invalid-feedback"> {{$message}} </div>                            
+            @enderror
+        </div>
+        <div>
+            <label for="digitsl">N° Digitos</label><span id="numhelp" class="text-danger">*</span>
+            <input wire:model="digits" type="number" id="digitsl" class="form-control {{$errors->has('digits')?'is-invalid':''}}" aria-describedby="numhelp">
+            @error('digits')
+                <div class="invalid-feedback"> {{$message}} </div>                            
+            @enderror
+        </div>
+    </form>
+</div>

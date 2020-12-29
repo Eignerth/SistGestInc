@@ -8,6 +8,10 @@
         <div class="modal-body">
             <h3>¿Desea Eliminar este Registro?</h3>
             <p>Este proceso no tiene reversión</p>
+            <div>
+              <small class="text-danger">Si la descripción es <strong>Terminado.</strong>No eliminar!
+              </small>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" wire:click.prevent="cancel()" class="btn  btn-secondary" data-dismiss="modal">Cerrar</button>

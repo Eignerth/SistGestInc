@@ -6,6 +6,7 @@
           <h5 class="modal-title" id="updatecompanytittle">Actualizar Datos de la Empresa</h5>
         </div>
         <div class="modal-body">
+            @include('includes.obligatorio')        
             <form wire:submit.prevent="update">
                 <div class="form-group">
                     <label for="address">Dirección</label>

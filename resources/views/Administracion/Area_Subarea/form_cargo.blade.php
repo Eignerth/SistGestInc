@@ -1,9 +1,5 @@
 <div>
-    <small class="text-danger">
-        <strong>
-            Campos Obligatorios (*)
-        </strong>
-    </small>
+    @include('includes.obligatorio')        
     <div class="form-group">
         <label for="areal">Área</label><span id="areahelp" class="text-danger">*</span>
         <select wire:model="area" class="form-control" id="areal" aria-describedby="seriehelp">
