@@ -29,6 +29,25 @@ class DatabaseSeeder extends Seeder
         \App\Models\Channel::create(['description'=>'Whatsapp']);
         \App\Models\Channel::create(['description'=>'Llamada']);
         \App\Models\Channel::create(['description'=>'Correo Electrónico']);
+        
+        \App\Models\Classification::create(['abbreviation'=>'INC','description'=>'Incidencia']);
+        \App\Models\Classification::create(['abbreviation'=>'CON','description'=>'Consulta']);
+        \App\Models\Classification::create(['abbreviation'=>'CAP','description'=>'Capacitación']);
+        
+        \App\Models\Prioritie::create(['description'=>'Sin Definir','level'=>1,'color'=>'#9c9c9c']);
+        \App\Models\Prioritie::create(['description'=>'Leve','level'=>2,'color'=>'#36b044']);
+        \App\Models\Prioritie::create(['description'=>'Medio','level'=>3,'color'=>'#e3dc1c']);
+        \App\Models\Prioritie::create(['description'=>'Alta','level'=>4,'color'=>'#de7a1b']);
+        \App\Models\Prioritie::create(['description'=>'Crítico','level'=>5,'color'=>'#db0000']);
+        
+        \App\Models\Tkstatus::create(['description'=>'Registrado','color'=>'#347aea']);
+        \App\Models\Tkstatus::create(['description'=>'Escalado','color'=>'#e9f53d']);
+        \App\Models\Tkstatus::create(['description'=>'Terminado','color'=>'#208f0a']);
+
+        \App\Models\Product::create(['abbreviation'=>'INT','description'=>'BSS_INTEGRAL']);
+        \App\Models\Product::create(['abbreviation'=>'ERP','description'=>'BSS_ERP']);
+        \App\Models\Product::create(['abbreviation'=>'MIG','description'=>'BSS_MIGRADOR']);
+        
 
         $tipoidentidad1 = array('abbreviation'=>'DNI','description'=>'Documento Nacional de Identidad','ndigits'=>8);
         $tipoidentidad2 = array('abbreviation'=>'RUC','description'=>'Registro Único de Contribuyentes','ndigits'=>11);

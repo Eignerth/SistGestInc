@@ -20,7 +20,7 @@ class CreatePersonalsTable extends Migration
             $table->string('ownemail')->nullable(false);
             $table->string('email')->nullable();
             $table->string('address')->nullable();
-            $table->date('dateborn')->nullable();
+            $table->date('dateborn')->nullable(true);
             $table->foreignId('idpossitions')->nullable()->constrained('possitions')->nullable(true);
             $table->text('addnote')->nullable();
             $table->timestamps();

@@ -1,8 +1,8 @@
 <div>
     @include('includes.obligatorio')
     <div class="form-group">
-        <label for="personal">Personal</label>
-        <select class="form-control" name="personal" wire:model="personal" required {{$mode=='edit'?'disabled':''}}>
+        <label for="personal">Personal</label><span id="perhelp" class="text-danger">*</span>
+        <select class="form-control" wire:model="personal" {{$mode=='edit'?'disabled':''}} aria-describedby="perhelp">
             <option value="" selected>--Escoger--</option>
             @if ($mode=='create')
                 @foreach ($personals as $personal)
@@ -20,8 +20,8 @@
         @enderror
     </div>
     <div class="form-group">
-        <label for="usuario">Usuario</label>
-        <input type="text" class="form-control {{$errors->has('usuario')?'is-invalid':''}}" maxlength="20" name="usuario" wire:model="usuario" required placeholder="Usuario">
+        <label for="usuario">Usuario</label><span id="userhelp" class="text-danger">*</span>
+        <input type="text" class="form-control {{$errors->has('usuario')?'is-invalid':''}}" maxlength="20" wire:model="usuario" placeholder="Usuario" aria-describedby="userhelp">
         @error('usuario')
                 <div class="invalid-feedback"><strong>{{$message}}</strong> </div>
         @enderror
@@ -39,21 +39,21 @@
     @endif
     <div class="form-group">
         <label for="clave">Contraseña</label>
-        <input type="password" class="form-control {{$errors->has('password')?'is-invalid':''}}" wire:model="password" name="password" required placeholder="Contraseña">
+        <input type="password" class="form-control {{$errors->has('password')?'is-invalid':''}}" wire:model="password" name="password" placeholder="Contraseña">
         @error('password')
                 <div class="invalid-feedback"><strong>{{$message}}</strong> </div>
         @enderror
     </div>
     <div class="form-group">
         <label for="rclave">Repetir Contraseña</label>
-        <input type="password" class="form-control {{$errors->has('password_confirmation')?'is-invalid':''}}" wire:model="password_confirmation" name="password_confirmation" wire:model="password_confirmation" required placeholder="Repita la Contraseña">
+        <input type="password" class="form-control {{$errors->has('password_confirmation')?'is-invalid':''}}" wire:model="password_confirmation" name="password_confirmation" wire:model="password_confirmation" placeholder="Repita la Contraseña">
         @error('password_confirmation')
                 <div class="invalid-feedback"><strong>{{$message}}</strong> </div>
         @enderror
     </div>
     <div class="form-group">
-        <label for="rol">Rol</label>
-        <select id="rol" class="form-control" name="role" wire:model="role" required >
+        <label for="rol">Rol</label><span id="rolhelp" class="text-danger">*</span>
+        <select id="rol" class="form-control" wire:model="role" aria-describedby="rolhelp">
             <option value="" selected>--Escoger--</option>
             @foreach ($roles as $role)
                 <option value="{{$role->id}}">{{$role->name}}</option>

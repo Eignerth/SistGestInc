@@ -82,7 +82,6 @@ class PersonalComponent extends Component
             'ownemail'=>'required|nullable|email',
             'email'=>'email',
             'address'=>'nullable|max:500',
-            'dateborn'=>'date|nullable',
             'addnote'=>'nullable|string',
             ]);
     }

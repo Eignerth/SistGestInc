@@ -30,7 +30,8 @@ class CreateViewListTksupportViews extends Migration
         `gestinc`.`personals`.`email` AS `email`,
         `gestinc`.`tksupportm`.`subject` AS `asunto`,
         `gestinc`.`tksupportm`.`message` AS `mensaje`,
-        `gestinc`.`products`.`description` AS `producto`
+        `gestinc`.`products`.`description` AS `producto`,
+        `gestinc`.`tksupportm`.`created_at` AS `created_at`
     FROM
         (((((((`gestinc`.`tksupportm`
         JOIN `gestinc`.`contacts` ON ((`gestinc`.`tksupportm`.`idcontacts` = `gestinc`.`contacts`.`id`)))

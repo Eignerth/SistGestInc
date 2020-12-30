@@ -54,15 +54,18 @@ class UserComponent extends Component
         ]);
     }
 
+    protected $rules=[
+        'status'=>'required|boolean',
+        'role'=>'required', 
+    ];
+
     public function updated($propertyName)
     {   
-        $this->validateOnly($propertyName,[
-            'role'=>'required', 
+        $this->validateOnly($propertyName,[            
             'personal'=>'required|unique:App\Models\User,idpersonals,'.$this->codigo.',id',
             'usuario'=>'required|min:3|unique:App\Models\User,name,'.$this->codigo.',id',
             'password'=>['required_if:changepassword,1','exclude_if:changepassword,0','min:8',],
-            'password_confirmation'=>['required_if:changepassword,1','exclude_if:changepassword,0','min:8','same:password',],
-            'status'=>'required|boolean',
+            'password_confirmation'=>['required_if:changepassword,1','exclude_if:changepassword,0','min:8','same:password',],            
         ]);
     }
 
@@ -85,6 +88,7 @@ class UserComponent extends Component
     public function store()
     {
         try {
+            $this->validate();
             $user=User::create([
                 'name'=>$this->usuario,
                 'password'=>Hash::make($this->password),
@@ -92,6 +96,7 @@ class UserComponent extends Component
                 'idpersonals'=>$this->personal,
                 'flgstatus'=>$this->status
             ]);
+            
             $role = Role::findById($this->role);
             $user->assignRole($role);
             $this->limpiar();

@@ -1,11 +1,10 @@
 <div>
     @include('includes.obligatorio')
     <div class="form-group">
-        <label for="descripcion">Descripción</label>
-        <input type="text" class="form-control" wire:model="name" name="descripcion">
+        <label for="descripcion">Descripción</label><span id="deshelp" class="text-danger">*</span>
+        <input type="text" class="form-control" wire:model="name" aria-describedby="deshelp">
     </div>
     <label for="permisoWindows">Permisos de módulos</label>
-    
 
     <div wire:ignore>
         <div class="accordion" id="accordionExample">

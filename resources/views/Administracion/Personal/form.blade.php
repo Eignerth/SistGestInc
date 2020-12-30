@@ -3,16 +3,16 @@
         @include('includes.obligatorio')
                  
         <div class="form-group">
-            <label for="name">Nombre y Apellidos</label>
-            <input type="text" class="form-control {{$errors->has('name')?'is-invalid':''}}"wire:model="name"placeholder="Nombre y Apellidos">
+            <label for="name">Nombre y Apellidos</label><span id="nomhelp" class="text-danger">*</span>
+            <input type="text" class="form-control {{$errors->has('name')?'is-invalid':''}}"wire:model="name"placeholder="Nombre y Apellidos" aria-describedby="nomhelp">
             @error('name')
                 <div class="invalid-feedback"> {{$message}} </div>                        
             @enderror
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="idkindident">Tipo de Doc. Identidad</label>
-                <select wire:model="idkindident" class="form-control">
+                <label for="idkindident">Tipo de Doc. Identidad</label><span id="tipidenhelp" class="text-danger">*</span>
+                <select wire:model="idkindident" class="form-control" aria-describedby="tipidenhelp">
                     <option value="" selected>--Escoger--</option>
                     @foreach ($idkindidents as $idkindident)
                         <option value="{{$idkindident->id}}">{{$idkindident->description}}</option>                
@@ -23,8 +23,8 @@
                 @enderror
             </div>
             <div class="form-group col-md-6">
-                <label for="kindident">Documento de Identidad</label>
-                <input type="text" class="form-control {{$errors->has('kindident')?'is-invalid':''}}" wire:model="kindident" placeholder="Documento de Identidad">
+                <label for="kindident">Documento de Identidad</label><span id="idenhelp" class="text-danger">*</span>
+                <input type="text" class="form-control {{$errors->has('kindident')?'is-invalid':''}}" wire:model="kindident" placeholder="Documento de Identidad" aria-describedby="idenhelp">
                 @error('kindident')
                     <div class="invalid-feedback"> {{$message}} </div>                            
                 @enderror
@@ -54,8 +54,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="ownemail">Email Personal</label>
-            <input type="email" class="form-control {{$errors->has('ownemail')?'is-invalid':''}}" wire:model="ownemail" placeholder="Email Personal">
+            <label for="ownemail">Email Personal</label><span id="ownemailhelp" class="text-danger"></span>
+            <input type="email" class="form-control {{$errors->has('ownemail')?'is-invalid':''}}" wire:model="ownemail" placeholder="Email Personal" aria-describedby="ownemailhelp">
             @error('ownemail')
                 <div class="invalid-feedback"> {{$message}} </div>                        
             @enderror
