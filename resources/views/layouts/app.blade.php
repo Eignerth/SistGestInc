@@ -151,7 +151,6 @@
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Informes
-                <span class="right badge badge-danger">New</span>
               </p>
             </a>
           </li>

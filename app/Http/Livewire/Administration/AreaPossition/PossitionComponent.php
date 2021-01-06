@@ -105,7 +105,6 @@ class PossitionComponent extends Component
     {
         try {
             $this->authorize('Agregar Cargo');
-            $validatedData=$this->validate();
             Possition::create([
                 'idareas'=>$this->area,
                 'description'=>$this->descripcion,

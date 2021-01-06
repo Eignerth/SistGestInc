@@ -61,7 +61,7 @@ class ContactComponent extends Component
 
     public function store()
     {
-/*         try { */
+        try {
             $this->authorize('Agregar Contactos');
             Contact::create([
                 'idcustomers'=>$this->customer,
@@ -81,7 +81,7 @@ class ContactComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
-/*         } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',
                 'text'=>'No se pudo agregar el nuevo registro',
@@ -90,7 +90,7 @@ class ContactComponent extends Component
                 'toast'=>true,
                 'position'=>'top-right'
             ]);
-        } */
+        }
     }
 
     public function edit($codigo)
@@ -182,6 +182,7 @@ class ContactComponent extends Component
         $this->telf='';
         $this->possition='';
         $this->addnote='';
+        $this->email='';
     }
     public function cancel()
     {

@@ -3,6 +3,9 @@
     <div class="form-group">
         <label for="descripcion">Descripción</label><span id="deshelp" class="text-danger">*</span>
         <input type="text" class="form-control" wire:model="name" aria-describedby="deshelp">
+        @error('name')
+            <div class="invalid-feedback"> {{$message}} </div>                            
+        @enderror
     </div>
     <label for="permisoWindows">Permisos de módulos</label>
 
@@ -107,7 +110,7 @@
               <div class="card-header" id="headingTwo">
                 <div class="row">
                     <div class="col-md-10 form-inline">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button disabled class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             <span class="h4">KB</span>
                         </button>
                     </div>
@@ -120,7 +123,7 @@
               </div>
               <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
-                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    Estamos trabajndo para mejorar el Sistema.
                 </div>
               </div>
             </div>
@@ -238,9 +241,9 @@
                     </div>
                 </div>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                  <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                  </div>
+                    <div class="card-body">
+                        Estamos trabajando para mejorar el Sistema.
+                    </div>
                 </div>
             </div>
             {{--Administración--}}
@@ -509,7 +512,7 @@
                 <div class="card-header" id="headingSix">
                     <div class="row">
                         <div class="col-md-10 form-inline">
-                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <button disabled class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
                                 <span class="h4">Perfil</span> 
                             </button>
                         </div>

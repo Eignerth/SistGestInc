@@ -128,7 +128,7 @@ class PersonalComponent extends Component
     }
     public function store(){
         
-           try { 
+        try { 
             $this->authorize('Agregar Personal');
             $personal = Personal::create([
                 'name' =>$this->name,
@@ -145,15 +145,15 @@ class PersonalComponent extends Component
                 'addnote'=>$this->addnote,
                 ]);
                 $this->limpiar();
-            $this->dispatchBrowserEvent('swal',[
-                'title'=>'Agregado!',
-                'text'=>'La información se agregó correctamente!',
-                'timer'=>3000,
-                'icon'=>'success',
-                'toast'=>true,
-                'position'=>'top-right'
-            ]);
-          } catch (\Throwable $th) {
+                $this->dispatchBrowserEvent('swal',[
+                    'title'=>'Agregado!',
+                    'text'=>'La información se agregó correctamente!',
+                    'timer'=>3000,
+                    'icon'=>'success',
+                    'toast'=>true,
+                    'position'=>'top-right'
+                ]);
+        } catch (\Throwable $th) {
             $this->limpiar();
             $this->dispatchBrowserEvent('swal',[
                 'title'=>'No Agregado!',
@@ -200,7 +200,7 @@ class PersonalComponent extends Component
         $this->search='';
         $this->codigo='';
         $this->name='';
-        $this->idkindident='';
+        $this->idkindident=null;
         $this->kindident='';
         $this->ruc='';
         $this->telf='';
@@ -208,8 +208,8 @@ class PersonalComponent extends Component
         $this->ownemail='';
         $this->email='';
         $this->address='';
-        $this->dateborn='';
-        $this->idpossitions='';
+        $this->dateborn=null;
+        $this->idpossitions=null;
         $this->addnote='';
     }
 

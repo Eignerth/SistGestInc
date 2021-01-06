@@ -63,8 +63,7 @@ class RolePermissionComponent extends Component
     public function updated($propertyName)
     {   
         $this->validateOnly($propertyName,[
-            'name'=>'required|min:3|unique:roles,name,'.$this->codigo.',id',
-            
+            'name'=>'required|min:3|unique:roles,name,'.$this->codigo.',id',   
         ]);
     }
     public function getDatos(){
